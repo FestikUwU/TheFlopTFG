@@ -1,0 +1,7 @@
+{
+  "name": "TheFlop",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
