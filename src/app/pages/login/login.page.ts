@@ -25,7 +25,7 @@ import { FormsModule } from '@angular/forms';
     IonItem,
     IonLabel,
     IonInput,
-    FormsModule   // <-- для [(ngModel)]
+    FormsModule   // <-- [(ngModel)]
   ]
 })
 export class LoginPage {

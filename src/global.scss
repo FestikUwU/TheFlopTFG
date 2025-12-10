@@ -40,7 +40,7 @@ ion-app, ion-content {
   background: #6A041D;
 }
 
-.login-container{
+.login-container,{
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -50,20 +50,26 @@ ion-app, ion-content {
 
   ion-item {
     --background: #D9D9D9;
-    color: #000000;
+    color: #919191;
     border-radius: 20px;
     width: 320px;
+    margin: 40px;
   }
-  .btnEntrar {
+  .btnTipo1 {
     --background: #FFBF00;
     color: white;
     font-family: 'Limelight';
     font-size: 30px;
-    border-radius: 80px;
+    border-radius: 100px;
     width: 360px;
+    height:70px;
+    margin-top: 80px;
   }
   .btnCrear{
     color: white;
+  }
+
+  ion-label{
   }
 
 }
@@ -86,5 +92,16 @@ h1 {
   width: 100%;
   margin-bottom: 70px;
   justify-content: start;
+}
+
+.btnTipo1 {
+  --background: #FFBF00;
+  color: white;
+  font-family: 'Limelight';
+  font-size: 30px;
+  border-radius: 100px;
+  width: 360px;
+  height:70px;
+  margin-top: 80px;
 }
 

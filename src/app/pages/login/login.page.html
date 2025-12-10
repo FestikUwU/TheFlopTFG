@@ -4,20 +4,20 @@
       <h1 class="custom-title">Login</h1>
     </div>
 
-    <div class="form-container ion-align-self-center">
-      <ion-item class="custom-item ion-margin">
+    <div>
+      <ion-item >
         <ion-label position="floating">Email</ion-label>
         <ion-input [(ngModel)]="email" type="email"></ion-input>
       </ion-item>
 
-      <ion-item class="custom-item ion-margin">
+      <ion-item >
         <ion-label position="floating">Password</ion-label>
         <ion-input [(ngModel)]="password" type="password"></ion-input>
       </ion-item>
     </div>
 
     <div class="buttons-container bottom-buttons">
-      <ion-button class="btnEntrar" expand="block" (click)="login()">Entrar</ion-button>
+      <ion-button class="btnTipo1" expand="block" (click)="login()">Entrar</ion-button>
       <ion-button class="btnCrear" expand="block" fill="clear" (click)="goRegister()">Crear cuenta</ion-button>
     </div>
   </div>
