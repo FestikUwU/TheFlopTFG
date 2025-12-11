@@ -1,0 +1,51 @@
+/* Удаляем flex у ion-content — он ломает верстку */
+ion-content {
+  font-family: 'Limelight', sans-serif !important;
+}
+
+/* Заголовки — по центру */
+.header-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.custom-title {
+  font-size: 2vh;
+  margin: 20px;
+  text-align: center;
+}
+
+.title-left {
+  text-align: left;
+  width: 100%;
+  margin-left: 20px; /* можно убрать или уменьшить */
+}
+
+/* Центровка кнопок внутри ion-item */
+.custom-buttons::part(native) {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  box-shadow: none;
+  --inner-border-width: 0;
+}
+
+/* Кнопки сами — без фона */
+ion-button {
+  --background: transparent;
+}
+
+/* Центрированный контейнер с полем */
+.campoTxt::part(native) {
+  background: #D9D9D9 !important; /* Твой серый фон */
+  border-radius: 10px;
+  border: 1px solid black;
+  height: 130px;
+  margin: 20px;
+}
+
+/* Чтобы сам инпут тоже был прозрачным */
+ion-input {
+  --background: transparent;
+}
