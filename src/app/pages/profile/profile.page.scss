@@ -1,13 +1,20 @@
-/* Удаляем flex у ion-content — он ломает верстку */
+/* =========================== */
+/* Общие настройки шрифта и контента */
+/* =========================== */
 ion-content {
   font-family: 'Limelight', sans-serif !important;
+  --overflow: auto;
+  overflow-y: auto;
+  display: flex;
 }
 
-/* Заголовки — по центру */
+/* Заголовки */
 .header-container {
   display: flex;
   justify-content: center;
-  width: 100%;
+  min-width: 200px;
+  box-sizing: border-box;
+  padding: 0 16px;
 }
 
 .custom-title {
@@ -19,10 +26,10 @@ ion-content {
 .title-left {
   text-align: left;
   width: 100%;
-  margin-left: 20px; /* можно убрать или уменьшить */
+  margin-left: 20px;
 }
 
-/* Центровка кнопок внутри ion-item */
+/* Кнопки внутри ion-item */
 .custom-buttons::part(native) {
   display: flex;
   justify-content: center;
@@ -31,21 +38,147 @@ ion-content {
   --inner-border-width: 0;
 }
 
-/* Кнопки сами — без фона */
 ion-button {
   --background: transparent;
 }
 
-/* Центрированный контейнер с полем */
+/* Центрируем и делаем адаптивные поля */
 .campoTxt::part(native) {
-  background: #D9D9D9 !important; /* Твой серый фон */
+  background: #D9D9D9 !important;
   border-radius: 10px;
   border: 1px solid black;
-  height: 130px;
-  margin: 20px;
+  min-height: 80px;
+  padding: 15px;        /* внутренние отступы */
+  margin: 12px auto;    /* авто по бокам для центрирования */
+  width: 90%;           /* ограничиваем ширину, чтобы не выходило за экран */
+  box-sizing: border-box; /* учитываем padding и border в ширине */
 }
 
-/* Чтобы сам инпут тоже был прозрачным */
+/* Для маленьких экранов */
+@media (max-width: 360px) {
+  .campoTxt::part(native) {
+    width: 95%;
+    padding: 10px;
+    min-height: 65px;
+  }
+}
+
+
 ion-input {
   --background: transparent;
+  font-family: 'Limelight', sans-serif !important;
+}
+
+/* =========================== */
+/* Popover для ion-select (Edad / Genero) */
+/* =========================== */
+ion-select {
+  font-family: 'Limelight', sans-serif !important;
+  --background: #D9D9D9;
+  --color: #000;
+}
+
+ion-select::part(overlay) {
+  --background: #D9D9D9;
+}
+
+ion-select-option {
+  --background: #D9D9D9;
+  color: #000;
+  font-family: 'Limelight', sans-serif !important;
+}
+
+/* Принудительно серый для темной темы */
+@media (prefers-color-scheme: dark) {
+  ion-select::part(overlay),
+  ion-select-option {
+    --background: #D9D9D9 !important;
+    color: #000 !important;
+  }
+}
+
+/* =========================== */
+/* Модалки (если будут еще) */
+/* =========================== */
+.bottom-sheet-modal {
+  --height: auto;
+  --border-radius: 20px 20px 0 0;
+  --box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+  align-items: flex-end;
+  animation: slideUp 0.3s ease-out;
+}
+
+.bottom-sheet-modal::part(content) {
+  width: 95vw;
+  max-width: 480px;
+  margin: 0 auto;
+  max-height: 70vh;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #D9D9D9; /* принудительно серый */
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  font-family: 'Limelight', sans-serif !important;
+}
+
+.modal-header {
+  --background: transparent;
+  --border-color: #ccc;
+  --border-width: 0 0 1px 0;
+  --min-height: 56px;
+  padding: 0 8px;
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: #000;
+  padding: 0;
+}
+
+/* =========================== */
+/* Адаптивность */
+/* =========================== */
+@media (max-width: 360px) {
+  .custom-title {
+    font-size: 1.8vh;
+  }
+
+  .campoTxt::part(native) {
+    margin: 10px 3vw;
+    min-height: 65px;
+  }
+
+  ion-item.campoTxt {
+    --padding-start: 10px;
+    --inner-padding-end: 10px;
+  }
+}
+
+/* =========================== */
+/* Анимация появления модалки */
+/* =========================== */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+html.ios {
+  --ion-default-font: 'Limelight', sans-serif !important;
 }
