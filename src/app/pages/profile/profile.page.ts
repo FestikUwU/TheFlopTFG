@@ -96,4 +96,12 @@ export class ProfilePage implements OnInit {
 
     await alert.present();
   }
+
+  mode: 'editar' | 'preview' = 'editar';
+
+  setMode(newMode: 'editar' | 'preview') {
+    this.mode = newMode;
+  }
+
+
 }

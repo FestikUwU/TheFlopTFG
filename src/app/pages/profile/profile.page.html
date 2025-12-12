@@ -1,4 +1,6 @@
-<ion-content class="ion-padding">
+<ion-content class="ion-padding"
+             [class.bg-editar]="mode === 'editar'"
+             [class.bg-preview]="mode === 'preview'">
 
   <div class="header-container">
     <p class="custom-title">CONFIGURACIONES</p>
@@ -9,19 +11,31 @@
       <ion-button (click)="onListoClick()">listo</ion-button>
     </ion-buttons>
   </ion-item>
-
   <div class="header-container">
-    <p class="custom-title">Edita tu informacion</p>
+  <p class="custom-title">Edita tu informacion</p>
   </div>
 
   <ion-item class="custom-buttons">
     <ion-buttons slot="start">
-      <ion-button fill="clear">Editar</ion-button>
+      <ion-button fill="clear"
+                  (click)="setMode('editar')"
+                  [class.active]="mode === 'editar'"
+                  [class.inactive]="mode !== 'editar'">
+        Editar
+      </ion-button>
     </ion-buttons>
+
     <ion-buttons slot="end">
-      <ion-button fill="clear">Vista Previa</ion-button>
+      <ion-button fill="clear"
+                  (click)="setMode('preview')"
+                  [class.active]="mode === 'preview'"
+                  [class.inactive]="mode !== 'preview'">
+        Vista Previa
+      </ion-button>
     </ion-buttons>
   </ion-item>
+
+
 
   <div class="header-container">
     <p class="custom-title title-left">Explica algo sobre ti</p>
