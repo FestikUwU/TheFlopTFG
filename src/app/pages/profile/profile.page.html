@@ -4,6 +4,12 @@
     <p class="custom-title">CONFIGURACIONES</p>
   </div>
 
+  <ion-item class="btnListo">
+    <ion-buttons slot="end">
+      <ion-button (click)="onListoClick()">listo</ion-button>
+    </ion-buttons>
+  </ion-item>
+
   <div class="header-container">
     <p class="custom-title">Edita tu informacion</p>
   </div>
@@ -31,7 +37,7 @@
   </div>
 
   <ion-list>
-    <ion-item class="campoTxt">
+    <ion-item class="campoGenero">
       <ion-select aria-label="Genero" interface="action-sheet" placeholder="Seleccionar Genero">
         <ion-select-option value="masculino">Masculino</ion-select-option>
         <ion-select-option value="femenino">Femenino</ion-select-option>
@@ -41,13 +47,33 @@
   </ion-list>
 
   <!-- Edad с popover выбором -->
-  <ion-item class="campoTxt">
-    <ion-label>Edad</ion-label>
+  <ion-item class="none">
+  <ion-label>Edad</ion-label>
+  <ion-item class="campoEdad">
+    <!--<ion-label>Edad</ion-label>-->
     <ion-select [(ngModel)]="selectedAge" interface="popover" placeholder="00">
       <ion-select-option *ngFor="let age of ageOptions" [value]="age.value">
         {{ age.display }}
       </ion-select-option>
     </ion-select>
   </ion-item>
+  </ion-item>
+  <ion-item class="fotos" lines="none">
+    <span class="dot-text">Texto</span>
+    <span class="dot-fill"></span>
+    <ion-button fill="clear" size="small" (click)="onPlusClick()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <div class="header-container">
+    <p class="custom-title">Control de tu perfil</p>
+  </div>
+
+  <ion-toggle labelPlacement="start" class="ion-align-content-end">Opcion 1</ion-toggle> <br> <br>
+
+  <ion-toggle labelPlacement="start" class="ion-align-content-end">Opcion 1</ion-toggle>
+
+
 
 </ion-content>

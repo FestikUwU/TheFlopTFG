@@ -10,8 +10,12 @@ import {
   IonSelectOption,
   IonButton,
   IonButtons,
-  IonList
+  IonList,
+  IonIcon,
+  IonToggle,
+  AlertController
 } from '@ionic/angular/standalone';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +33,10 @@ import {
     IonSelectOption,
     IonButton,
     IonButtons,
-    IonList
+    IonList,
+    IonIcon,
+    IonToggle,
+    RouterModule // 🔹 добавляем RouterModule для навигации
   ]
 })
 export class ProfilePage implements OnInit {
@@ -37,7 +44,8 @@ export class ProfilePage implements OnInit {
   selectedAge: number | null = null;
   ageOptions: Array<{ value: number, display: string }> = [];
 
-  constructor() { }
+  // 🔹 DI для AlertController и Router
+  constructor(private alertController: AlertController, private router: Router) { }
 
   ngOnInit() {
     this.generateAgeOptions();
@@ -62,5 +70,30 @@ export class ProfilePage implements OnInit {
       case 4: return 'Años';
       default: return 'años';
     }
+  }
+
+  onPlusClick() {
+    console.log('Кликнули на +');
+  }
+
+  async onListoClick() {
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: '¿Estás seguro de continuar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.router.navigate(['/home']);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
