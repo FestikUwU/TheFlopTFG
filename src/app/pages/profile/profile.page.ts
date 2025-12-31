@@ -13,6 +13,8 @@ import {
   IonList,
   IonIcon,
   IonToggle,
+  IonSegment,
+  IonSegmentButton,
   AlertController
 } from '@ionic/angular/standalone';
 import { RouterModule, Router } from '@angular/router';
@@ -25,6 +27,7 @@ import { RouterModule, Router } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     IonContent,
     IonItem,
     IonLabel,
@@ -36,16 +39,28 @@ import { RouterModule, Router } from '@angular/router';
     IonList,
     IonIcon,
     IonToggle,
-    RouterModule // 🔹 добавляем RouterModule для навигации
+    IonSegment,
+    IonSegmentButton
   ]
 })
 export class ProfilePage implements OnInit {
 
-  selectedAge: number | null = null;
-  ageOptions: Array<{ value: number, display: string }> = [];
+  mode: 'editar' | 'preview' = 'editar';
 
-  // 🔹 DI для AlertController и Router
-  constructor(private alertController: AlertController, private router: Router) { }
+  // ✅ ЕДИНЫЙ ОБЪЕКТ ПРОФИЛЯ
+  profile = {
+    description: '',
+    age: null as number | null,
+    gender: '',
+    photos: [] as string[]
+  };
+
+  ageOptions: Array<{ value: number; display: string }> = [];
+
+  constructor(
+    private alertController: AlertController,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.generateAgeOptions();
@@ -58,22 +73,8 @@ export class ProfilePage implements OnInit {
     }));
   }
 
-  getAgeLabel(age: number): string {
-    if (age === null) return '';
-    const lastDigit = age % 10;
-    const lastTwoDigits = age % 100;
-    if (lastTwoDigits >= 11 && lastTwoDigits <= 14) return 'Años';
-    switch (lastDigit) {
-      case 1: return 'Año';
-      case 2:
-      case 3:
-      case 4: return 'Años';
-      default: return 'años';
-    }
-  }
-
   onPlusClick() {
-    console.log('Кликнули на +');
+    console.log('Añadir foto');
   }
 
   async onListoClick() {
@@ -81,27 +82,14 @@ export class ProfilePage implements OnInit {
       header: 'Confirmación',
       message: '¿Estás seguro de continuar?',
       buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
+        { text: 'Cancelar', role: 'cancel' },
         {
           text: 'Confirmar',
-          handler: () => {
-            this.router.navigate(['/home']);
-          }
+          handler: () => this.router.navigate(['/home'])
         }
       ]
     });
 
     await alert.present();
   }
-
-  mode: 'editar' | 'preview' = 'editar';
-
-  setMode(newMode: 'editar' | 'preview') {
-    this.mode = newMode;
-  }
-
-
 }

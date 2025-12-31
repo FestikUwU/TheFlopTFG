@@ -2,92 +2,120 @@
              [class.bg-editar]="mode === 'editar'"
              [class.bg-preview]="mode === 'preview'">
 
+  <!-- HEADER -->
   <div class="header-container">
     <p class="custom-title">CONFIGURACIONES</p>
   </div>
 
+  <!-- BOTÓN LISTO -->
   <ion-item class="btnListo">
     <ion-buttons slot="end">
-      <ion-button (click)="onListoClick()">listo</ion-button>
-    </ion-buttons>
-  </ion-item>
-  <div class="header-container">
-  <p class="custom-title">Edita tu informacion</p>
-  </div>
-
-  <ion-item class="custom-buttons">
-    <ion-buttons slot="start">
-      <ion-button fill="clear"
-                  (click)="setMode('editar')"
-                  [class.active]="mode === 'editar'"
-                  [class.inactive]="mode !== 'editar'">
-        Editar
-      </ion-button>
-    </ion-buttons>
-
-    <ion-buttons slot="end">
-      <ion-button fill="clear"
-                  (click)="setMode('preview')"
-                  [class.active]="mode === 'preview'"
-                  [class.inactive]="mode !== 'preview'">
-        Vista Previa
-      </ion-button>
+      <ion-button (click)="onListoClick()">Listo</ion-button>
     </ion-buttons>
   </ion-item>
 
+  <!-- SEGMENT -->
+  <ion-segment [(ngModel)]="mode" value="editar" class="profile-segment">
+    <ion-segment-button value="editar">
+      <ion-label>Editar</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="preview">
+      <ion-label>Vista previa</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
+  <!-- ========================= -->
+  <!-- EDITAR -->
+  <!-- ========================= -->
+  <ng-container *ngIf="mode === 'editar'">
 
-  <div class="header-container">
-    <p class="custom-title title-left">Explica algo sobre ti</p>
-  </div>
+    <div class="header-container">
+      <p class="custom-title title-left">Explica algo sobre ti</p>
+    </div>
 
-  <ion-item class="campoTxt">
-    <ion-label position="floating">Tu información</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-
-  <div class="header-container">
-    <p class="custom-title title-left">Genero</p>
-  </div>
-
-  <ion-list>
-    <ion-item class="campoGenero">
-      <ion-select aria-label="Genero" interface="action-sheet" placeholder="Seleccionar Genero">
-        <ion-select-option value="masculino">Masculino</ion-select-option>
-        <ion-select-option value="femenino">Femenino</ion-select-option>
-        <ion-select-option value="otro">Otro</ion-select-option>
-      </ion-select>
+    <ion-item class="campoTxt">
+      <ion-textarea
+        [(ngModel)]="profile.description"
+        autoGrow="true"
+        placeholder="Escribe algo sobre ti">
+      </ion-textarea>
     </ion-item>
-  </ion-list>
 
-  <!-- Edad с popover выбором -->
-  <ion-item class="none">
-  <ion-label>Edad</ion-label>
-  <ion-item class="campoEdad">
-    <!--<ion-label>Edad</ion-label>-->
-    <ion-select [(ngModel)]="selectedAge" interface="popover" placeholder="00">
-      <ion-select-option *ngFor="let age of ageOptions" [value]="age.value">
-        {{ age.display }}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-  </ion-item>
-  <ion-item class="fotos" lines="none">
-    <span class="dot-text">Texto</span>
-    <span class="dot-fill"></span>
-    <ion-button fill="clear" size="small" (click)="onPlusClick()">
-      <ion-icon name="add"></ion-icon>
-    </ion-button>
-  </ion-item>
+    <div class="header-container">
+      <p class="custom-title title-left">Género</p>
+    </div>
 
-  <div class="header-container">
-    <p class="custom-title">Control de tu perfil</p>
-  </div>
+    <ion-list>
+      <ion-item class="campoGenero">
+        <ion-select
+          [(ngModel)]="profile.gender"
+          interface="action-sheet"
+          placeholder="Seleccionar género">
+          <ion-select-option value="masculino">Masculino</ion-select-option>
+          <ion-select-option value="femenino">Femenino</ion-select-option>
+          <ion-select-option value="otro">Otro</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
-  <ion-toggle labelPlacement="start" class="ion-align-content-end">Opcion 1</ion-toggle> <br> <br>
+    <!-- EDAD -->
+    <ion-item class="none">
+      <ion-label>Edad</ion-label>
+      <ion-item class="campoEdad">
+        <ion-select
+          [(ngModel)]="profile.age"
+          interface="popover"
+          placeholder="00">
+          <ion-select-option
+            *ngFor="let age of ageOptions"
+            [value]="age.value">
+            {{ age.display }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-item>
 
-  <ion-toggle labelPlacement="start" class="ion-align-content-end">Opcion 1</ion-toggle>
+    <!-- FOTOS -->
+    <ion-item class="fotos" lines="none">
+      <span class="dot-text">Fotos</span>
+      <span class="dot-fill"></span>
+      <ion-button fill="clear" size="small" (click)="onPlusClick()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
 
+  </ng-container>
 
+  <!-- ========================= -->
+  <!-- VISTA PREVIA -->
+  <!-- ========================= -->
+  <ng-container *ngIf="mode === 'preview'">
+
+    <div class="header-container">
+      <p class="custom-title">Vista previa de tu perfil</p>
+    </div>
+
+    <ion-item>
+      <ion-label>
+        <h2>Edad</h2>
+        <p>{{ profile.age ?? '--' }}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Descripción</h2>
+        <p>{{ profile.description || 'Sin descripción' }}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Género</h2>
+        <p>{{ profile.gender || '--' }}</p>
+      </ion-label>
+    </ion-item>
+
+  </ng-container>
 
 </ion-content>
