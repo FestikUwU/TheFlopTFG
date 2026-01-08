@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {IonButton, IonContent, IonFooter, IonHeader, IonIcon, IonTitle, IonToolbar} from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import {NavController} from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFooter, IonButton, IonIcon]
 })
 export class HomePage implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private navCtrl: NavController) { }
 
 
   ngOnInit() {
@@ -30,12 +31,22 @@ export class HomePage implements OnInit {
     window.speechSynthesis.speak(utterance);
   }
 
-  goToChatList() {
-    this.router.navigate(['/chat-list']);
+  goHome() {
+    this.navCtrl.navigateRoot('/home', {
+      animated: false
+    });
   }
 
-  goToSlotsGame(){
-    this.router.navigate(['/slot']);
+  goToSlotsGame() {
+    this.navCtrl.navigateRoot('/slot', {
+      animated: false
+    });
+  }
+
+  goToChatList() {
+    this.navCtrl.navigateRoot('/chat-list', {
+      animated: false
+    });
   }
 
 }
