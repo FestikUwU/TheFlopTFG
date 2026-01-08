@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonButton, IonContent, IonFooter, IonHeader, IonIcon, IonTitle, IonToolbar} from '@ionic/angular/standalone';
+import {
+  IonButton,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonIcon,
+  IonImg,
+  IonTitle,
+  IonToolbar
+} from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import {NavController} from "@ionic/angular";
 
@@ -10,7 +19,7 @@ import {NavController} from "@ionic/angular";
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFooter, IonButton, IonIcon]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFooter, IonButton, IonIcon, IonImg]
 })
 export class HomePage implements OnInit {
   constructor(private router: Router, private navCtrl: NavController) { }
@@ -48,5 +57,22 @@ export class HomePage implements OnInit {
       animated: false
     });
   }
+
+  goToSettings() {
+    this.navCtrl.navigateRoot('/profile', {
+      animated: false
+    });
+  }
+
+  onCheck() {
+    console.log('Нажата галочка ✅');
+    // Тут можно добавить логику "лайка" или другое действие
+  }
+
+  onCross() {
+    console.log('Нажат крестик ❌');
+    // Тут можно добавить логику "пасы" или другое действие
+  }
+
 
 }
