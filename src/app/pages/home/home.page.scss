@@ -10,7 +10,7 @@
 .logo-container img {
   height: 120px;
   width: auto;
-  max-width: 90%;
+  max-width: 100%;
 }
 
 .config {
@@ -102,7 +102,7 @@
 .bottom-bar-single {
   position: fixed;
   left: 50%;
-  bottom: 165px;
+  bottom: 155px;
   transform: translateX(-50%);
   display: flex;
   gap: 20px;
