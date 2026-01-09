@@ -4,20 +4,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 16px 0;
+  margin: 16px;
+  margin-left: 20px;
 }
 
 .logo-container img {
-  height: 120px;
+  height: 15vh;
   width: auto;
   max-width: 100%;
 }
 
 .config {
   position: absolute;
-  right: 20px;
+  right: 5px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-49%);
 }
 
 .config button {
@@ -26,8 +27,8 @@
 }
 
 .config img {
-  width: 37px;
-  height: 60px;
+  width: 85px;
+  height: 85px;
 }
 
 
@@ -43,16 +44,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 90%;
-  max-width: 600px;
-  height: 56vh;
+  width: 80%;
+  max-width: 80%;
+  height: 50%;
   border: 2px solid #D9D9D9;
   border-radius: 30px;
   box-sizing: border-box;
-  margin-right: 20px;
-  margin-left: 20px;
-  box-shadow:  3px 7px 15px rgba(0, 0, 0, 0.9);
+  margin: 0 auto; /* центрирует по горизонтали */
+  box-shadow: 3px 7px 15px rgba(0, 0, 0, 0.9);
 }
+
 
 .bottom-bar {
   position: fixed;
@@ -64,8 +65,8 @@
 }
 
 .bar-container {
-  width: 100%;
-  height: 80px;
+  width: 77%;
+  height: 60px;
   background: #D9D9D9;
   border: 4px solid #000;
   border-radius: 999px;
@@ -77,8 +78,8 @@
 }
 
 .bar-btn {
-  width: 55px;
-  height: 55px;
+  width: 40px;
+  height: 40px;
 
   border-radius: 50%;
   border: 2px solid #000;
@@ -102,17 +103,17 @@
 .bottom-bar-single {
   position: fixed;
   left: 50%;
-  bottom: 155px;
+  bottom: 15%;
   transform: translateX(-50%);
   display: flex;
   gap: 20px;
-  z-index: 11;
+  z-index: 5;
 }
 
 
 .single-btn {
-  width: 120px;
-  height: 70px;
+  width: 15vh;
+  height: 9vh;
   border-radius: 999px;
   border: 2px solid black;
   background-color: #D9D9D9;

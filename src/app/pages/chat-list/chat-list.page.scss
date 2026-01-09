@@ -8,19 +8,16 @@
   left: 0;
   right: 0;
   bottom: 20px;
-
   padding: 0 16px;
   z-index: 10;
 }
 
 .bar-container {
-  width: 100%;
-  height: 80px;
-
+  width: 77%;
+  height: 60px;
   background: #D9D9D9;
   border: 4px solid #000;
   border-radius: 999px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,8 +26,46 @@
 }
 
 .bar-btn {
-  width: 55px;
-  height: 55px;
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  border: 2px solid #000;
+
+  background: transparent;
+  color: #000;
+  font-size: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-bar {
+   position: fixed;
+   left: 0;
+   right: 0;
+   bottom: 20px;
+   padding: 0 16px;
+   z-index: 10;
+ }
+
+.bar-container {
+  width: 77%;
+  height: 60px;
+  background: #D9D9D9;
+  border: 4px solid #000;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+}
+
+.bar-btn {
+  width: 40px;
+  height: 40px;
 
   border-radius: 50%;
   border: 2px solid #000;
@@ -49,4 +84,21 @@
   height: 60%;
   background: black;
   border-radius: 1px;
+}
+
+.config {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-49%);
+}
+
+.config button {
+  all: unset;
+  cursor: pointer;
+}
+
+.config img {
+  width: 85px;
+  height: 85px;
 }

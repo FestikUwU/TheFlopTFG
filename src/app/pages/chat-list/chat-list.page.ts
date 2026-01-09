@@ -73,4 +73,10 @@ export class ChatListPage implements OnInit {
     });
   }
 
+  goToSettings() {
+    this.navCtrl.navigateRoot('/profile', {
+      animated: false
+    });
+  }
+
 }

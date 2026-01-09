@@ -56,5 +56,11 @@ export class SlotPage implements OnInit {   // ✅ ВАЖНО
       animated: false
     });
   }
+
+  goToSettings() {
+    this.navCtrl.navigateRoot('/profile', {
+      animated: false
+    });
+  }
 }
 
