@@ -11,6 +11,7 @@ import {
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import {animate} from "@angular/animations";
 
 
 @Component({
@@ -62,6 +63,12 @@ export class ChatListPage implements OnInit {
 
   goToChatList() {
     this.navCtrl.navigateRoot('/chat-list', {
+      animated: false
+    });
+  }
+
+  goToChat() {
+    this.navCtrl.navigateRoot('/chat', {
       animated: false
     });
   }
