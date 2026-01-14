@@ -59,10 +59,13 @@ export class HomePage implements OnInit {
   }
 
   goToSettings() {
-    this.navCtrl.navigateRoot('/profile', {
-      animated: false
-    });
+    setTimeout(() => {
+      this.navCtrl.navigateRoot('/profile', {
+        animated: false
+      });
+    }, 100);
   }
+
 
   onCheck() {
     console.log('Нажата галочка ✅');

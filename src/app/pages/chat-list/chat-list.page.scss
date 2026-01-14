@@ -1,6 +1,6 @@
 .content-wrapper {
   padding: 16px;
-  padding-bottom: 120px;
+  padding-bottom: 120px; /* место под нижнюю панель */
 }
 
 .bottom-bar {
@@ -21,59 +21,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 20px;
 }
 
 .bar-btn {
   width: 40px;
   height: 40px;
-
   border-radius: 50%;
   border: 2px solid #000;
-
   background: transparent;
   color: #000;
   font-size: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bottom-bar {
-   position: fixed;
-   left: 0;
-   right: 0;
-   bottom: 20px;
-   padding: 0 16px;
-   z-index: 10;
- }
-
-.bar-container {
-  width: 77%;
-  height: 60px;
-  background: #D9D9D9;
-  border: 4px solid #000;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 20px;
-}
-
-.bar-btn {
-  width: 40px;
-  height: 40px;
-
-  border-radius: 50%;
-  border: 2px solid #000;
-
-  background: transparent;
-  color: #000;
-  font-size: 20px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,6 +44,7 @@
   border-radius: 1px;
 }
 
+/* Настройка кнопки Config */
 .config {
   position: absolute;
   right: 5px;
@@ -96,9 +55,52 @@
 .config button {
   all: unset;
   cursor: pointer;
+  display: block;
+  position: relative;
+  transition: transform 0.1s ease;
+}
+
+.config button:active {
+  transform: scale(0.8) rotate(80deg);
 }
 
 .config img {
   width: 85px;
   height: 85px;
+  transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.config button:active img {
+  transform: rotate(50deg);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.config button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(139, 47, 60, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.config button:active::before {
+  animation: settingsPulse 1.5s ease-out;
+}
+
+@keyframes settingsPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
 }

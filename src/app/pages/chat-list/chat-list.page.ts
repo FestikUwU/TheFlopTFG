@@ -74,9 +74,11 @@ export class ChatListPage implements OnInit {
   }
 
   goToSettings() {
-    this.navCtrl.navigateRoot('/profile', {
-      animated: false
-    });
+    setTimeout(() => {
+      this.navCtrl.navigateRoot('/profile', {
+        animated: false
+      });
+    }, 100);
   }
 
 }

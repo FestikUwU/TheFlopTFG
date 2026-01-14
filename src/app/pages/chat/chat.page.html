@@ -1,22 +1,29 @@
 <ion-header>
   <ion-toolbar>
+    <!-- Кнопка назад с картинкой -->
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <img src="assets/iconsYimgs/arrowLeft.png" alt="Back" class="back-icon">
+      </ion-button>
+    </ion-buttons>
+
+    <!-- Заголовок -->
     <ion-title>Chat de prueba</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding" #content>
-  <ion-list>
+  <ion-list class="message">
     <ion-item *ngFor="let msg of messages">
       <strong>{{ msg.user }}:</strong> {{ msg.text }}
     </ion-item>
   </ion-list>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-item lines="none">
-      <ion-input placeholder="Escribe un mensaje" [(ngModel)]="newMessage"></ion-input>
-      <ion-button (click)="send()">Enviar</ion-button>
-    </ion-item>
-  </ion-toolbar>
-</ion-footer>
+<!-- Floating input “сосиска” -->
+<div class="chat-input-sausage">
+  <ion-input placeholder="" [(ngModel)]="newMessage"></ion-input>
+  <button class="arrow-button" (click)="send()">
+    <img class="arrow" src="assets/iconsYimgs/arrowUp.png" alt="arrow" />
+  </button>
+</div>

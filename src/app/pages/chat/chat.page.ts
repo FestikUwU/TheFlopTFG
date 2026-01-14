@@ -1,8 +1,21 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { sendMessage, subscribeMessages } from 'src/app/firebase.service';
-import { IonContent, IonButton, IonFooter, IonHeader, IonInput, IonItem, IonList, IonTitle, IonToolbar } from "@ionic/angular/standalone";
+import {
+  IonContent,
+  IonButton,
+  IonFooter,
+  IonHeader,
+  IonInput,
+  IonItem,
+  IonList,
+  IonTitle,
+  IonToolbar,
+  IonButtons
+} from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // ✅ Necesario para *ngFor, *ngIf
+import { CommonModule } from '@angular/common';
+import {Router} from "@angular/router";
+import {NavController} from "@ionic/angular"; // ✅ Necesario para *ngFor, *ngIf
 
 @Component({
   selector: 'app-chat',
@@ -10,7 +23,6 @@ import { CommonModule } from '@angular/common'; // ✅ Necesario para *ngFor, *n
   styleUrls: ['./chat.page.scss'],
   standalone: true,
   imports: [
-    IonFooter,
     IonItem,
     IonInput,
     IonButton,
@@ -20,7 +32,8 @@ import { CommonModule } from '@angular/common'; // ✅ Necesario para *ngFor, *n
     IonToolbar,
     IonHeader,
     FormsModule,
-    CommonModule
+    CommonModule,
+    IonButtons
   ]
 })
 export class ChatPage implements OnInit {
@@ -31,7 +44,11 @@ export class ChatPage implements OnInit {
   newMessage: string = '';
   username: string = 'User' + Math.floor(Math.random() * 1000);
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone,
+    private router: Router,
+    private navCtrl: NavController
+  ) {}
 
   ngOnInit() {
     subscribeMessages((data: any) => {
@@ -53,6 +70,12 @@ export class ChatPage implements OnInit {
       sendMessage(this.newMessage, this.username);
       this.newMessage = '';
     }
+  }
+
+  goBack() {
+    this.navCtrl.navigateRoot('/chat-list', {
+      animated: true,//нужна наобарот
+    });
   }
 }
 

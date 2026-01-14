@@ -133,3 +133,62 @@
   background-color: #D9D9D9;
 }
 
+.config {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-49%);
+}
+
+.config button {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  transition: transform 0.1s ease;
+}
+
+.config button:active {
+  transform: scale(0.8) rotate(80deg);
+}
+
+.config img {
+  width: 85px;
+  height: 85px;
+  transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.config button:active img {
+  transform: rotate(50deg);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.config button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(139, 47, 60, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.config button:active::before {
+  animation: settingsPulse 1.5s ease-out;
+}
+
+@keyframes settingsPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
