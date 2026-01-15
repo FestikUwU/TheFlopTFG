@@ -90,19 +90,29 @@
   <!-- VISTA PREVIA -->
   <!-- ========================= -->
   <ng-container *ngIf="mode === 'preview'">
-    <div class="preview-card">
-      <!-- Фото (берём первое, можно сделать слайдер позже) -->
-      <img *ngIf="profile.photos.length > 0" [src]="profile.photos[0]" class="preview-image" />
+    <div class="content-wrapper">
+      <div class="content preview-content">
 
-      <!-- Текст поверх фото -->
-      <div class="overlay-text">
-        {{ profile.description || 'Sin descripción' }}
-      </div>
+        <div class="preview-card">
+          <!-- Фото -->
+          <img
+            *ngIf="profile.photos.length > 0"
+            [src]="profile.photos[0]"
+            class="preview-image"
+          />
 
-      <!-- Данные (Edad, Género) -->
-      <div class="overlay-data">
-        <span>{{ profile.age ?? '--' }} años</span>
-        <span>{{ profile.gender || '--' }}</span>
+          <!-- Текст -->
+          <div class="overlay-text">
+            {{ profile.description || 'Sin descripción' }}
+          </div>
+
+          <!-- Edad / Género -->
+          <div class="overlay-data">
+            <span>{{ profile.age ?? '--' }} años</span>
+            <span>{{ profile.gender || '--' }}</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </ng-container>

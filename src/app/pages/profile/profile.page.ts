@@ -15,7 +15,7 @@ import {
   IonToggle,
   IonSegment,
   IonSegmentButton,
-  AlertController
+  AlertController, IonTextarea
 } from '@ionic/angular/standalone';
 import { RouterModule, Router } from '@angular/router';
 
@@ -40,7 +40,8 @@ import { RouterModule, Router } from '@angular/router';
     IonIcon,
     IonToggle,
     IonSegment,
-    IonSegmentButton
+    IonSegmentButton,
+    IonTextarea
   ]
 })
 export class ProfilePage implements OnInit {

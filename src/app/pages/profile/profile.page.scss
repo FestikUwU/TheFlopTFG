@@ -266,13 +266,13 @@ ion-button.inactive {
 .preview-card {
   position: relative;
   width: 100%;
-  max-width: 350px;
-  height: 400px;
-  margin: 20px auto;
-  border-radius: 15px;
+  max-width: 320px;
+  height: 420px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
+
 
 .preview-image {
   width: 100%;
@@ -307,6 +307,11 @@ ion-button.inactive {
   color: #fff;
   font-weight: bold;
   box-sizing: border-box;
+}
+
+.preview-content {
+  justify-content: center;
+  padding: 20px;
 }
 
 
