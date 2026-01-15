@@ -73,10 +73,6 @@ export class ProfilePage implements OnInit {
     }));
   }
 
-  onPlusClick() {
-    console.log('Añadir foto');
-  }
-
   async onListoClick() {
     const alert = await this.alertController.create({
       header: 'Confirmación',
@@ -92,4 +88,23 @@ export class ProfilePage implements OnInit {
 
     await alert.present();
   }
+
+  onPlusClick() {
+    // Создаем скрытый input для выбора фото
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = (event: any) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.profile.photos.push(e.target?.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+    input.click();
+  }
+
 }

@@ -10,7 +10,7 @@ import {
   IonList,
   IonTitle,
   IonToolbar,
-  IonButtons
+  IonButtons, IonImg
 } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -33,7 +33,8 @@ import {NavController} from "@ionic/angular"; // ✅ Necesario para *ngFor, *ngI
     IonHeader,
     FormsModule,
     CommonModule,
-    IonButtons
+    IonButtons,
+    IonImg
   ]
 })
 export class ChatPage implements OnInit {
