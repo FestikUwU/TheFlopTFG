@@ -45,5 +45,9 @@ export const routes: Routes = [
     path: 'slot',
     loadComponent: () =>
       import('./pages/slot/slot.page').then((m) => m.SlotPage),
+  },  {
+    path: 'stats',
+    loadComponent: () => import('./pages/stats/stats.page').then( m => m.StatsPage)
   },
+
 ];

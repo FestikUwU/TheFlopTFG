@@ -106,3 +106,13 @@ h1 {
   margin-top: 80px;
 }
 
+ion-input, ion-textarea {
+  --caret-color: black !important;
+  --color: black !important;
+}
+
+input, textarea {
+  caret-color: black !important;
+  text-decoration-color: black !important;
+  color: black !important;
+}
