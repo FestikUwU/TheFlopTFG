@@ -318,6 +318,41 @@ ion-button.inactive {
   padding: 20px;
 }
 
+.fotos{
+  background: transparent !important;
+  --background: transparent !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.imgAdd{
+  width: 10%;
+  height: auto;
+}
+
+.dot-text {
+  white-space: nowrap;
+}
+
+.dot-fill {
+  flex: 1;                     /* ⬅️ РАСТЯГИВАЕТ ТОЧКИ */
+  border-bottom: 1px dotted #000;
+  margin: 0 8px;
+  position: relative;
+  top: 8px;
+}
+
+ion-button {
+  margin-left: auto;           /* ⬅️ ПРИЖИМАЕТ ВПРАВО */
+}
+
+.imgAdd {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
 
 
 
