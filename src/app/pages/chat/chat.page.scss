@@ -55,6 +55,12 @@ ion-list ion-item {
 .chat-input-sausage ion-input {
   flex: 1;
   margin-right: 8px;
+  --background: transparent;   /* прозрачный фон */
+  --padding-start: 0;          /* убираем левый отступ */
+  --highlight-color-focused: transparent; /* убирает линию при фокусе */
+  --highlight-color: transparent;         /* убирает стандартную линию */
+  border: none;                /* на всякий случай */
+  box-shadow: none;
 }
 
 .chat-input-sausage ion-button {
@@ -73,10 +79,18 @@ ion-header ion-toolbar {
   --border-width: 0;
   box-shadow: none;
   border: none;
-
   display: flex;
-  align-items: center;        /* 👈 вертикальный центр */
+  align-items: center;  /* вертикальный центр */
+  justify-content: flex-start; /* элементы слева */
+  gap: 8px; /* небольшой промежуток между элементами */
   padding: 0 12px;
+  margin-top: 15px;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 ion-buttons {
@@ -85,17 +99,17 @@ ion-buttons {
 }
 
 ion-title{
-  padding: 0;
   margin: 0;
-
-  text-align: left;
+  padding: 0;
   font-size: 18px;
   font-weight: 600;
+  white-space: nowrap;
+  flex: 0;
+
 
   display: flex;
   align-items: center;
-
-  flex: 1;
+  justify-content: flex-start
 }
 
 .back-icon {
@@ -106,10 +120,7 @@ ion-title{
 
 .imgPerfilMini {
   width: 40px;
-  height: 40px;
-  margin-left: 8px;
-  margin-right: 8px;
-
+  height: 50px;
   border: 1px solid black;
   border-radius: 10px;
   object-fit: cover;

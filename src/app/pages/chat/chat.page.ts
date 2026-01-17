@@ -14,8 +14,8 @@ import {
 } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {Router} from "@angular/router";
-import {NavController} from "@ionic/angular"; // ✅ Necesario para *ngFor, *ngIf
+import { Router } from "@angular/router";
+import { NavController } from "@ionic/angular";
 
 @Component({
   selector: 'app-chat',
@@ -44,6 +44,7 @@ export class ChatPage implements OnInit {
   messages: any[] = [];
   newMessage: string = '';
   username: string = 'User' + Math.floor(Math.random() * 1000);
+  private bgMusic!: HTMLAudioElement;
 
   constructor(
     private ngZone: NgZone,
@@ -52,10 +53,19 @@ export class ChatPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Инициализация фоновой музыки
+    this.bgMusic = new Audio('assets/audio/no-more-what-ifs.mp3');
+    this.bgMusic.loop = true;
+
+    // запускаем плавный fadeIn
+    this.fadeInMusicSimple(0.07); // targetVolume = 0.07
+
+    // Слушаем сообщения
     subscribeMessages((data: any) => {
       this.ngZone.run(() => {
         if (data) {
-          this.messages = Object.values(data).sort((a: any, b: any) => a.timestamp - b.timestamp);
+          this.messages = Object.values(data)
+            .sort((a: any, b: any) => a.timestamp - b.timestamp);
           setTimeout(() => {
             if(this.content) this.content.scrollToBottom(300);
           }, 50);
@@ -66,6 +76,51 @@ export class ChatPage implements OnInit {
     });
   }
 
+  fadeInMusicSimple(targetVolume: number = 0.07) {
+    if (!this.bgMusic) return;
+    this.bgMusic.volume = 0;
+    this.bgMusic.play().catch(() => {});
+
+    const steps = 3;                  // три шага
+    const stepVolume = targetVolume / steps;
+    let currentStep = 0;
+
+    const fadeInterval = setInterval(() => {
+      if (currentStep < steps) {
+        this.bgMusic.volume += stepVolume;
+        currentStep++;
+      } else {
+        clearInterval(fadeInterval);
+      }
+    }, 200); // каждый шаг через 200 мс
+  }
+
+  ionViewWillLeave() {
+    if (this.bgMusic) {
+      // плавное затухание при выходе
+      this.fadeOutMusicSimple();
+    }
+  }
+
+  fadeOutMusicSimple() {
+    if (!this.bgMusic) return;
+    const steps = 3;
+    const stepVolume = this.bgMusic.volume / steps;
+    let currentStep = 0;
+
+    const fadeInterval = setInterval(() => {
+      if (currentStep < steps) {
+        this.bgMusic.volume -= stepVolume;
+        currentStep++;
+      } else {
+        this.bgMusic.pause();
+        this.bgMusic.currentTime = 0;
+        clearInterval(fadeInterval);
+      }
+    }, 150);
+  }
+
+
   send() {
     if (this.newMessage.trim() !== '') {
       sendMessage(this.newMessage, this.username);
@@ -75,9 +130,10 @@ export class ChatPage implements OnInit {
 
   goBack() {
     this.navCtrl.navigateRoot('/chat-list', {
-      animated: true,//нужна наобарот
+      //animated: true,
+      //animationDirection: 'back'
     });
   }
-}
 
+}
 

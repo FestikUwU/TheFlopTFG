@@ -1,18 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <!-- Кнопка назад с картинкой -->
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <img src="assets/iconsYimgs/arrowLeft.png" alt="Back" class="back-icon">
-      </ion-button>
-    </ion-buttons>
+    <div class="toolbar-left">
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <img src="assets/iconsYimgs/arrowLeft.png" alt="Back" class="back-icon">
+        </ion-button>
+      </ion-buttons>
 
-    <ion-img class="imgPerfilMini">
+      <ion-img class="imgPerfilMini" src="assets/iconsYimgs/MAIZ.png"></ion-img>
+    </div>
 
-    </ion-img>
     <ion-title>Chat de prueba</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content class="ion-padding" #content>
   <ion-list class="message">
@@ -23,7 +24,7 @@
 </ion-content>
 
 <!-- Floating input “сосиска” -->
-<div class="chat-input-sausage">
+<div class="chat-input-sausage" lines="none">
   <ion-input placeholder="" [(ngModel)]="newMessage"></ion-input>
   <button class="arrow-button" (click)="send()">
     <img class="arrow" src="assets/iconsYimgs/arrowUp.png" alt="arrow" />
