@@ -15,12 +15,20 @@
   </ion-item>
 
   <!-- SEGMENT -->
-  <ion-segment [(ngModel)]="mode" value="editar" class="profile-segment">
+  <ion-segment mode="ios"
+               [(ngModel)]="mode"
+               value="editar"
+               class="profile-segment">
     <ion-segment-button value="editar">
-      <ion-label>Editar</ion-label>
+      <ion-label>EDITAR</ion-label>
     </ion-segment-button>
+
+    <ion-segment-button value="ajustes">
+    <ion-label>PREFERENCIAS</ion-label>
+    </ion-segment-button>
+
     <ion-segment-button value="preview">
-      <ion-label>Vista previa</ion-label>
+      <ion-label>VISTA PREVIA</ion-label>
     </ion-segment-button>
   </ion-segment>
 
@@ -85,6 +93,18 @@
     </ion-item>
 
   </ng-container>
+
+  <!-- ========================= -->
+  <!-- AJUSTES -->
+  <!-- ========================= -->
+  <ng-container *ngIf="mode === 'ajustes'">
+
+    <div class="header-container">
+      <p class="custom-title title-left">Prefirencias</p>
+    </div>
+
+  </ng-container>
+
 
   <!-- ========================= -->
   <!-- VISTA PREVIA -->

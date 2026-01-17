@@ -46,7 +46,7 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  mode: 'editar' | 'preview' = 'editar';
+  mode: 'editar' | 'ajustes' | 'preview' = 'editar';
 
   // ✅ ЕДИНЫЙ ОБЪЕКТ ПРОФИЛЯ
   profile = {

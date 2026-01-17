@@ -13,7 +13,9 @@ ion-content {
 ion-list {
   flex: 1;
   overflow-y: auto;
+  background: transparent;
 }
+
 
 .arrow-button {
   all: unset;              /* убирает все дефолтные стили ion-button */
@@ -28,9 +30,14 @@ ion-list {
 }
 
 ion-list ion-item {
-  background: #f1f1f1;
+  --background: #D9D9D9;
+  --color: #000000;
+  box-shadow: none;
   margin-bottom: 4px;
-  border-radius: 4px;
+  border: 3px solid #bcbcbc;
+  border-radius: 10px;
+  max-width: 75%;
+  width: fit-content;
 }
 
 /* Плавающий input (сосиска) */
