@@ -132,4 +132,23 @@ ion-title{
   border-radius: 10px;
   object-fit: cover;
 }
+.chat-message {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 6px;
+  align-items: start;
+
+  --inner-border-width: 0;
+  --border-width: 0;
+}
+
+.chat-message .user {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.chat-message .text {
+  word-break: break-word;
+}
+
 

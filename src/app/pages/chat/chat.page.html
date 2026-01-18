@@ -17,8 +17,11 @@
 
 <ion-content class="ion-padding" #content>
   <ion-list class="message">
-    <ion-item *ngFor="let msg of messages">
-      <strong>{{ msg.user }}:</strong> {{ msg.text }}
+    <ion-item *ngFor="let msg of messages" lines="none" class="chat-item">
+      <div class="bubble">
+        <span class="user">{{ msg.user }}:</span>
+        <span class="text">{{ msg.text }}</span>
+      </div>
     </ion-item>
   </ion-list>
 </ion-content>
