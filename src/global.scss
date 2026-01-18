@@ -52,8 +52,8 @@ ion-app, ion-content {
     --background: #D9D9D9;
     color: #919191;
     border-radius: 20px;
-    width: 100%;
-    margin: 5vh auto;
+    width: 80%;
+    margin: 2vh ;
     display: block;
   }
 
@@ -71,10 +71,10 @@ ion-app, ion-content {
     font-size: 30px;
 
     width: 75%;        /* ✅ ШИРИНА */
-    min-height: 10vh;  /* ✅ ВЫСОТА (аналог 15%) */
+    min-height: 8vh;  /* ✅ ВЫСОТА (аналог 15%) */
 
     border-radius: 100px;
-    margin-top: 80px;
+    margin-top: 15vh;
     display: block;
   }
 
