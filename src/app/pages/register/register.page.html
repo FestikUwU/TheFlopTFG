@@ -1,21 +1,26 @@
 <ion-content class="ion-padding login-page">
   <div class="login-container">
   <div class="header-container">
-    <h1 class="custom-title">REGISTRARSE</h1>
+    <h1 class="custom-title">Sign Up</h1>
   </div>
 
     <ion-item class="custom-item ion-margin">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+
+    <ion-item class="custom-item ion-margin">
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
     </ion-item>
 
     <ion-item class="custom-item ion-margin">
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
 
     <div class="buttons-container bottom-buttons ">
-      <ion-button shape="round" class="btnTipo1" expand="block" (click)="goProfile()">Entrar</ion-button>
+      <ion-button shape="round" class="btnTipo1" expand="block" (click)="onRegister()">Entrar</ion-button>
     </div>
   </div>
 </ion-content>

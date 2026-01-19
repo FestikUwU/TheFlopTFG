@@ -123,10 +123,11 @@ export class ChatPage implements OnInit {
 
   send() {
     if (this.newMessage.trim() !== '') {
-      sendMessage(this.newMessage, this.username);
+      sendMessage(this.newMessage);  // ❌ username больше не передаём
       this.newMessage = '';
     }
   }
+
 
   goBack() {
     this.navCtrl.navigateRoot('/chat-list', {
