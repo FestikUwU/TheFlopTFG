@@ -36,9 +36,33 @@ export class RegisterPage implements OnInit {
   email = '';
   password = '';
 
+  // Флаги для отображения карт
+  showCard1 = false;
+  showCard2 = false;
+  showCard3 = false;
+
   constructor(private router: Router, private toastController: ToastController, private navCtrl: NavController) {}
 
   ngOnInit() {}
+
+  // Методы для показа карт при вводе
+  onNameInput() {
+    if (this.name.length > 0 && !this.showCard1) {
+      this.showCard1 = true;
+    }
+  }
+
+  onEmailInput() {
+    if (this.email.length > 0 && !this.showCard2) {
+      this.showCard2 = true;
+    }
+  }
+
+  onPasswordInput() {
+    if (this.password.length > 0 && !this.showCard3) {
+      this.showCard3 = true;
+    }
+  }
 
   //  Метод, который вызывается при клике кнопки "Entrar"
   async onRegister() {
@@ -69,6 +93,4 @@ export class RegisterPage implements OnInit {
       animated: false
     });
   }
-
-
 }
