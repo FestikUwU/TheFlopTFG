@@ -1,1 +1,110 @@
+.login-page {
+  align-items: center;
+  justify-content: center;
+}
 
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* Header */
+.header-container {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.custom-title {
+  font-size: 5vh;
+  font-weight: bold;
+  color: #D9D9D9;
+  font-family: 'Limelight', cursive;
+  margin: 0;
+}
+
+
+/* Input Group */
+.input-group {
+  width: 80%;
+  margin-bottom: 20px; // ← ИСПРАВЛЕНО: вместо 2vh
+  --border-radius: 20px;
+  --highlight-color-focused: transparent; /* убирает линию при фокусе */
+  --highlight-color: transparent;         /* убирает стандартную линию */
+  border: none;
+
+
+  @media (max-width: 480px) {
+    width: 90%;
+  }
+}
+
+.input-label {
+  display: block;
+  font-size: 14px;
+  color: #919191;
+  margin-bottom: 8px;
+  margin-left: 10px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.input-field {
+  --background: #D9D9D9;
+  --color: #333;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 15px;
+  --padding-bottom: 15px;
+
+  width: 100%;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Buttons Container */
+.buttons-container {
+  width: 100%;
+  margin-top: 7vh; // ← ИСПРАВЛЕНО: вместо 15vh
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  @media (max-width: 480px) {
+    width: 90%;
+    margin-top: 25px;
+  }
+}
+
+/* Primary Button */
+.btnTipo1 {
+  --background: linear-gradient(135deg, #FFBF00 0%, #FFD700 100%);
+  --color: white;
+  --border-radius: 100px;
+  --box-shadow: 0 6px 20px rgba(255, 191, 0, 0.4);
+
+  font-family: 'Limelight', cursive;
+  font-size: clamp(20px, 5vw, 24px);
+  height: 60px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  width: 80%;
+
+  &:hover {
+    --box-shadow: 0 8px 25px rgba(255, 191, 0, 0.6);
+  }
+}
+
+/* Secondary Button */
+.btnTipo2 {
+  --color: #D9D9D9;
+  font-size: 16px;
+  font-weight: 500;
+
+
+}

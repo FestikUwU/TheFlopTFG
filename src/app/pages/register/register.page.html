@@ -1,26 +1,59 @@
 <ion-content class="ion-padding login-page">
   <div class="login-container">
-  <div class="header-container">
-    <h1 class="custom-title">Sign Up</h1>
-  </div>
 
-    <ion-item class="custom-item ion-margin">
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text" [(ngModel)]="name"></ion-input>
-    </ion-item>
-
-    <ion-item class="custom-item ion-margin">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email"></ion-input>
-    </ion-item>
-
-    <ion-item class="custom-item ion-margin">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-
-    <div class="buttons-container bottom-buttons ">
-      <ion-button shape="round" class="btnTipo1" expand="block" (click)="onRegister()">Entrar</ion-button>
+    <!-- Header -->
+    <div class="header-container">
+      <h1 class="custom-title">Sign Up</h1>
+      <div class="casino-accent"></div>
     </div>
+
+    <!-- Inputs -->
+    <div class="input-group" lines="none">
+      <ion-label class="input-label">Nombre</ion-label>
+      <ion-input
+        type="text"
+        class="input-field"
+        [(ngModel)]="name"
+        placeholder="Introduce tu Nombre">
+      </ion-input>
+    </div>
+
+    <div class="input-group" lines="none">
+      <ion-label class="input-label">Email</ion-label>
+      <ion-input
+        type="email"
+        class="input-field"
+        [(ngModel)]="email"
+        placeholder="ejemplo@email.com">
+      </ion-input>
+    </div>
+
+    <div class="input-group" lines="none">
+      <ion-label class="input-label">Password</ion-label>
+      <ion-input
+        type="password"
+        class="input-field"
+        [(ngModel)]="password"
+        placeholder="Minimo 6 digitos">
+      </ion-input>
+    </div>
+
+     <!-- Buttons -->
+    <div class="buttons-container">
+      <ion-button
+        class="btnTipo1"
+        expand="block"
+        (click)="onRegister()">
+        Entrar
+      </ion-button>
+
+      <ion-button
+        class="btnTipo2"
+        fill="clear"
+        (click)="goToLogin()">
+        Ya tengo cuenta
+      </ion-button>
+    </div>
+
   </div>
 </ion-content>

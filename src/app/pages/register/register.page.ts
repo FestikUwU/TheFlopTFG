@@ -15,7 +15,7 @@ import {
 
 //  Импортируем функцию регистрации из твоего firebase.service.ts
 import { registerUser } from 'src/app/firebase.service'; // путь поправь под себя
-import { ToastController } from '@ionic/angular';
+import {NavController, ToastController} from '@ionic/angular';
 
 
 @Component({
@@ -36,21 +36,21 @@ export class RegisterPage implements OnInit {
   email = '';
   password = '';
 
-  constructor(private router: Router, private toastController: ToastController) {}
+  constructor(private router: Router, private toastController: ToastController, private navCtrl: NavController) {}
 
   ngOnInit() {}
 
-  // 🔹 Метод, который вызывается при клике кнопки "Entrar"
+  //  Метод, который вызывается при клике кнопки "Entrar"
   async onRegister() {
     try {
-      // 🔹 Вызываем регистрацию в Firebase
+      //  Вызываем регистрацию в Firebase
       await registerUser(this.name, this.email, this.password);
 
-      // 🔹 После успешной регистрации редирект на home
+      //  После успешной регистрации редирект на home
       this.router.navigate(['/home']);
     } catch (error) {
       console.error('Error al registrarse:', error);
-      // 🔹 Тут можно добавить alert для пользователя
+      //  Тут можно добавить alert для пользователя
     }
   }
 
@@ -62,6 +62,12 @@ export class RegisterPage implements OnInit {
       color: 'warning'
     });
     toast.present();
+  }
+
+  goToLogin() {
+    this.navCtrl.navigateRoot('/login', {
+      animated: false
+    });
   }
 
 
