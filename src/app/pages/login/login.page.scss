@@ -1,49 +1,62 @@
 .login-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  height: 100%;
   width: 100%;
+  min-height: 100vh;
+  padding: 20px 0;
+  position: relative;
 
-  ion-item {
-    --background: #D9D9D9;
-    color: #919191;
-    border-radius: 20px;
+  .input-group {
     width: 80%;
-    margin: 2vh 0;
-    /* flex-direction и display убраны, чтобы floating label работал правильно */
+    margin-bottom: 20px;
+    --border-radius: 20px;
+    --highlight-color-focused: transparent;
+    --highlight-color: transparent;
+    border: none;
+
+    ion-item {
+      --background: #D9D9D9;
+      color: #919191;
+      border-radius: 20px;
+      width: 80%;
+      margin: 2vh 0;
+      /* flex-direction и display убраны, чтобы floating label работал правильно */
+    }
+
+    ion-label {
+      font-size: 1rem;
+    }
+
+    ion-input {
+      font-size: 1rem;
+      --padding-start: 10px;
+    }
+
+    .btnTipo1 {
+      --background: #FFBF00;
+      color: white;
+      font-family: 'Limelight';
+      font-size: 30px;
+      width: 75%;
+      min-height: 8vh;
+      border-radius: 100px;
+      margin-top: 15vh;
+      display: block;
+    }
+
+    .btnTipo2 {
+      --color: #D9D9D9;
+      font-size: 14px;
+      font-weight: 500;
+    }
   }
 
-  ion-label {
-    font-size: 1rem;
+  .buttons-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-
-  ion-input {
-    font-size: 1rem;
-    --padding-start: 10px;
-  }
-
-  .btnTipo1 {
-    --background: #FFBF00;
-    color: white;
-    font-family: 'Limelight';
-    font-size: 30px;
-    width: 75%;
-    min-height: 8vh;
-    border-radius: 100px;
-    margin-top: 15vh;
-    display: block;
-  }
-
-  .btnTipo2 {
-    color: white;
-  }
-}
-
-.buttons-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }

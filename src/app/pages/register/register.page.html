@@ -1,6 +1,18 @@
-
 <ion-content class="ion-padding login-page">
   <div class="login-container">
+
+    <!-- Карты в правом верхнем углу -->
+    <div class="cards-display">
+      <div class="card-slot" [class.show]="showCard1">
+        <img [src]="card1Url" alt="Card 1" class="poker-card">
+      </div>
+      <div class="card-slot" [class.show]="showCard2">
+        <img [src]="card2Url" alt="Card 2" class="poker-card">
+      </div>
+      <div class="card-slot" [class.show]="showCard3">
+        <img [src]="card3Url" alt="Card 3" class="poker-card">
+      </div>
+    </div>
 
     <!-- Header -->
     <div class="header-container">
@@ -8,54 +20,39 @@
       <div class="casino-accent"></div>
     </div>
 
-    <!-- Inputs with Cards -->
+    <!-- Inputs БЕЗ карт -->
     <div class="input-card-wrapper">
       <div class="input-group" lines="none">
         <ion-label class="input-label">Nombre</ion-label>
-        <div class="input-with-card">
-          <ion-input
-            type="text"
-            class="input-field"
-            [(ngModel)]="name"
-            (ionInput)="onNameInput()"
-            placeholder="Introduce tu Nombre">
-          </ion-input>
-          <div class="card-slot" [class.show]="showCard1">
-            <img src="assets/iconsYimgs/Hearts5.jpg" alt="Card 1" class="poker-card">
-          </div>
-        </div>
+        <ion-input
+          type="text"
+          class="input-field"
+          [(ngModel)]="name"
+          (ionInput)="onNameInput()"
+          placeholder="Introduce tu Nombre">
+        </ion-input>
       </div>
 
       <div class="input-group" lines="none">
         <ion-label class="input-label">Email</ion-label>
-        <div class="input-with-card">
-          <ion-input
-            type="email"
-            class="input-field"
-            [(ngModel)]="email"
-            (ionInput)="onEmailInput()"
-            placeholder="ejemplo@email.com">
-          </ion-input>
-          <div class="card-slot" [class.show]="showCard2">
-            <img src="assets/iconsYimgs/HeartsT.jpg" alt="Card 2" class="poker-card">
-          </div>
-        </div>
+        <ion-input
+          type="email"
+          class="input-field"
+          [(ngModel)]="email"
+          (ionInput)="onEmailInput()"
+          placeholder="ejemplo@email.com">
+        </ion-input>
       </div>
 
       <div class="input-group" lines="none">
         <ion-label class="input-label">Password</ion-label>
-        <div class="input-with-card">
-          <ion-input
-            type="password"
-            class="input-field"
-            [(ngModel)]="password"
-            (ionInput)="onPasswordInput()"
-            placeholder="Minimo 6 digitos">
-          </ion-input>
-          <div class="card-slot" [class.show]="showCard3">
-            <img src="assets/iconsYimgs/HeartsJ.jpg" alt="Card 3" class="poker-card">
-          </div>
-        </div>
+        <ion-input
+          type="password"
+          class="input-field"
+          [(ngModel)]="password"
+          (ionInput)="onPasswordInput()"
+          placeholder="Minimo 6 digitos">
+        </ion-input>
       </div>
     </div>
 
@@ -65,14 +62,14 @@
         class="btnTipo1"
         expand="block"
         (click)="onRegister()">
-        Entrar
+        ENTRAR
       </ion-button>
 
       <ion-button
         class="btnTipo2"
         fill="clear"
         (click)="goToLogin()">
-        Ya tengo cuenta
+        YA TENGO CUENTA
       </ion-button>
     </div>
 
