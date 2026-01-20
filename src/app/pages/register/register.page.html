@@ -2,17 +2,7 @@
   <div class="login-container">
 
     <!-- Карты в правом верхнем углу -->
-    <div class="cards-display">
-      <div class="card-slot" [class.show]="showCard1">
-        <img [src]="card1Url" alt="Card 1" class="poker-card">
-      </div>
-      <div class="card-slot" [class.show]="showCard2">
-        <img [src]="card2Url" alt="Card 2" class="poker-card">
-      </div>
-      <div class="card-slot" [class.show]="showCard3">
-        <img [src]="card3Url" alt="Card 3" class="poker-card">
-      </div>
-    </div>
+
 
     <!-- Header -->
     <div class="header-container">
@@ -56,8 +46,23 @@
       </div>
     </div>
 
+
+
     <!-- Buttons -->
     <div class="buttons-container">
+
+      <div class="cards-display">
+        <div class="card-slot" [class.show]="showCard1">
+          <img [src]="card1Url" alt="Card 1" class="poker-card">
+        </div>
+        <div class="card-slot" [class.show]="showCard2">
+          <img [src]="card2Url" alt="Card 2" class="poker-card">
+        </div>
+        <div class="card-slot" [class.show]="showCard3">
+          <img [src]="card3Url" alt="Card 3" class="poker-card">
+        </div>
+      </div>
+
       <ion-button
         class="btnTipo1"
         expand="block"
