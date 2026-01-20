@@ -212,11 +212,21 @@ ion-list{
   border: 1px solid black;
   height: auto;
   width: 90%;
-  margin: 12px auto;    /* авто по бокам для центрирования */
+  margin: 12px ;    /* авто по бокам для центрирования */
   width: auto;           /* ограничиваем ширину, чтобы не выходило за экран */
   box-sizing: border-box; /* учитываем padding и border в ширине */
   --inner-border-width: 0;
   margin-bottom: 30px;
+}
+
+.line {
+  position: absolute;
+  right: 10px;
+  top: 30px;    /* отступ сверху */
+  bottom: 30px; /* отступ снизу */
+  width: 2px;
+  background-color: #6A041D;
+  z-index: 100;
 }
 
 .none {
@@ -233,11 +243,10 @@ ion-list{
   border-radius: 10px;
   border: 1px solid black;
   min-width: 90%;
-  margin: 12px auto;    /* авто по бокам для центрирования */
+  margin: 12px;    /* авто по бокам для центрирования */
   width: auto;           /* ограничиваем ширину, чтобы не выходило за экран */
   box-sizing: border-box; /* учитываем padding и border в ширине */
   --inner-border-width: 0;
-  margin-bottom: 30px;
 }
 
 .btnListo::part(native) {
