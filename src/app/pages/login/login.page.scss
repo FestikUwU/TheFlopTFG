@@ -3,60 +3,104 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
   min-height: 100vh;
-  padding: 20px 0;
-  position: relative;
+  width: 100%;
+  padding: 2vh 0;
+}
+.header-container {
+  margin-bottom: 4vh;
+}
 
-  .input-group {
-    width: 80%;
-    margin-bottom: 20px;
-    --border-radius: 20px;
-    --highlight-color-focused: transparent;
-    --highlight-color: transparent;
-    border: none;
+.custom-title {
+  font-size: 4vh;
+  font-family: 'Limelight', cursive;
+  color: #FFEFD5;
+}
 
-    ion-item {
-      --background: #FFEFD5;
-      color: #919191;
-      border-radius: 20px;
-      width: 80%;
-      margin: 2vh 0;
-      /* flex-direction и display убраны, чтобы floating label работал правильно */
-    }
+ion-label {
+  font-weight: 700;
+  color: #6A041D;
+}
+ion-input {
+  font-size: 1vh;
+  color: #333;
+}
+.buttons-container {
+  margin-top: 6vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+}
+.btnTipo1 {
+  --background: linear-gradient(135deg, #FFBF00, #FFD700);
+  --color: white;
+  --border-radius: 100px;
+  --box-shadow: 0 0.75vh 2.5vh rgba(255, 191, 0, 0.4);
 
-    ion-label {
-      font-size: 1rem;
-    }
+  width: 80%;
+  height: 7.6vh;
+  font-family: 'Limelight', cursive;
+  font-size: clamp(20px, 5vw, 24px);
+}
+.btnTipo2 {
+  --color: #FFFFFF;
+  font-size: 1.8vh;
+}
 
-    ion-input {
-      font-size: 1rem;
-      --padding-start: 10px;
-    }
+.input-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3vh; // 10px → 1.3vh
+  width: 100%;
+  align-items: center;
+  padding: 1.3vh; //  10px → 1.3vh
+  border-radius: 15px;
+}
 
-    .btnTipo1 {
-      --background: #FFBF00;
-      color: white;
-      font-family: 'Limelight';
-      font-size: 30px;
-      width: 75%;
-      min-height: 8vh;
-      border-radius: 100px;
-      margin-top: 15vh;
-      display: block;
-    }
+.input-group {
+  width: 80%;
+  margin-bottom: 2vh; //  20px → 2vh
+  --border-radius: 20px;
+  --highlight-color-focused: transparent;
+  --highlight-color: transparent;
+  border: none;
 
-    .btnTipo2 {
-      --color: FFEFD5;
-      font-size: 14px;
-      font-weight: 500;
-    }
-  }
-
-  .buttons-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  @media (max-width: 480px) {
+    width: 90%;
   }
 }
+
+.input-label {
+  display: block;
+  font-size: 1.8vh; //  14px → 1.8vh
+  color: #6A041D;
+  margin-bottom: 1vh; //  8px → 1vh
+  margin-left: 1.2vw; //  10px → 1.2vw
+  font-weight: 750;
+  transition: color 0.3s ease;
+}
+
+.input-field {
+  --background: #F3DFBA;
+  --color: #000000;
+  border: 1px solid black;
+  --padding-start: 2.5vw; //  20px → 2.5vw
+  --padding-end: 2.5vw; //  20px → 2.5vw
+  --padding-top: 1.9vh; //  15px → 1.9vh
+  --padding-bottom: 1.9vh; //  15px → 1.9vh
+
+  width: 100%;
+  border-radius: 20px;
+  font-size: 2vh; // 16px → 2vh
+  box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1); // 2px 8px → vh
+}
+
+.input-field::part(native) {
+  background-image: linear-gradient(#000, #000);
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: left 70%;
+}
+

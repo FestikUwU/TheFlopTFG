@@ -1,25 +1,46 @@
-<ion-content class="ion-padding login-page">
+<ion-content class="login-page">
 
   <div class="login-container">
+
     <div class="header-container">
       <h1 class="custom-title">Login</h1>
     </div>
 
+    <div class="input-card-wrapper">
 
-      <ion-item class="input-group">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input [(ngModel)]="email" type="email"></ion-input>
-      </ion-item>
+      <div class="input-group">
+        <ion-label class="input-label">Email</ion-label>
+        <div class="input-wrapper">
+          <ion-input
+            class="input-field"
+            type="email"
+            [(ngModel)]="email"
+            placeholder="Email">
+          </ion-input>
+          <div class="input-line"></div>
+        </div>
+      </div>
 
-      <ion-item class="input-group">
-        <ion-label position="floating">Password</ion-label>
-        <ion-input [(ngModel)]="password" type="password"></ion-input>
-      </ion-item>
+      <div class="input-group">
+        <ion-label class="input-label">Password</ion-label>
+        <div class="input-wrapper">
+          <ion-input
+            class="input-field"
+            type="password"
+            [(ngModel)]="password"
+            placeholder="Password">
+          </ion-input>
+          <div class="input-line"></div>
+        </div>
+      </div>
 
+    </div>
 
-    <div class="buttons-container bottom-buttons">
-      <ion-button shape="round" class="btnTipo1" (click)="login()">ENTRAR</ion-button>
+    <div class="buttons-container">
+      <ion-button class="btnTipo1" (click)="login()">ENTRAR</ion-button>
       <ion-button class="btnTipo2" fill="clear" (click)="goRegister()">CREAR CUENTA</ion-button>
     </div>
+
   </div>
+
 </ion-content>
