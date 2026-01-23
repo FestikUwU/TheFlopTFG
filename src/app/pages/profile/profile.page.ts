@@ -12,10 +12,10 @@ import {
   IonButtons,
   IonList,
   IonIcon,
-  IonToggle,
   IonSegment,
   IonSegmentButton,
-  AlertController, IonTextarea
+  AlertController,
+  IonTextarea
 } from '@ionic/angular/standalone';
 import { RouterModule, Router } from '@angular/router';
 
@@ -38,7 +38,6 @@ import { RouterModule, Router } from '@angular/router';
     IonButtons,
     IonList,
     IonIcon,
-    IonToggle,
     IonSegment,
     IonSegmentButton,
     IonTextarea
@@ -46,9 +45,8 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  mode: 'editar' | 'ajustes' | 'preview' = 'editar';
+  mode: 'editar' | 'preview' = 'editar';
 
-  // ✅ ЕДИНЫЙ ОБЪЕКТ ПРОФИЛЯ
   profile = {
     description: '',
     age: null as number | null,
@@ -57,6 +55,11 @@ export class ProfilePage implements OnInit {
   };
 
   ageOptions: Array<{ value: number; display: string }> = [];
+
+  sections = {
+    public: true,
+    private: false
+  };
 
   constructor(
     private alertController: AlertController,
@@ -72,6 +75,10 @@ export class ProfilePage implements OnInit {
       value: i,
       display: i.toString().padStart(2, '0')
     }));
+  }
+
+  toggleSection(section: 'public' | 'private') {
+    this.sections[section] = !this.sections[section];
   }
 
   async onListoClick() {
@@ -91,7 +98,6 @@ export class ProfilePage implements OnInit {
   }
 
   onPlusClick() {
-    // Создаем скрытый input для выбора фото
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -107,5 +113,4 @@ export class ProfilePage implements OnInit {
     };
     input.click();
   }
-
 }

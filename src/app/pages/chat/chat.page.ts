@@ -123,7 +123,7 @@ export class ChatPage implements OnInit {
 
   send() {
     if (this.newMessage.trim() !== '') {
-      sendMessage(this.newMessage);  // ❌ username больше не передаём
+      sendMessage(this.newMessage);  //  username больше не передаём
       this.newMessage = '';
     }
   }
@@ -135,6 +135,7 @@ export class ChatPage implements OnInit {
       //animationDirection: 'back'
     });
   }
+
 
 }
 
