@@ -1,3 +1,8 @@
+.login-page{
+  --background: url('/assets/card-suits-bg.svg') no-repeat center center;
+  --background-size: cover;
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -85,7 +90,7 @@ ion-input {
 .input-field {
   --background: #F3DFBA;
   --color: #000000;
-  border: 1px solid black;
+  border: 2px solid black;
   --padding-start: 2.5vw; //  20px → 2.5vw
   --padding-end: 2.5vw; //  20px → 2.5vw
   --padding-top: 1.9vh; //  15px → 1.9vh
@@ -97,10 +102,6 @@ ion-input {
   box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1); // 2px 8px → vh
 }
 
-.input-field::part(native) {
-  background-image: linear-gradient(#000, #000);
-  background-size: 100% 2px;
-  background-repeat: no-repeat;
-  background-position: left 70%;
-}
+
+
 

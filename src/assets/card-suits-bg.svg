@@ -1,0 +1,13 @@
+<svg viewBox="0 0 393 852" xmlns="http://www.w3.org/2000/svg">
+  <!-- Черви (красные) - левый верх -->
+  <text x="30" y="130" font-size="85" fill="#DC143C" opacity="0.2" transform="rotate(45 70 110)">♥</text>
+
+  <!-- Пики (черные) - правый центр -->
+  <text x="280" y="280" font-size="85" fill="#000000" opacity="0.2" transform="rotate(-20 280 280)">♠</text>
+
+  <!-- Трефы (черные) - левый низ -->
+  <text x="20" y="400" font-size="85" fill="#000000" opacity="0.2" transform="rotate(-25 20 400)">♣</text>
+
+  <!-- Бубны (красные) - центр низ -->
+  <text x="300" y="500" font-size="85" fill="#DC143C" opacity="0.2" transform="rotate(120 230 460)">♦</text>
+</svg>

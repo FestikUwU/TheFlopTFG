@@ -44,8 +44,9 @@ ion-button {
 
 /* Центрируем и делаем адаптивные поля */
 .campoTxt::part(native) {
-  background: #D9D9D9 !important;
+  background: #FFEFD5 !important;
   border-radius: 10px;
+  color: black;
   border: 1px solid black;
   min-height: 80px;
   padding: 15px;        /* внутренние отступы */
@@ -74,16 +75,16 @@ ion-input {
 /* =========================== */
 ion-select {
   font-family: 'Limelight', sans-serif !important;
-  --background: #D9D9D9;
+  --background: none;
   --color: #000;
 }
 
 ion-select::part(overlay) {
-  --background: #D9D9D9;
+  --background: #FFEFD5;
 }
 
 ion-select-option {
-  --background: #D9D9D9;
+  --background: #FFEFD5;
   color: #000;
   font-family: 'Limelight', sans-serif !important;
 }
@@ -92,7 +93,7 @@ ion-select-option {
 @media (prefers-color-scheme: dark) {
   ion-select::part(overlay),
   ion-select-option {
-    --background: #D9D9D9 !important;
+    --background: #FFEFD5 !important;
     color: #000 !important;
   }
 }
@@ -124,7 +125,7 @@ ion-select-option {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #D9D9D9; /* принудительно серый */
+  background: #FFEFD5; /* принудительно серый */
   border-radius: 20px 20px 0 0;
   overflow: hidden;
   font-family: 'Limelight', sans-serif !important;
@@ -204,7 +205,7 @@ ion-list{
 }
 
 .campoEdad::part(native) {
-  --background: #D9D9D9 !important;
+  --background: #FFEFD5 !important;
   --ion-default-font: 'Limelight', sans-serif !important;
   color: black;
   align-items: start;
@@ -236,7 +237,7 @@ ion-list{
 }
 
 .campoGenero::part(native) {
-  background: #D9D9D9 !important;
+  background: #FFEFD5 !important;
   --ion-default-font: 'Limelight', sans-serif !important;
   color: #000000;
   align-items: start;
@@ -260,7 +261,7 @@ ion-list{
 
 /* Активная кнопка — 100% */
 ion-button.active {
-  background: #D9D9D9;
+  background: #FFEFD5;
   border-radius: 10px;
   padding: 0 12px;
 }
@@ -352,7 +353,7 @@ ion-button.inactive {
 }
 
 .dot-fill {
-  flex: 1;                     /* ⬅️ РАСТЯГИВАЕТ ТОЧКИ */
+  flex: 1;                     /* РАСТЯГИВАЕТ ТОЧКИ */
   border-bottom: 1px dotted #000;
   margin: 0 8px;
   position: relative;
@@ -360,7 +361,7 @@ ion-button.inactive {
 }
 
 ion-button {
-  margin-left: auto;           /* ⬅️ ПРИЖИМАЕТ ВПРАВО */
+  margin-left: auto;           /*  ПРИЖИМАЕТ ВПРАВО */
 }
 
 .imgAdd {
@@ -370,7 +371,7 @@ ion-button {
 }
 
 ion-segment-button {
-  font-size: 1.6vh;   // ← меняй тут
+  font-size: 1.6vh;   // меняй тут
 }
 
 .buttstyle::part(native) {
@@ -391,3 +392,5 @@ ion-segment-button {
   margin-top: 15px;
   margin-bottom: 5px;
 }
+
+ion-segment-button{}
