@@ -72,30 +72,29 @@ export const getCurrentUser = () => {
   return auth.currentUser;
 };
 
-export const saveUserProfile = async (profile: {
-  description: string;
-  age: number | null;
-  gender: string;
-  photos: string[];
+export const saveUserProfile = async (data: {
+  public?: {
+    description: string;
+    age: number | null;
+    gender: string;
+    photos: string[];
+  };
+  private?: {
+    location: string;
+    lookingGender: string;
+    ageMin: number;
+    ageMax: number;
+    interests: string[];
+  };
 }) => {
   const user = auth.currentUser;
   if (!user) return;
 
   const userRef = doc(firestore, 'users', user.uid);
 
-  await setDoc(
-    userRef,
-    {
-      public: {
-        description: profile.description,
-        age: profile.age,
-        gender: profile.gender,
-        photos: profile.photos
-      }
-    },
-    { merge: true }
-  );
+  await setDoc(userRef, data, { merge: true });
 };
+
 
 
 export const loadUserProfile = async () => {

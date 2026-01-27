@@ -56,6 +56,15 @@ export class ProfilePage implements OnInit {
     photos: [] as string[]
   };
 
+  privateProfile = {
+    location: '',
+    lookingGender: 'todos',
+    ageMin: 18,
+    ageMax: 99,
+    interests: [] as string[]
+  };
+
+
   ageOptions: Array<{ value: number; display: string }> = [];
 
   sections = {
@@ -110,10 +119,24 @@ export class ProfilePage implements OnInit {
       this.profile.gender = pub.gender ?? '';
       this.profile.photos = pub.photos ?? [];
     }
+
+    if (data && data['private']) {
+      const priv = data['private'];
+
+      this.privateProfile.location = priv.location ?? '';
+      this.privateProfile.lookingGender = priv.lookingGender ?? 'todos';
+      this.privateProfile.ageMin = priv.ageMin ?? 18;
+      this.privateProfile.ageMax = priv.ageMax ?? 99;
+      this.privateProfile.interests = priv.interests ?? [];
+    }
+
   }
 
   async onListoClick() {
-    await saveUserProfile(this.profile);
+    await saveUserProfile({
+      public: this.profile,
+      private: this.privateProfile
+    });
 
     const alert = await this.alertController.create({
       header: 'Guardado',

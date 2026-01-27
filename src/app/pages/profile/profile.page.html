@@ -84,11 +84,11 @@
 
     <!-- PREFERENCIAS PRIVADAS -->
     <ion-item button (click)="toggleSection('private')" lines="none" class="buttstyle">
-      <ion-label>
-        Preferencias privadas
-        <span class="hint"></span>
-      </ion-label>
-      <ion-icon [name]="sections.private ? 'chevron-up-outline' : 'chevron-down-outline'" slot="end"></ion-icon>
+      <ion-label>Preferencias privadas</ion-label>
+      <ion-icon
+        [name]="sections.private ? 'chevron-up-outline' : 'chevron-down-outline'"
+        slot="end">
+      </ion-icon>
     </ion-item>
 
     <ng-container *ngIf="sections.private">
@@ -96,30 +96,70 @@
 
         <!-- Ubicación -->
         <ion-label class="field-label">Ubicación</ion-label>
-        <ion-item class="campoTxt" lines="none">
-          <!-- Selector de ciudades -->
+        <ion-item class="campoGenero" lines="none">
+          <ion-select
+            [(ngModel)]="privateProfile.location"
+            interface="action-sheet"
+            placeholder="Selecciona ciudad">
+            <ion-select-option value="Madrid">Madrid</ion-select-option>
+            <ion-select-option value="Barcelona">Barcelona</ion-select-option>
+            <ion-select-option value="Valencia">Valencia</ion-select-option>
+            <ion-select-option value="Sevilla">Sevilla</ion-select-option>
+            <ion-select-option value="Zaragoza">Zaragoza</ion-select-option>
+            <ion-select-option value="Málaga">Málaga</ion-select-option>
+            <ion-select-option value="Murcia">Murcia</ion-select-option>
+            <ion-select-option value="Palma">Palma</ion-select-option>
+            <ion-select-option value="Bilbao">Bilbao</ion-select-option>
+            <ion-select-option value="Alicante">Alicante</ion-select-option>
+          </ion-select>
         </ion-item>
 
         <!-- Género buscado -->
         <ion-label class="field-label">Género buscado</ion-label>
         <ion-item class="campoGenero" lines="none">
-          <!-- Hombre/Mujer/Todos -->
+          <ion-select
+            [(ngModel)]="privateProfile.lookingGender"
+            interface="action-sheet"
+            placeholder="Seleccionar género">
+            <ion-select-option value="masculino">Masculino</ion-select-option>
+            <ion-select-option value="femenino">Femenino</ion-select-option>
+            <ion-select-option value="otro">Otro</ion-select-option>
+          </ion-select>
+          <div class="line"></div>
         </ion-item>
 
         <!-- Rango de edad -->
         <ion-label class="field-label">Rango de edad</ion-label>
-        <ion-item class="campoEdad" lines="none">
-          <!-- Min/Max -->
+
+        <ion-item class="rangoEdad" lines="none">
+          <ion-select
+            [(ngModel)]="privateProfile.ageMin"
+            interface="popover"
+            placeholder="Edad mínima">
+            <ion-select-option
+              *ngFor="let age of ageOptions"
+              [value]="age.value">
+              {{ age.display }}
+            </ion-select-option>
+          </ion-select>
         </ion-item>
 
-        <!-- Gustos -->
-        <ion-label class="field-label">Gustos</ion-label>
-        <ion-item class="campoTxt" lines="none">
-          <!-- Lista preferencias -->
+        <ion-item class="rangoEdad" lines="none">
+          <ion-select
+            [(ngModel)]="privateProfile.ageMax"
+            interface="popover"
+            placeholder="Edad máxima">
+            <ion-select-option
+              *ngFor="let age of ageOptions"
+              [value]="age.value">
+              {{ age.display }}
+            </ion-select-option>
+          </ion-select>
         </ion-item>
 
       </div>
     </ng-container>
+
 
   </ng-container>
 
