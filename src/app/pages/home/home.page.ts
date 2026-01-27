@@ -30,7 +30,10 @@ export class HomePage implements OnInit {
 
   constructor(private router: Router, private navCtrl: NavController) {}
 
+  isLoading = true;
+
   async ngOnInit() {
+    this.isLoading = true;
     const userData = await loadUserProfile();
     const city = userData?.['private']?.location ?? '';
 
@@ -39,6 +42,7 @@ export class HomePage implements OnInit {
       this.showNextMatch();
       console.log('Matches:', this.matches);
     }
+    this.isLoading = false;
   }
 
 

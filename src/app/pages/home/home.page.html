@@ -11,14 +11,30 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
 
   <!-- Контейнер для текущего матча -->
   <div class="content">
+    <div *ngIf="isLoading" class="loading">
+      <p>Cargando... </p>
+    </div>
     <div *ngIf="currentMatch" class="match-card">
-      <img *ngIf="currentMatch.photos?.length" [src]="currentMatch.photos[0]" alt="Foto de perfil" class="match-photo"/>
-      <div class="match-info">
-        <p>{{ currentMatch.description || 'Sin descripción' }}</p>
-        <p>{{ currentMatch.age ?? '--' }} años, {{ currentMatch.gender || 'Sin especificar' }}</p>
+      <!-- Foto -->
+      <img
+        *ngIf="currentMatch.photos?.length"
+        [src]="currentMatch.photos[0]"
+        alt="Foto de perfil"
+        class="match-photo"/>
+
+      <!-- Descripción -->
+      <div class="match-description">
+        {{ currentMatch.description || 'Sin descripción' }}
+      </div>
+
+      <!-- Edad / Género -->
+      <div class="match-data">
+        <span>{{ currentMatch.age ?? '--' }} años</span>
+        <span>{{ currentMatch.gender || 'Sin especificar' }}</span>
       </div>
     </div>
-    <div *ngIf="!currentMatch">
+
+    <div *ngIf="!currentMatch" class="no-matches">
       <p>No hay más coincidencias en tu ciudad 😢</p>
     </div>
   </div>
