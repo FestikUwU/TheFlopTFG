@@ -1,17 +1,8 @@
-.header {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 16px;
-  margin-left: 20px;
-}
-
 .logo-container img {
-  height: 12vh;
+  height: 10vh;
   width: auto;
   max-width: 100%;
+  align-content: center;
 }
 
 .config {

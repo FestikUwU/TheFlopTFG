@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, push, onValue } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 // Tu configuración de Firebase
 const firebaseConfig = {
@@ -17,6 +18,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
+const firestore = getFirestore(app);
+
 
 // Función para enviar un mensaje
 export const sendMessage = (message: string) => {
@@ -67,5 +70,42 @@ export const loginUser = async (
 
 export const getCurrentUser = () => {
   return auth.currentUser;
+};
+
+export const saveUserProfile = async (profile: {
+  description: string;
+  age: number | null;
+  gender: string;
+  photos: string[];
+}) => {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const userRef = doc(firestore, 'users', user.uid);
+
+  await setDoc(
+    userRef,
+    {
+      public: {
+        description: profile.description,
+        age: profile.age,
+        gender: profile.gender,
+        photos: profile.photos
+      }
+    },
+    { merge: true }
+  );
+};
+
+
+export const loadUserProfile = async () => {
+  const user = auth.currentUser;
+  if (!user) return null;
+
+  const userRef = doc(firestore, 'users', user.uid);
+  const snap = await getDoc(userRef);
+
+  if (!snap.exists()) return null;
+  return snap.data();
 };
 

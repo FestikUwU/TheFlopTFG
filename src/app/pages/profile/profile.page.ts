@@ -18,6 +18,8 @@ import {
   IonTextarea
 } from '@ionic/angular/standalone';
 import { RouterModule, Router } from '@angular/router';
+import { saveUserProfile, loadUserProfile } from 'src/app/firebase.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -66,10 +68,6 @@ export class ProfilePage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.generateAgeOptions();
-  }
-
   generateAgeOptions() {
     this.ageOptions = Array.from({ length: 100 }, (_, i) => ({
       value: i,
@@ -81,21 +79,6 @@ export class ProfilePage implements OnInit {
     this.sections[section] = !this.sections[section];
   }
 
-  async onListoClick() {
-    const alert = await this.alertController.create({
-      header: 'Confirmación',
-      message: '¿Estás seguro de continuar?',
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Confirmar',
-          handler: () => this.router.navigate(['/home'])
-        }
-      ]
-    });
-
-    await alert.present();
-  }
 
   onPlusClick() {
     const input = document.createElement('input');
@@ -113,4 +96,37 @@ export class ProfilePage implements OnInit {
     };
     input.click();
   }
+
+  async ngOnInit() {
+    this.generateAgeOptions();
+
+    const data = await loadUserProfile();
+
+    if (data && data['public']) {
+      const pub = data['public'];
+
+      this.profile.description = pub.description ?? '';
+      this.profile.age = pub.age ?? null;
+      this.profile.gender = pub.gender ?? '';
+      this.profile.photos = pub.photos ?? [];
+    }
+  }
+
+  async onListoClick() {
+    await saveUserProfile(this.profile);
+
+    const alert = await this.alertController.create({
+      header: 'Guardado',
+      message: 'Perfil guardado correctamente',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => this.router.navigate(['/home'])
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 }

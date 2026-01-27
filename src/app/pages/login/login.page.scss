@@ -1,3 +1,19 @@
+.header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
+  margin-left: 20px;
+}
+
+.logo-container img {
+  height: 12vh;
+  width: auto;
+  max-width: 100%;
+}
+
 .login-page{
   --background: url('/assets/card-suits-bg.svg') no-repeat center center;
   --background-size: cover;
