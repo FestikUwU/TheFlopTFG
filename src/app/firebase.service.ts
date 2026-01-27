@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, push, onValue } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 // Tu configuración de Firebase
 const firebaseConfig = {
@@ -108,3 +109,32 @@ export const loadUserProfile = async () => {
   return snap.data();
 };
 
+export const getMatchesByCity = async (city: string) => {
+  const user = getAuth().currentUser;
+  if (!user) return [];
+
+  const usersRef = collection(getFirestore(), 'users');
+  const q = query(usersRef, where('private.location', '==', city));
+
+  const querySnapshot = await getDocs(q);
+
+  const matches: Array<any> = [];
+
+  querySnapshot.forEach(doc => {
+    if (doc.id === user.uid) return; // исключаем себя
+    const data = doc.data();
+    const pubData = data['public'];
+    if (pubData) {
+      matches.push({
+        uid: doc.id,
+        description: pubData.description,
+        age: pubData.age,
+        gender: pubData.gender,
+        photos: pubData.photos
+      });
+    }
+  });
+
+
+  return matches;
+};

@@ -12,7 +12,8 @@ import {
   IonToolbar
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import {NavController} from "@ionic/angular";
+import { NavController } from "@ionic/angular";
+import { getMatchesByCity, loadUserProfile } from 'src/app/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -22,60 +23,72 @@ import {NavController} from "@ionic/angular";
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFooter, IonButton, IonIcon, IonImg]
 })
 export class HomePage implements OnInit {
-  constructor(private router: Router, private navCtrl: NavController) { }
 
+  matches: Array<any> = [];       // все найденные матчи
+  currentIndex = 0;               // индекс текущего отображаемого матча
+  currentMatch: any = null;       // текущий матч
 
-  ngOnInit() {
+  constructor(private router: Router, private navCtrl: NavController) {}
+
+  async ngOnInit() {
+    const userData = await loadUserProfile();
+    const city = userData?.['private']?.location ?? '';
+
+    if (city) {
+      this.matches = await getMatchesByCity(city);
+      this.showNextMatch();
+      console.log('Matches:', this.matches);
+    }
   }
+
+
+  showNextMatch() {
+    if (this.currentIndex < this.matches.length) {
+      this.currentMatch = this.matches[this.currentIndex];
+    } else {
+      this.currentMatch = null; // больше матчей нет
+    }
+  }
+
+  onCheck() {
+    console.log('Лайк ✅', this.currentMatch);
+    // Здесь можно добавить логику сохранения лайка в базу
+    this.currentIndex++;
+    this.showNextMatch();
+  }
+
+  onCross() {
+    console.log('Пас ❌', this.currentMatch);
+    this.currentIndex++;
+    this.showNextMatch();
+  }
+
   shout() {
     const text = 'TUS DATOS SON!!!';
-
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'es-ES';
-    utterance.volume = 1; // максимум разрешённый
-    utterance.rate = 0.9; // чуть медленнее, чтобы "кричало"
+    utterance.volume = 1;
+    utterance.rate = 0.9;
     utterance.pitch = 1.2;
-
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
   }
 
   goHome() {
-    this.navCtrl.navigateRoot('/home', {
-      animated: false
-    });
+    this.navCtrl.navigateRoot('/home', { animated: false });
   }
 
   goToSlotsGame() {
-    this.navCtrl.navigateRoot('/slot', {
-      animated: false
-    });
+    this.navCtrl.navigateRoot('/slot', { animated: false });
   }
 
   goToChatList() {
-    this.navCtrl.navigateRoot('/chat-list', {
-      animated: false
-    });
+    this.navCtrl.navigateRoot('/chat-list', { animated: false });
   }
 
   goToSettings() {
     setTimeout(() => {
-      this.navCtrl.navigateRoot('/profile', {
-        animated: false
-      });
+      this.navCtrl.navigateRoot('/profile', { animated: false });
     }, 100);
   }
-
-
-  onCheck() {
-    console.log('Нажата галочка ✅');
-    // Тут можно добавить логику "лайка" или другое действие
-  }
-
-  onCross() {
-    console.log('Нажат крестик ❌');
-    // Тут можно добавить логику "пасы" или другое действие
-  }
-
-
 }

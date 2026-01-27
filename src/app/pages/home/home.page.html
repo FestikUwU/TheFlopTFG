@@ -9,10 +9,18 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
     </div>
   </div>
 
-
-
+  <!-- Контейнер для текущего матча -->
   <div class="content">
-
+    <div *ngIf="currentMatch" class="match-card">
+      <img *ngIf="currentMatch.photos?.length" [src]="currentMatch.photos[0]" alt="Foto de perfil" class="match-photo"/>
+      <div class="match-info">
+        <p>{{ currentMatch.description || 'Sin descripción' }}</p>
+        <p>{{ currentMatch.age ?? '--' }} años, {{ currentMatch.gender || 'Sin especificar' }}</p>
+      </div>
+    </div>
+    <div *ngIf="!currentMatch">
+      <p>No hay más coincidencias en tu ciudad 😢</p>
+    </div>
   </div>
 
   <div class="bottom-bar-single">
@@ -28,11 +36,11 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
 
       <div class="divider"></div>
 
-      <button class="bar-btn" (click)="goToSlotsGame()">🎰</button> <!-- slot game -->
+      <button class="bar-btn" (click)="goToSlotsGame()">🎰</button>
 
       <div class="divider"></div>
 
-      <button class="bar-btn" (click)="goToChatList()"> <!-- chat-list btn -->
+      <button class="bar-btn" (click)="goToChatList()">
         <img src="assets/iconsYimgs/messege2.png" alt="Logo Mensaje">
       </button>
 
