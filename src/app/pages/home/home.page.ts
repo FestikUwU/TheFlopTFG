@@ -55,14 +55,14 @@ export class HomePage implements OnInit {
   }
 
   onCheck() {
-    console.log('Лайк ✅', this.currentMatch);
+    console.log('✅', this.currentMatch);
     // Здесь можно добавить логику сохранения лайка в базу
     this.currentIndex++;
     this.showNextMatch();
   }
 
   onCross() {
-    console.log('Пас ❌', this.currentMatch);
+    console.log('❌', this.currentMatch);
     this.currentIndex++;
     this.showNextMatch();
   }

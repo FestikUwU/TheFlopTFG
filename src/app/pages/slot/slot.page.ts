@@ -21,7 +21,7 @@ import {NavController} from "@ionic/angular";
     IonIcon
   ]
 })
-export class SlotPage implements OnInit {   // ✅ ВАЖНО
+export class SlotPage implements OnInit {   //  ВАЖНО
 
   constructor(private router: Router, private navCtrl: NavController) {}
 

@@ -35,13 +35,13 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
     </div>
 
     <div *ngIf="!currentMatch" class="no-matches">
-      <p>No hay más coincidencias en tu ciudad 😢</p>
+      <p>No hay más coincidencias en tu ciudad</p>
     </div>
   </div>
 
   <div class="bottom-bar-single">
     <button class="single-btn check" (click)="onCheck()">ALL IN</button>
-    <button class="single-btn cross" (click)="onCross()">X</button>
+    <button class="single-btn cross" (click)="onCross()">PASS</button>
   </div>
 
   <div class="bottom-bar">
@@ -50,18 +50,16 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
         <img src="assets/iconsYimgs/logoTest.png" alt="Logo The Flop" />
       </button>
 
-      <div class="divider"></div>
+      <!--<div class="divider"></div>-->
 
       <button class="bar-btn" (click)="goToSlotsGame()">🎰</button>
 
-      <div class="divider"></div>
-
+      <!--<div class="divider"></div>-->
       <button class="bar-btn" (click)="goToChatList()">
         <img src="assets/iconsYimgs/messege2.png" alt="Logo Mensaje">
       </button>
 
-      <div class="divider"></div>
-
+      <!--<div class="divider"></div>-->
       <button class="bar-btn" (click)="shout()">
         📢
       </button>

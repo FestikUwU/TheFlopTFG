@@ -253,11 +253,28 @@ ion-list{
 .btnListo::part(native) {
   display: flex;
   justify-content: center;
-  background: transparent;
+  background: #F3DFBA;
+  border-radius: 20px;
+  max-width: 8vh;
+  max-height: 2vh;
+  color: black;
   box-shadow: none;
-  margin: 0px;
+  margin-bottom: 15px;
   --inner-border-width: 0;
+  --box-shadow: 0 10px 12px rgba(0, 0, 0, 0.3);
 }
+
+.btnDiv::part(native){
+  background: transparent !important;
+}
+
+.btnListo ion-button {
+  font-weight: 800;
+  --color: #000;
+
+  font-family: 'Limelight', cursive;
+}
+
 
 /* Активная кнопка — 100% */
 ion-button.active {
@@ -397,3 +414,4 @@ ion-segment-button {
 }
 
 ion-segment-button{}
+

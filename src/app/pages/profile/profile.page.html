@@ -6,16 +6,17 @@
   </div>
 
   <!-- BOTÓN LISTO -->
-  <ion-item class="btnListo" lines="none">
-    <ion-buttons slot="end">
-      <ion-button (click)="onListoClick()">Listo</ion-button>
-    </ion-buttons>
+  <ion-item class="btnDiv">
+    <ion-item class="btnListo" lines="none" slot="end">
+      <ion-buttons slot="end">
+        <ion-button (click)="onListoClick()">Listo</ion-button>
+      </ion-buttons>
+    </ion-item>
   </ion-item>
-
   <!-- SEGMENT -->
   <ion-segment mode="ios" [(ngModel)]="mode" value="editar" class="profile-segment">
     <ion-segment-button value="editar">
-      <ion-label>EDITAR</ion-label>
+      <ion-label class="segmentStyle">EDITAR</ion-label>
     </ion-segment-button>
     <ion-segment-button value="preview">
       <ion-label>VISTA PREVIA</ion-label>
@@ -37,6 +38,7 @@
       <div class="section-content">
 
         <!-- Descripción -->
+        <ion-label class="field-label">Informacion sobre ti</ion-label>
         <ion-item class="campoTxt" lines="none">
           <ion-textarea
             [(ngModel)]="profile.description"
@@ -46,6 +48,7 @@
         </ion-item>
 
         <!-- Género -->
+        <ion-label class="field-label">Género</ion-label>
         <ion-item class="campoGenero" lines="none">
           <ion-select
             [(ngModel)]="profile.gender"
@@ -59,6 +62,7 @@
         </ion-item>
 
         <!-- Edad -->
+        <ion-label class="field-label">Edad</ion-label>
         <ion-item class="campoEdad" lines="none">
           <ion-select
             [(ngModel)]="profile.age"
