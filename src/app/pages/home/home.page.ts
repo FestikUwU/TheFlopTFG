@@ -14,6 +14,7 @@ import {
 import { Router } from '@angular/router';
 import { NavController } from "@ionic/angular";
 import { getMatchesByCity, loadUserProfile } from 'src/app/firebase.service';
+import { likeUser, dislikeUser } from 'src/app/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -54,15 +55,22 @@ export class HomePage implements OnInit {
     }
   }
 
-  onCheck() {
-    console.log('✅', this.currentMatch);
-    // Здесь можно добавить логику сохранения лайка в базу
+  async onCheck() {
+    if (this.currentMatch) {
+      await likeUser(this.currentMatch.uid);
+      console.log('LIKE', this.currentMatch.uid);
+    }
+
     this.currentIndex++;
     this.showNextMatch();
   }
 
-  onCross() {
-    console.log('❌', this.currentMatch);
+  async onCross() {
+    if (this.currentMatch) {
+      await dislikeUser(this.currentMatch.uid);
+      console.log('DISLIKE', this.currentMatch.uid);
+    }
+
     this.currentIndex++;
     this.showNextMatch();
   }

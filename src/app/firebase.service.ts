@@ -61,6 +61,42 @@ export const registerUser = async (
   return cred.user;
 };
 
+export const likeUser = async (targetUid: string) => {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const likeRef = doc(
+    firestore,
+    "interactions",
+    user.uid,
+    "likes",
+    targetUid
+  );
+
+  await setDoc(likeRef, {
+    liked: true,
+    timestamp: Date.now()
+  });
+};
+
+export const dislikeUser = async (targetUid: string) => {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const dislikeRef = doc(
+    firestore,
+    "interactions",
+    user.uid,
+    "dislikes",
+    targetUid
+  );
+
+  await setDoc(dislikeRef, {
+    disliked: true,
+    timestamp: Date.now()
+  });
+};
+
 export const loginUser = async (
   email: string,
   password: string
