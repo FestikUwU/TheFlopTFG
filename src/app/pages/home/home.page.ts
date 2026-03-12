@@ -29,6 +29,9 @@ export class HomePage implements OnInit {
   currentIndex = 0;               // индекс текущего отображаемого матча
   currentMatch: any = null;       // текущий матч
 
+  isMatch = false;
+  matchedUser: any = null;
+
   constructor(private router: Router, private navCtrl: NavController) {}
 
   isLoading = true;
@@ -57,7 +60,14 @@ export class HomePage implements OnInit {
 
   async onCheck() {
     if (this.currentMatch) {
-      await likeUser(this.currentMatch.uid);
+
+      const isMatch = await likeUser(this.currentMatch.uid);
+
+      if (isMatch) {
+        this.matchedUser = this.currentMatch;
+        this.isMatch = true;
+      }
+
       console.log('LIKE', this.currentMatch.uid);
     }
 
@@ -102,5 +112,9 @@ export class HomePage implements OnInit {
     setTimeout(() => {
       this.navCtrl.navigateRoot('/profile', { animated: false });
     }, 100);
+  }
+
+  closeMatch() {
+    this.isMatch = false;
   }
 }

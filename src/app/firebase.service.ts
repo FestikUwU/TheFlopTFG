@@ -61,9 +61,10 @@ export const registerUser = async (
   return cred.user;
 };
 
-export const likeUser = async (targetUid: string) => {
+export const likeUser = async (targetUid: string): Promise<boolean> => {
+
   const user = auth.currentUser;
-  if (!user) return;
+  if (!user) return false;
 
   const likeRef = doc(
     firestore,
@@ -77,6 +78,35 @@ export const likeUser = async (targetUid: string) => {
     liked: true,
     timestamp: Date.now()
   });
+
+  const likeBackRef = doc(
+    firestore,
+    "interactions",
+    targetUid,
+    "likes",
+    user.uid
+  );
+
+  const snap = await getDoc(likeBackRef);
+
+  if (snap.exists()) {
+
+    const matchId =
+      user.uid < targetUid
+        ? `${user.uid}_${targetUid}`
+        : `${targetUid}_${user.uid}`;
+
+    const matchRef = doc(firestore, "matches", matchId);
+
+    await setDoc(matchRef, {
+      users: [user.uid, targetUid],
+      createdAt: Date.now()
+    });
+
+    return true;
+  }
+
+  return false;
 };
 
 export const dislikeUser = async (targetUid: string) => {
@@ -94,6 +124,40 @@ export const dislikeUser = async (targetUid: string) => {
   await setDoc(dislikeRef, {
     disliked: true,
     timestamp: Date.now()
+  });
+};
+
+export const checkMatch = async (targetUid: string) => {
+  const user = auth.currentUser;
+  if (!user) return false;
+
+  const likeRef = doc(
+    firestore,
+    "interactions",
+    targetUid,
+    "likes",
+    user.uid
+  );
+
+  const snap = await getDoc(likeRef);
+
+  return snap.exists();
+};
+
+export const createMatch = async (targetUid: string) => {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const matchId =
+    user.uid < targetUid
+      ? `${user.uid}_${targetUid}`
+      : `${targetUid}_${user.uid}`;
+
+  const matchRef = doc(firestore, "matches", matchId);
+
+  await setDoc(matchRef, {
+    users: [user.uid, targetUid],
+    createdAt: Date.now()
   });
 };
 
@@ -163,6 +227,7 @@ export const getMatchesByCity = async (city: string) => {
     if (pubData) {
       matches.push({
         uid: doc.id,
+        name: data['name'] ?? "Player",
         description: pubData.description,
         age: pubData.age,
         gender: pubData.gender,
