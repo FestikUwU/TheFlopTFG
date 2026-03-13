@@ -3,6 +3,7 @@ import { getDatabase, ref, push, onValue } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { addDoc, orderBy, onSnapshot } from "firebase/firestore";
 
 // Tu configuración de Firebase
 const firebaseConfig = {
@@ -196,7 +197,54 @@ export const saveUserProfile = async (data: {
   await setDoc(userRef, data, { merge: true });
 };
 
+export const getUserMatches = async () => {
 
+  const user = auth.currentUser;
+  if (!user) return [];
+
+  const matchesRef = collection(firestore, "matches");
+  const snapshot = await getDocs(matchesRef);
+
+  const matches:any[] = [];
+
+  snapshot.forEach(doc => {
+    const data: any = doc.data();
+
+    if (data['users'].includes(user.uid)) {
+      matches.push({
+        id: doc.id,
+        users: data['users']
+      });
+    }
+  });
+
+  return matches;
+};
+
+
+export const sendChatMessage = async (matchId: string, text: string) => {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const messagesRef = collection(firestore, "chats", matchId, "messages");
+  await addDoc(messagesRef, {
+    text,
+    sender: user.displayName ?? "Player",
+    senderUid: user.uid,
+    timestamp: Date.now()
+  });
+};
+
+export const subscribeToChat = (matchId: string, callback: (messages: any[]) => void) => {
+  const messagesRef = collection(firestore, "chats", matchId, "messages");
+  const q = query(messagesRef, orderBy("timestamp", "asc"));
+
+  return onSnapshot(q, (snapshot) => {
+    const msgs: any[] = [];
+    snapshot.forEach(doc => msgs.push(doc.data()));
+    callback(msgs);
+  });
+};
 
 export const loadUserProfile = async () => {
   const user = auth.currentUser;
@@ -206,6 +254,16 @@ export const loadUserProfile = async () => {
   const snap = await getDoc(userRef);
 
   if (!snap.exists()) return null;
+  return snap.data();
+};
+
+export const getMatchUsers = async (matchId: string) => {
+
+  const matchRef = doc(firestore, "matches", matchId);
+  const snap = await getDoc(matchRef);
+
+  if (!snap.exists()) return null;
+
   return snap.data();
 };
 

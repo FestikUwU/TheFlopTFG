@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { getUserMatches } from 'src/app/firebase.service';
 import {
   IonContent,
   IonHeader,
@@ -31,10 +32,13 @@ import {animate} from "@angular/animations";
   ]
 })
 export class ChatListPage implements OnInit {
+  matches: any[] = [];
 
   constructor(private router: Router, private navCtrl: NavController) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.matches = await getUserMatches();
+  }
 
   shout() {
     const text = 'TUS DATOS SON!!!';
@@ -67,11 +71,10 @@ export class ChatListPage implements OnInit {
     });
   }
 
-  goToChat() {
-    this.navCtrl.navigateRoot('/chat', {
-      animated: false
-    });
+  goToChat(matchId: string) {
+    this.router.navigate(['/chat', matchId]);
   }
+
 
   goToSettings() {
     setTimeout(() => {

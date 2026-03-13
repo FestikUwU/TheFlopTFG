@@ -1,5 +1,8 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
-import { sendMessage, subscribeMessages } from 'src/app/firebase.service';
+import { sendChatMessage, subscribeToChat } from 'src/app/firebase.service';
+import { ActivatedRoute } from '@angular/router';
+import { getMatchUsers } from 'src/app/firebase.service';
+import { getAuth } from "firebase/auth";
 import {
   IonContent,
   IonButton,
@@ -16,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
 import { NavController } from "@ionic/angular";
+
+const auth = getAuth();
 
 @Component({
   selector: 'app-chat',
@@ -41,39 +46,41 @@ export class ChatPage implements OnInit {
 
   @ViewChild('content') content!: IonContent;
 
+  matchId: string = "test_chat";
+
   messages: any[] = [];
   newMessage: string = '';
   username: string = 'User' + Math.floor(Math.random() * 1000);
   private bgMusic!: HTMLAudioElement;
+  otherUserPhoto: string = "";
 
   constructor(
     private ngZone: NgZone,
     private router: Router,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    // Инициализация фоновой музыки
-    this.bgMusic = new Audio('assets/audio/no-more-what-ifs.mp3');
-    this.bgMusic.loop = true;
+  async ngOnInit() {
 
-    // запускаем плавный fadeIn
-    this.fadeInMusicSimple(0.07); // targetVolume = 0.07
+    this.matchId = this.route.snapshot.paramMap.get('matchId')!;
 
-    // Слушаем сообщения
-    subscribeMessages((data: any) => {
+    const match: any = await getMatchUsers(this.matchId);
+
+    if (match) {
+      const currentUserUid = auth.currentUser?.uid;
+
+      const otherUid = match['users'].find((uid: any) => uid !== currentUserUid);
+
+      console.log("Other user UID:", otherUid);
+    }
+
+    subscribeToChat(this.matchId, (msgs) => {
       this.ngZone.run(() => {
-        if (data) {
-          this.messages = Object.values(data)
-            .sort((a: any, b: any) => a.timestamp - b.timestamp);
-          setTimeout(() => {
-            if(this.content) this.content.scrollToBottom(300);
-          }, 50);
-        } else {
-          this.messages = [];
-        }
+        this.messages = msgs;
       });
     });
+
   }
 
   fadeInMusicSimple(targetVolume: number = 0.07) {
@@ -123,7 +130,7 @@ export class ChatPage implements OnInit {
 
   send() {
     if (this.newMessage.trim() !== '') {
-      sendMessage(this.newMessage);  //  username больше не передаём
+      sendChatMessage(this.matchId, this.newMessage);
       this.newMessage = '';
     }
   }

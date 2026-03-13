@@ -7,7 +7,7 @@
         </ion-button>
       </ion-buttons>
 
-      <ion-img class="imgPerfilMini" src="assets/iconsYimgs/MAIZ.png"></ion-img>
+      <ion-img class="imgPerfilMini" [src]="otherUserPhoto"></ion-img>
     </div>
 
     <ion-title>Chat de prueba</ion-title>
@@ -19,7 +19,7 @@
   <ion-list class="message">
     <ion-item *ngFor="let msg of messages" lines="none" class="chat-item">
       <div class="bubble">
-        <span class="user">{{ msg.user }}:</span>
+        <span class="user">{{ msg.sender }}:</span>
         <span class="text">{{ msg.text }}</span>
       </div>
     </ion-item>

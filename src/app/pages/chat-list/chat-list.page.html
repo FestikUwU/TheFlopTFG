@@ -2,11 +2,13 @@
 
 
   <div class="content-wrapper">
-    <p>
-      Chat_List_PAGE
-    </p>
-    <button class="bar-btn" (click)="goToChat()"> <!-- chat-list btn -->
-      <ion-icon name="chatbubbles-outline"></ion-icon>
+    <p>Chat_List_PAGE</p>
+  </div>
+
+  <!-- MATCH LIST -->
+  <div *ngFor="let match of matches" class="match-item">
+    <button class="open-chat-btn" (click)="goToChat(match.id)">
+      Open Chat
     </button>
   </div>
 

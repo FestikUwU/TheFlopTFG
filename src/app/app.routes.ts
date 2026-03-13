@@ -45,9 +45,18 @@ export const routes: Routes = [
     path: 'slot',
     loadComponent: () =>
       import('./pages/slot/slot.page').then((m) => m.SlotPage),
-  },  {
+  },
+  {
     path: 'stats',
     loadComponent: () => import('./pages/stats/stats.page').then( m => m.StatsPage)
   },
-
+  {
+    path: 'chat/:matchId',
+    loadComponent: () => import('./pages/chat/chat.page').then(m => m.ChatPage)
+  },
+  {
+    path: 'chat/:matchId',
+    loadComponent: () =>
+      import('./pages/chat/chat.page').then(m => m.ChatPage)
+  },
 ];

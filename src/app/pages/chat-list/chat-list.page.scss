@@ -109,4 +109,16 @@
   }
 }
 
+.match-item {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
+.open-chat-btn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  background: white;
+  font-weight: bold;
+}
