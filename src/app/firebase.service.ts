@@ -2,8 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, push, onValue } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { addDoc, orderBy, onSnapshot } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, orderBy, onSnapshot, limit } from "firebase/firestore";
 
 // Tu configuración de Firebase
 const firebaseConfig = {
@@ -255,6 +254,72 @@ export const loadUserProfile = async () => {
 
   if (!snap.exists()) return null;
   return snap.data();
+};
+
+export const getChatList = async () => {
+
+  const user = auth.currentUser;
+  if (!user) return [];
+
+  const matchesRef = collection(firestore, "matches");
+  const matchesSnap = await getDocs(matchesRef);
+
+  const chatList: any[] = [];
+
+  for (const docSnap of matchesSnap.docs) {
+
+    const data: any = docSnap.data();
+
+    if (!data['users'].includes(user.uid)) continue;
+
+    const matchId = docSnap.id;
+
+    const otherUid = data['users'].find((uid: any) => uid !== user.uid);
+
+    // загрузка профиля
+    const userRef = doc(firestore, "users", otherUid);
+    const userSnap = await getDoc(userRef);
+
+    let name = "Usuario";
+    let photo = "assets/iconsYimgs/default-avatar.png";
+
+    if (userSnap.exists()) {
+      const userData: any = userSnap.data();
+
+      name = userData?.public?.name || "Usuario";
+      photo = userData?.public?.photos?.[0] || photo;
+    }
+
+    // последнее сообщение
+    const messagesRef = collection(firestore, "chats", matchId, "messages");
+
+    const q = query(messagesRef, orderBy("timestamp", "desc"), limit(1));
+    const msgSnap = await getDocs(q);
+
+    let lastMessage = "";
+    let time = "";
+
+    msgSnap.forEach(m => {
+      const msg: any = m.data();
+
+      lastMessage = msg.text || "";
+
+      const date = new Date(msg.timestamp);
+      time = date.getHours() + ":" + date.getMinutes().toString().padStart(2, "0");
+    });
+
+    chatList.push({
+      id: matchId,
+      name,
+      photo,
+      lastMessage,
+      time
+    });
+
+  }
+
+  return chatList;
+
 };
 
 export const getMatchUsers = async (matchId: string) => {

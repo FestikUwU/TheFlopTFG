@@ -11,23 +11,23 @@
   <div class="bottom-bar">
     <div class="bar-container">
       <button class="bar-btn" (click)="goHome()">
-        <img src="assets/iconsYimgs/logoTest.png" alt="Logo The Flop" />
+        <img src="assets/icon/LogoMini.png" alt="Logo The Flop" />
       </button>
 
-      <!--<div class="divider"></div>-->
-
-      <button class="bar-btn" (click)="goToSlotsGame()">🎰</button> <!-- slot game -->
-
-      <!--<div class="divider"></div>-->
-
-      <button class="bar-btn" (click)="goToChatList()"> <!-- chat-list btn -->
+      <button class="bar-btn active" (click)="goToChatList()">
         <img src="assets/iconsYimgs/messege2.png" alt="Logo Mensaje">
       </button>
 
-      <!--<div class="divider"></div>-->
+      <button class="bar-btn" (click)="goStats">
+        <img src="assets/icon/statsIcon.png" alt="Logo Stats">
+      </button>
 
-      <button class="bar-btn" (click)="shout()">
+      <!--<button class="bar-btn" (click)="shout()">
         📢
+      </button>-->
+
+      <button class="bar-btn" (click)="goToSlotsGame()">
+        <img src="assets/icon/chip.png" alt="Logo Game">
       </button>
     </div>
     <div class="config">

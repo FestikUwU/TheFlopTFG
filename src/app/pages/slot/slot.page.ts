@@ -45,6 +45,12 @@ export class SlotPage implements OnInit {   //  ВАЖНО
     });
   }
 
+  goStats() {
+    this.navCtrl.navigateRoot('/stats', {
+      animated: false
+    });
+  }
+
   goToSlotsGame() {
     this.navCtrl.navigateRoot('/slot', {
       animated: false

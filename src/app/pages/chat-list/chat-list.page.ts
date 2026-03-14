@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { getUserMatches } from 'src/app/firebase.service';
+import { getChatList } from 'src/app/firebase.service';
 import {
   IonContent,
   IonHeader,
@@ -38,6 +39,7 @@ export class ChatListPage implements OnInit {
 
   async ngOnInit() {
     this.matches = await getUserMatches();
+    this.matches = await getChatList();
   }
 
   shout() {
@@ -61,6 +63,12 @@ export class ChatListPage implements OnInit {
 
   goToSlotsGame() {
     this.navCtrl.navigateRoot('/slot', {
+      animated: false
+    });
+  }
+
+  goStats() {
+    this.navCtrl.navigateRoot('/stats', {
       animated: false
     });
   }

@@ -100,6 +100,12 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateRoot('/home', { animated: false });
   }
 
+  goStats() {
+    this.navCtrl.navigateRoot('/stats', {
+      animated: false
+    });
+  }
+
   goToSlotsGame() {
     this.navCtrl.navigateRoot('/slot', { animated: false });
   }

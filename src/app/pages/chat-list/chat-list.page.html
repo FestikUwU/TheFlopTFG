@@ -1,37 +1,58 @@
 <ion-content class="page-content">
 
-
-  <div class="content-wrapper">
-    <p>Chat_List_PAGE</p>
+  <div class="header">
+    <h1 class="page-title">Chats</h1>
   </div>
 
-  <!-- MATCH LIST -->
-  <div *ngFor="let match of matches" class="match-item">
-    <button class="open-chat-btn" (click)="goToChat(match.id)">
-      Open Chat
-    </button>
+  <div class="content-wrapper">
+    <!-- MATCH LIST -->
+    <div *ngFor="let match of matches; let i = index" class="match-item">
+
+      <div class="chat-card" (click)="goToChat(match.id)">
+
+        <div class="profile-image">
+          <img [src]="match.photo">
+        </div>
+
+        <div class="chat-info">
+          <h2 class="chat-name">{{ match.name }}</h2>
+          <p class="last-message">Ultimo mensaje: {{ match.lastMessage }}</p>
+        </div>
+
+        <div class="chat-meta">
+          <span class="chat-time">{{ match.time }}</span>
+        </div>
+      </div>
+      <div class="divider-line" *ngIf="i < matches.length - 1"></div>
+    </div>
+
+
+    <!-- Если нет чатов -->
+    <div *ngIf="matches.length === 0" class="no-chats">
+      <p>No tienes conversaciones aún</p>
+    </div>
   </div>
 
   <div class="bottom-bar">
     <div class="bar-container">
       <button class="bar-btn" (click)="goHome()">
-        <img src="assets/iconsYimgs/logoTest.png" alt="Logo The Flop" />
+        <img src="assets/icon/LogoMini.png" alt="Logo The Flop" />
       </button>
 
-      <!--<div class="divider"></div>-->
-
-      <button class="bar-btn" (click)="goToSlotsGame()">🎰</button> <!-- slot game -->
-
-      <!--<div class="divider"></div>-->
-
-      <button class="bar-btn" (click)="goToChatList()"> <!-- chat-list btn -->
+      <button class="bar-btn active" (click)="goToChatList()">
         <img src="assets/iconsYimgs/messege2.png" alt="Logo Mensaje">
       </button>
 
-      <!--<div class="divider"></div>-->
+      <button class="bar-btn" (click)="goStats">
+        <img src="assets/icon/statsIcon.png" alt="Logo Stats">
+      </button>
 
-      <button class="bar-btn" (click)="shout()">
+      <!--<button class="bar-btn" (click)="shout()">
         📢
+      </button>-->
+
+      <button class="bar-btn" (click)="goToSlotsGame()">
+        <img src="assets/icon/chip.png" alt="Logo Game">
       </button>
     </div>
     <div class="config">
@@ -42,6 +63,3 @@
   </div>
 
 </ion-content>
-
-
-
