@@ -326,6 +326,81 @@ export const getChatList = async () => {
 
 };
 
+export const subscribeChatList = (callback: (chats:any[]) => void) => {
+
+  const user = getAuth().currentUser;
+  if (!user) return;
+
+  const matchesRef = collection(firestore, "matches");
+
+  onSnapshot(matchesRef, async (snapshot) => {
+
+    const chatList:any[] = [];
+
+    for (const docSnap of snapshot.docs) {
+
+      const data:any = docSnap.data();
+
+      if (!data['users'].includes(user.uid)) continue;
+
+      const matchId = docSnap.id;
+
+      const otherUid = data['users'].find((uid:any)=> uid !== user.uid);
+
+      // профиль пользователя
+      const userRef = doc(firestore, "users", otherUid);
+      const userSnap = await getDoc(userRef);
+
+      let name = "Usuario";
+      let photo = "assets/iconsYimgs/default-avatar.png";
+
+      if (userSnap.exists()) {
+        const userData:any = userSnap.data();
+        name = userData?.public?.name || "Usuario";
+        photo = userData?.public?.photos?.[0] || photo;
+      }
+
+      const messagesRef = collection(firestore, "chats", matchId, "messages");
+
+      const q = query(messagesRef, orderBy("timestamp", "desc"), limit(1));
+
+      const unsubscribe = onSnapshot(q, (msgSnap)=>{
+
+        msgSnap.forEach(m => {
+
+          const msg:any = m.data();
+
+          const timestamp = msg.timestamp;
+
+          const date = new Date(timestamp);
+
+          const time =
+            date.getHours() + ":" +
+            date.getMinutes().toString().padStart(2,"0");
+
+          chatList.push({
+            id: matchId,
+            name,
+            photo,
+            lastMessage: msg.text,
+            time,
+            timestamp
+          });
+
+        });
+
+        chatList.sort((a,b)=>b.timestamp-a.timestamp);
+
+        callback([...chatList]);
+
+      });
+
+    }
+
+  });
+
+};
+
 export const getMatchUsers = async (matchId: string) => {
 
   const matchRef = doc(firestore, "matches", matchId);

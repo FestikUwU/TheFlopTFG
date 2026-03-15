@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { getUserMatches } from 'src/app/firebase.service';
 import { getChatList } from 'src/app/firebase.service';
+import { subscribeChatList } from 'src/app/firebase.service';
 import {
   IonContent,
   IonHeader,
@@ -40,12 +41,19 @@ export class ChatListPage implements OnInit {
   loading = true;
 
   async ngOnInit() {
-    this.matches = await getUserMatches();
-    this.matches = await getChatList();
-    this.matches.sort((a, b) => b.timestamp - a.timestamp);
+    //this.matches = await getUserMatches();
+    //this.matches = await getChatList();
+    subscribeChatList((chats)=>{
+
+      this.matches = chats;
+
+      this.loading = false;
+
+    });
+    //this.matches.sort((a, b) => b.timestamp - a.timestamp);
     setTimeout(() => {
       this.loading = false;
-    }, 100);
+    }, 250);
   }
 
   shout() {
