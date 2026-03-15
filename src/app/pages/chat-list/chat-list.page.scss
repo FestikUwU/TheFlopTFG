@@ -136,7 +136,7 @@
   padding: 5px 5px 5px 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
-  width: 100%;
+  width: 75%;
 }
 
 .chat-card:active {
@@ -180,9 +180,15 @@
 .chat-meta {
   display: flex;
   align-items: flex-end;
-  height: 100%;
+  align-self: stretch;
   margin-bottom: 10px;
   margin-right: 10px;
+  margin-top: 0;
+}
+
+/* margin-top только для реальных карточек */
+.chat-card:not(:has(.skeleton-img)) .chat-meta {
+  margin-top: 130px;
 }
 
 .chat-time {
@@ -199,24 +205,11 @@
 }
 
 /* SKELETON */
-
-.skeleton {
-  animation: skeleton-loading 1.2s infinite linear alternate;
-}
-
-@keyframes skeleton-loading {
-  0% {
-    background-color: #f2e2c5;
-  }
-  100% {
-    background-color: #e6d3b1;
-  }
-}
-
 .skeleton-img {
   width: 130px;
   height: 160px;
   border-radius: 16px;
+  flex-shrink: 0;
   background: #e6d3b1;
 }
 
@@ -227,12 +220,12 @@
 
 .skeleton-text.name {
   width: 120px;
-  height: 24px;
-  margin-top: 12px;
+  height: 22px;
+  margin-top: 10px;
 }
 
 .skeleton-text.message {
-  width: 180px;
+  width: 100%;
   height: 18px;
   margin-top: 12px;
 }
@@ -240,6 +233,19 @@
 .skeleton-text.time {
   width: 40px;
   height: 16px;
+}
+
+.skeleton-card {
+  pointer-events: none;
+}
+
+.skeleton {
+  animation: skeleton-loading 1.2s infinite linear alternate;
+}
+
+@keyframes skeleton-loading {
+  0%   { background-color: #f2e2c5; }
+  100% { background-color: #e6d3b1; }
 }
 
 .page-title {
@@ -254,4 +260,34 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+ion-item-sliding {
+  background: transparent;
+}
+
+ion-item-options{
+
+}
+
+ion-item-option {
+  justify-content: center;
+  background: rgba(217, 217, 217, 0.36);
+  width: 90px;
+  height: 90px;
+  margin-top: 4vh;
+  margin-right: 5px;
+  border-radius: 7px;
+}
+
+.iconDelete{
+  max-width: 3vh;
+  max-height: 3vh;
+}
+
+.chat-item {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --min-height: auto;
 }

@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, push, onValue } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-import { collection, query, where, getDocs, addDoc, orderBy, onSnapshot, limit } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, orderBy, onSnapshot, limit, deleteDoc } from "firebase/firestore";
 
 // Tu configuración de Firebase
 const firebaseConfig = {
@@ -245,6 +245,24 @@ export const subscribeToChat = (matchId: string, callback: (messages: any[]) => 
   });
 };
 
+export const deleteChatFromFirestore = async (matchId: string) => {
+
+  // удалить сообщения
+  const messagesRef = collection(firestore, "chats", matchId, "messages");
+
+  const snapshot = await getDocs(messagesRef);
+
+  for (const docSnap of snapshot.docs) {
+    await deleteDoc(docSnap.ref);
+  }
+
+  // удалить match
+  const matchRef = doc(firestore, "matches", matchId);
+
+  await deleteDoc(matchRef);
+
+};
+
 export const loadUserProfile = async () => {
   const user = auth.currentUser;
   if (!user) return null;
@@ -378,14 +396,22 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
             date.getHours() + ":" +
             date.getMinutes().toString().padStart(2,"0");
 
-          chatList.push({
+          const existingIndex = chatList.findIndex(c => c.id === matchId);
+
+          const chatData = {
             id: matchId,
             name,
             photo,
             lastMessage: msg.text,
             time,
             timestamp
-          });
+          };
+
+          if (existingIndex !== -1) {
+            chatList[existingIndex] = chatData;
+          } else {
+            chatList.push(chatData);
+          }
 
         });
 

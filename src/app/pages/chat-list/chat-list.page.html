@@ -1,7 +1,7 @@
 <ion-content class="page-content">
 
   <div class="header">
-    <h1 class="page-title">Chats</h1>
+    <h1 class="page-title">Chats(FIX SKELETON!!!)</h1>
   </div>
 
   <div class="content-wrapper">
@@ -11,52 +11,75 @@
 
       <div *ngFor="let s of [1,2,3]" class="match-item">
 
-        <div class="chat-card skeleton">
+        <ion-item-sliding>
 
-          <div class="profile-image skeleton-img"></div>
+          <ion-item lines="none" class="chat-item">
 
-          <div class="chat-info">
-            <div class="skeleton-text name"></div>
-            <div class="skeleton-text message"></div>
-          </div>
+            <div class="chat-card skeleton-card">
 
-          <div class="chat-meta">
-            <div class="skeleton-text time"></div>
-          </div>
+              <div class="skeleton-img skeleton"></div>
 
-        </div>
+              <div class="chat-info">
+                <div class="skeleton-text name skeleton"></div>
+                <div class="skeleton-text message skeleton"></div>
+              </div>
+
+              <div class="chat-meta">
+                <div class="skeleton-text time skeleton"></div>
+              </div>
+
+            </div>
+
+          </ion-item>
+
+        </ion-item-sliding>
 
       </div>
 
     </div>
+
 
     <!-- MATCH LIST -->
     <div *ngIf="!loading">
 
       <ng-container *ngFor="let match of matches; let i = index">
 
-        <div class="match-item">
+        <ion-item-sliding>
 
-          <div class="chat-card" (click)="goToChat(match.id)">
+          <ion-item lines="none" class="chat-item">
 
-            <div class="profile-image">
-              <img [src]="match.photo">
+            <div class="chat-card" (click)="goToChat(match.id)">
+
+              <div class="profile-image">
+                <img [src]="match.photo">
+              </div>
+
+              <div class="chat-info">
+                <h2 class="chat-name">{{ match.name }}</h2>
+
+                <p class="last-message">
+                  Ultimo mensaje: {{ match.lastMessage }}
+                </p>
+              </div>
+
+              <div class="chat-meta">
+                <span class="chat-time">{{ match.time }}</span>
+              </div>
             </div>
 
-            <div class="chat-info">
-              <h2 class="chat-name">{{ match.name }}</h2>
-              <p class="last-message">
-                Ultimo mensaje: {{ match.lastMessage }}
-              </p>
-            </div>
+          </ion-item>
 
-            <div class="chat-meta">
-              <span class="chat-time">{{ match.time }}</span>
-            </div>
 
-          </div>
+          <ion-item-options side="start">
 
-        </div>
+            <ion-item-option (click)="deleteChat(match.id)">
+              <img class="iconDelete" src="assets/icon/delete.png">
+            </ion-item-option>
+
+          </ion-item-options>
+
+        </ion-item-sliding>
+
 
         <!-- DIVIDER -->
         <div class="divider-line" *ngIf="i < matches.length - 1"></div>
@@ -65,6 +88,7 @@
 
     </div>
 
+
     <!-- EMPTY -->
     <div *ngIf="!loading && matches.length === 0" class="no-chats">
       <p>No tienes conversaciones aún</p>
@@ -72,8 +96,12 @@
 
   </div>
 
+
+  <!-- BOTTOM BAR -->
   <div class="bottom-bar">
+
     <div class="bar-container">
+
       <button class="bar-btn" (click)="goHome()">
         <img src="assets/icon/LogoMini.png" alt="Logo The Flop" />
       </button>
@@ -86,19 +114,19 @@
         <img src="assets/icon/statsIcon.png" alt="Logo Stats">
       </button>
 
-      <!--<button class="bar-btn" (click)="shout()">
-        📢
-      </button>-->
-
       <button class="bar-btn" (click)="goToSlotsGame()">
         <img src="assets/icon/chip.png" alt="Logo Game">
       </button>
+
     </div>
+
+
     <div class="config">
       <button (click)="goToSettings()">
         <img src="assets/iconsYimgs/newSettings.png" alt="settings" />
       </button>
     </div>
+
   </div>
 
 </ion-content>

@@ -4,13 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { getUserMatches } from 'src/app/firebase.service';
 import { getChatList } from 'src/app/firebase.service';
 import { subscribeChatList } from 'src/app/firebase.service';
+import { AlertController } from '@ionic/angular';
+import { deleteChatFromFirestore } from 'src/app/firebase.service';
 import {
   IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
   IonButton,
-  IonIcon
+  IonIcon, IonItemSliding, IonItemOptions, IonItemOption, IonItem
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -30,13 +32,17 @@ import {animate} from "@angular/animations";
     IonTitle,
     IonToolbar,
     IonButton,
-    IonIcon
+    IonIcon,
+    IonItemSliding,
+    IonItemOptions,
+    IonItemOption,
+    IonItem
   ]
 })
 export class ChatListPage implements OnInit {
   matches: any[] = [];
 
-  constructor(private router: Router, private navCtrl: NavController) {}
+  constructor(private router: Router, private navCtrl: NavController, private alertController: AlertController) {}
 
   loading = true;
 
@@ -67,6 +73,33 @@ export class ChatListPage implements OnInit {
 
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
+  }
+
+  async deleteChat(id: string) {
+
+    const alert = await this.alertController.create({
+      header: 'Eliminar chat',
+      message: 'Esta conversasion se eliminara permanente.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          handler: async () => {
+
+            await deleteChatFromFirestore(id);
+
+            this.matches = this.matches.filter(chat => chat.id !== id);
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   goHome() {
