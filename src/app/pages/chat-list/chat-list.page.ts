@@ -37,9 +37,14 @@ export class ChatListPage implements OnInit {
 
   constructor(private router: Router, private navCtrl: NavController) {}
 
+  loading = true;
+
   async ngOnInit() {
     this.matches = await getUserMatches();
     this.matches = await getChatList();
+    setTimeout(() => {
+      this.loading = false;
+    }, 100);
   }
 
   shout() {
@@ -91,5 +96,7 @@ export class ChatListPage implements OnInit {
       });
     }, 100);
   }
+
+
 
 }

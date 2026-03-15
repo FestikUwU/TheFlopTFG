@@ -5,32 +5,71 @@
   </div>
 
   <div class="content-wrapper">
-    <!-- MATCH LIST -->
-    <div *ngFor="let match of matches; let i = index" class="match-item">
 
-      <div class="chat-card" (click)="goToChat(match.id)">
+    <!-- SKELETON -->
+    <div *ngIf="loading">
 
-        <div class="profile-image">
-          <img [src]="match.photo">
+      <div *ngFor="let s of [1,2,3]" class="match-item">
+
+        <div class="chat-card skeleton">
+
+          <div class="profile-image skeleton-img"></div>
+
+          <div class="chat-info">
+            <div class="skeleton-text name"></div>
+            <div class="skeleton-text message"></div>
+          </div>
+
+          <div class="chat-meta">
+            <div class="skeleton-text time"></div>
+          </div>
+
         </div>
 
-        <div class="chat-info">
-          <h2 class="chat-name">{{ match.name }}</h2>
-          <p class="last-message">Ultimo mensaje: {{ match.lastMessage }}</p>
-        </div>
-
-        <div class="chat-meta">
-          <span class="chat-time">{{ match.time }}</span>
-        </div>
       </div>
-      <div class="divider-line" *ngIf="i < matches.length - 1"></div>
+
     </div>
 
+    <!-- MATCH LIST -->
+    <div *ngIf="!loading">
 
-    <!-- Если нет чатов -->
-    <div *ngIf="matches.length === 0" class="no-chats">
+      <ng-container *ngFor="let match of matches; let i = index">
+
+        <div class="match-item">
+
+          <div class="chat-card" (click)="goToChat(match.id)">
+
+            <div class="profile-image">
+              <img [src]="match.photo">
+            </div>
+
+            <div class="chat-info">
+              <h2 class="chat-name">{{ match.name }}</h2>
+              <p class="last-message">
+                Ultimo mensaje: {{ match.lastMessage }}
+              </p>
+            </div>
+
+            <div class="chat-meta">
+              <span class="chat-time">{{ match.time }}</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="divider-line" *ngIf="i < matches.length - 1"></div>
+
+      </ng-container>
+
+    </div>
+
+    <!-- EMPTY -->
+    <div *ngIf="!loading && matches.length === 0" class="no-chats">
       <p>No tienes conversaciones aún</p>
     </div>
+
   </div>
 
   <div class="bottom-bar">
@@ -43,7 +82,7 @@
         <img src="assets/iconsYimgs/messege2.png" alt="Logo Mensaje">
       </button>
 
-      <button class="bar-btn" (click)="goStats">
+      <button class="bar-btn" (click)="goStats()">
         <img src="assets/icon/statsIcon.png" alt="Logo Stats">
       </button>
 
