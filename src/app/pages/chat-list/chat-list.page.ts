@@ -42,6 +42,7 @@ export class ChatListPage implements OnInit {
   async ngOnInit() {
     this.matches = await getUserMatches();
     this.matches = await getChatList();
+    this.matches.sort((a, b) => b.timestamp - a.timestamp);
     setTimeout(() => {
       this.loading = false;
     }, 100);

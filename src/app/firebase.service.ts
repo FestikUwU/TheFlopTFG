@@ -298,11 +298,14 @@ export const getChatList = async () => {
 
     let lastMessage = "";
     let time = "";
+    let timestamp = 0;
 
     msgSnap.forEach(m => {
       const msg: any = m.data();
 
       lastMessage = msg.text || "";
+
+      timestamp = msg.timestamp;
 
       const date = new Date(msg.timestamp);
       time = date.getHours() + ":" + date.getMinutes().toString().padStart(2, "0");
@@ -313,7 +316,8 @@ export const getChatList = async () => {
       name,
       photo,
       lastMessage,
-      time
+      time,
+      timestamp
     });
 
   }
@@ -333,32 +337,56 @@ export const getMatchUsers = async (matchId: string) => {
 };
 
 export const getMatchesByCity = async (city: string) => {
+
   const user = getAuth().currentUser;
   if (!user) return [];
 
-  const usersRef = collection(getFirestore(), 'users');
-  const q = query(usersRef, where('private.location', '==', city));
+  const firestore = getFirestore();
 
+  const usersRef = collection(firestore, "users");
+  const q = query(usersRef, where("private.location", "==", city));
   const querySnapshot = await getDocs(q);
+
+  // получаем лайки
+  const likesSnap = await getDocs(
+    collection(firestore, "interactions", user.uid, "likes")
+  );
+
+  const dislikesSnap = await getDocs(
+    collection(firestore, "interactions", user.uid, "dislikes")
+  );
+
+  const interactedUsers = new Set<string>();
+
+  likesSnap.forEach(doc => interactedUsers.add(doc.id));
+  dislikesSnap.forEach(doc => interactedUsers.add(doc.id));
 
   const matches: Array<any> = [];
 
   querySnapshot.forEach(doc => {
-    if (doc.id === user.uid) return; // исключаем себя
+
+    if (doc.id === user.uid) return;
+
+    if (interactedUsers.has(doc.id)) return;
+
     const data = doc.data();
-    const pubData = data['public'];
+    const pubData = data["public"];
+
     if (pubData) {
+
       matches.push({
         uid: doc.id,
-        name: data['name'] ?? "Player",
+        name: data["name"] ?? "Player",
         description: pubData.description,
         age: pubData.age,
         gender: pubData.gender,
         photos: pubData.photos
       });
+
     }
+
   });
 
-
   return matches;
+
 };
