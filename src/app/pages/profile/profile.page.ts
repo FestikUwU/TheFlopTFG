@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { uploadPhoto } from 'src/app/firebase.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {
   IonContent,
   IonItem,
@@ -22,6 +24,7 @@ import { saveUserProfile, loadUserProfile } from 'src/app/firebase.service';
 
 
 @Component({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
@@ -50,6 +53,7 @@ export class ProfilePage implements OnInit {
   mode: 'editar' | 'preview' = 'editar';
 
   profile = {
+    name: '',
     description: '',
     age: null as number | null,
     gender: '',
@@ -89,20 +93,28 @@ export class ProfilePage implements OnInit {
   }
 
 
-  onPlusClick() {
+  async onPlusClick() {
+
+    if (this.profile.photos.length >= 3) return;
+
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
-    input.onchange = (event: any) => {
+
+    input.onchange = async (event: any) => {
+
       const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.profile.photos.push(e.target?.result as string);
-        };
-        reader.readAsDataURL(file);
+
+      if (!file) return;
+
+      const url = await uploadPhoto(file);
+
+      if (url) {
+        this.profile.photos.push(url);
       }
+
     };
+
     input.click();
   }
 
@@ -114,6 +126,7 @@ export class ProfilePage implements OnInit {
     if (data && data['public']) {
       const pub = data['public'];
 
+      this.profile.name = pub.name ?? '';
       this.profile.description = pub.description ?? '';
       this.profile.age = pub.age ?? null;
       this.profile.gender = pub.gender ?? '';

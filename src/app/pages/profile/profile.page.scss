@@ -306,12 +306,6 @@ ion-button.inactive {
 }
 
 
-.preview-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 /* Текст поверх фото */
 .overlay-text {
   position: absolute;
@@ -415,3 +409,31 @@ ion-segment-button {
 
 ion-segment-button{}
 
+.campoNombre::part(native) {
+  background: #FFEFD5 !important;
+  border-radius: 10px;
+  color: black;
+  border: 1px solid black;
+  height: 25px;
+  margin: 12px auto;
+  width: 95%;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.campoNombre ion-input {
+  --background: transparent;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.preview-swiper {
+  width: 100%;
+  height: 400px;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

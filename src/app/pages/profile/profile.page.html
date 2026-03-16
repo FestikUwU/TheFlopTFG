@@ -37,6 +37,15 @@
     <ng-container *ngIf="sections.public">
       <div class="section-content">
 
+        <!-- Nombre -->
+        <ion-label class="field-label">Nombre a mostrar</ion-label>
+        <ion-item class="campoNombre" lines="none">
+          <ion-input
+            [(ngModel)]="profile.name"
+            placeholder="Tu nombre">
+          </ion-input>
+        </ion-item>
+
         <!-- Descripción -->
         <ion-label class="field-label">Informacion sobre ti</ion-label>
         <ion-item class="campoTxt" lines="none">
@@ -188,8 +197,8 @@
 
         <!-- Edad / Género -->
         <div class="overlay-data">
+          <span>{{ profile.name || 'Sin especificar' }}</span>
           <span>{{ profile.age ?? '--' }} años</span>
-          <span>{{ profile.gender || 'Sin especificar' }}</span>
         </div>
       </div>
 

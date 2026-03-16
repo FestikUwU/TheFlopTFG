@@ -3,6 +3,7 @@ import { getDatabase, ref, push, onValue } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { collection, query, where, getDocs, addDoc, orderBy, onSnapshot, limit, deleteDoc } from "firebase/firestore";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Tu configuración de Firebase
 const firebaseConfig = {
@@ -20,6 +21,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 const firestore = getFirestore(app);
+const storage = getStorage(app);
 
 
 // Función para enviar un mensaje
@@ -37,6 +39,21 @@ export const sendMessage = (message: string) => {
   });
 };
 
+export const uploadPhoto = async (file: File) => {
+
+  const user = auth.currentUser;
+  if (!user) return null;
+
+  const filePath = `users/${user.uid}/${Date.now()}_${file.name}`;
+
+  const fileRef = storageRef(storage, filePath);
+
+  await uploadBytes(fileRef, file);
+
+  const url = await getDownloadURL(fileRef);
+
+  return url;
+};
 
 // Función para escuchar mensajes en tiempo real
 export const subscribeMessages = (callback: (data: any) => void) => {

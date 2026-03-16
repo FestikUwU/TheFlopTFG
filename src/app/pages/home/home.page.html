@@ -34,8 +34,12 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
       </div>
     </div>
 
-    <div *ngIf="!currentMatch" class="no-matches">
+    <div *ngIf="!currentMatch && !isLoading" class="no-matches">
       <p>No hay más coincidencias en tu ciudad</p>
+
+      <button class="reload-btn" (click)="reloadMatches()">
+        Buscar de nuevo
+      </button>
     </div>
   </div>
 

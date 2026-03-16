@@ -96,6 +96,22 @@ export class HomePage implements OnInit {
     window.speechSynthesis.speak(utterance);
   }
 
+  async reloadMatches() {
+
+    this.isLoading = true;
+
+    const userData = await loadUserProfile();
+    const city = userData?.['private']?.location ?? '';
+
+    if (city) {
+      this.matches = await getMatchesByCity(city);
+      this.currentIndex = 0;
+      this.showNextMatch();
+    }
+
+    this.isLoading = false;
+  }
+
   goHome() {
     this.navCtrl.navigateRoot('/home', { animated: false });
   }
