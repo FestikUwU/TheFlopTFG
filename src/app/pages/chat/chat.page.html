@@ -10,26 +10,40 @@
       <ion-img class="imgPerfilMini" [src]="otherUserPhoto"></ion-img>
     </div>
 
-    <ion-title>Chat de prueba</ion-title>
+    <ion-title>{{ otherUserName }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content class="ion-padding" #content>
   <ion-list class="message">
-    <ion-item *ngFor="let msg of messages" lines="none" class="chat-item">
-      <div class="bubble">
-        <span class="user">{{ msg.sender }}:</span>
-        <span class="text">{{ msg.text }}</span>
+    <div *ngFor="let msg of messages" class="message-row">
+
+      <div
+        class="bubble"
+        [class.mine]="msg.senderUid === currentUserUid"
+        [class.other]="msg.senderUid !== currentUserUid"
+      >
+
+        {{ msg.text }}
+
       </div>
-    </ion-item>
+
+    </div>
   </ion-list>
 </ion-content>
 
 <!-- Floating input “сосиска” -->
-<div class="chat-input-sausage" lines="none">
-  <ion-input placeholder="" [(ngModel)]="newMessage"></ion-input>
+<div class="chat-input-sausage">
+
+  <ion-textarea
+    autoGrow="true"
+    placeholder="Mensaje"
+    [(ngModel)]="newMessage">
+  </ion-textarea>
+
   <button class="arrow-button" (click)="send()">
     <img class="arrow" src="assets/iconsYimgs/arrowUp.png" alt="arrow" />
   </button>
+
 </div>

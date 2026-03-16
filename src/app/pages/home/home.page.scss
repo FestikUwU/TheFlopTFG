@@ -53,6 +53,15 @@
   margin: 0 auto;
   box-shadow: 3px 7px 15px rgba(0, 0, 0, 0.9);
   font-family: Arial;
+  justify-content: center;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
 }
 
 /* Карточка матча */
@@ -285,3 +294,4 @@
   margin-top: 8px;
   border: 2px solid white;
 }
+

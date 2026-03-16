@@ -3,6 +3,9 @@ import { sendChatMessage, subscribeToChat } from 'src/app/firebase.service';
 import { ActivatedRoute } from '@angular/router';
 import { getMatchUsers } from 'src/app/firebase.service';
 import { getAuth } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { IonTextarea } from "@ionic/angular/standalone";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import {
   IonContent,
   IonButton,
@@ -39,10 +42,14 @@ const auth = getAuth();
     FormsModule,
     CommonModule,
     IonButtons,
-    IonImg
+    IonImg,
+    IonTextarea
   ]
 })
 export class ChatPage implements OnInit {
+  otherUserName: string = "";
+  otherUserPhoto: string = "";
+  currentUserUid: string | undefined;
 
   @ViewChild('content') content!: IonContent;
 
@@ -52,7 +59,6 @@ export class ChatPage implements OnInit {
   newMessage: string = '';
   username: string = 'User' + Math.floor(Math.random() * 1000);
   private bgMusic!: HTMLAudioElement;
-  otherUserPhoto: string = "";
 
   constructor(
     private ngZone: NgZone,
@@ -68,17 +74,42 @@ export class ChatPage implements OnInit {
     const match: any = await getMatchUsers(this.matchId);
 
     if (match) {
+
       const currentUserUid = auth.currentUser?.uid;
 
       const otherUid = match['users'].find((uid: any) => uid !== currentUserUid);
 
-      console.log("Other user UID:", otherUid);
+      const firestore = getFirestore();
+      const userRef = doc(firestore, "users", otherUid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+
+        const userData: any = userSnap.data();
+
+        this.otherUserName = userData?.public?.name || "Usuario";
+        this.otherUserPhoto = userData?.public?.photos?.[0] || "assets/iconsYimgs/default-avatar.png";
+
+      }
+
     }
 
-    subscribeToChat(this.matchId, (msgs) => {
-      this.ngZone.run(() => {
-        this.messages = msgs;
+    onAuthStateChanged(auth, (user) => {
+
+      if (!user) return;
+
+      this.currentUserUid = user.uid;
+
+      subscribeToChat(this.matchId, (msgs) => {
+        this.ngZone.run(() => {
+          this.messages = msgs;
+
+          setTimeout(() => {
+            this.content.scrollToBottom(200);
+          });
+        });
       });
+
     });
 
   }
