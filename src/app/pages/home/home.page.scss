@@ -193,6 +193,48 @@
   justify-content: center;
   font-family: 'Limelight';
   color: #5D934F;
+
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.single-btn:active {
+  transform: scale(0.92);
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.single-btn:active {
+  animation: buttonPress 0.25s ease;
+}
+
+@keyframes buttonPress {
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.88);
+  }
+
+  100% {
+    transform: scale(0.95);
+  }
+
+}
+
+.single-btn.check:active {
+  box-shadow:
+    0 0 10px #5D934F,
+    0 0 20px #5D934F,
+    inset 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.single-btn.cross:active {
+  box-shadow:
+    0 0 10px #b33a3a,
+    0 0 20px #b33a3a,
+    inset 0 4px 8px rgba(0,0,0,0.4);
 }
 
 .single-btn.check {

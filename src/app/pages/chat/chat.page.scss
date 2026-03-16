@@ -75,6 +75,7 @@ ion-list ion-item {
   --padding-start: 0;
   --highlight-color-focused: #000000;
   --highlight-color: #6A041D;
+  --highlight-height: 0;
 }
 
 .chat-input-sausage ion-input::part(native) {

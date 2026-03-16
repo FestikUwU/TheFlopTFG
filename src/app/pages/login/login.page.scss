@@ -45,6 +45,9 @@ ion-label {
 ion-input {
   font-size: 1vh;
   color: #333;
+  --highlight-height: 0;
+  --highlight-color-focused: #000000;
+  --highlight-color: #6A041D;
 }
 .buttons-container {
   margin-top: 6vh;
