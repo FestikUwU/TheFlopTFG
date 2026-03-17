@@ -25,20 +25,26 @@ import { likeUser, dislikeUser } from 'src/app/firebase.service';
 })
 export class HomePage implements OnInit {
 
-  matches: Array<any> = [];       // все найденные матчи
+  matches: Array<any> = [];               // все найденные матчи
   currentIndex = 0;               // индекс текущего отображаемого матча
-  currentMatch: any = null;       // текущий матч
+  currentMatch: any = null;               // текущий матч
+
+  currentUser: any = null;
 
   isMatch = false;
   matchedUser: any = null;
 
-  constructor(private router: Router, private navCtrl: NavController) {}
+  constructor(private router: Router, private navCtrl: NavController ) {}
 
   isLoading = true;
 
   async ngOnInit() {
     this.isLoading = true;
+
     const userData = await loadUserProfile();
+
+    this.currentUser = userData;
+
     const city = userData?.['private']?.location ?? '';
 
     if (city) {
@@ -46,6 +52,7 @@ export class HomePage implements OnInit {
       this.showNextMatch();
       console.log('Matches:', this.matches);
     }
+
     this.isLoading = false;
   }
 
@@ -138,5 +145,40 @@ export class HomePage implements OnInit {
 
   closeMatch() {
     this.isMatch = false;
+  }
+
+  goToChatFromMatch() {
+    this.isMatch = false;
+
+    this.navCtrl.navigateRoot('/chat-list', {
+      animated: false
+    });
+  }
+
+  triggerTestMatch() {
+    this.matchedUser = {
+      name: 'Test User',
+      photos: ['https://i.pravatar.cc/300']
+    };
+
+    this.isMatch = true;
+  }
+
+  logoClicks = 0;
+  logoTimer: any;
+
+  onLogoClick() {
+    this.logoClicks++;
+
+    clearTimeout(this.logoTimer);
+
+    this.logoTimer = setTimeout(() => {
+      this.logoClicks = 0;
+    }, 1000);
+
+    if (this.logoClicks >= 5) {
+      this.triggerTestMatch();
+      this.logoClicks = 0;
+    }
   }
 }

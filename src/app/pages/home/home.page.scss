@@ -349,3 +349,127 @@
 
   cursor: pointer;
 }
+
+.match-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Карточка */
+.match-card-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+/* Заголовок */
+.match-title {
+  font-family: 'Limelight';
+  font-size: 32px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+/* Подзаголовок */
+.match-subtitle {
+  font-size: 14px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+/* Аватары */
+.avatars {
+  position: relative;
+  width: 200px;
+  height: 120px;
+  margin: 0 auto 20px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  border: 2px solid white;
+  transform: rotate(-10deg);
+}
+
+.avatar.right {
+  right: 20px;
+  transform: rotate(10deg);
+}
+
+.avatar.left {
+  left: 20px;
+}
+
+/* Кнопка CHAT */
+.chat-btn {
+  width: 13vh;
+  height: 5vh;
+  padding: 12px;
+  border-radius: 30px;
+  background: #FFEFD5;
+  color: #6A041D;
+  font-family: 'Limelight';
+  font-size: 18px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+/* Кнопка закрытия */
+.close-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.test-btn {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  z-index: 9999;
+
+  padding: 6px 10px;
+  font-size: 12px;
+
+  background: black;
+  color: white;
+  border-radius: 10px;
+  opacity: 0.6;
+}
+
+.logo-container {
+  position: relative;
+}
+
+.logo-container img {
+  transition: transform 0.1s ease;
+}
+
+/* эффект нажатия */
+.logo-container:active img {
+  transform: scale(0.9);
+}
+
+/*
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+*/

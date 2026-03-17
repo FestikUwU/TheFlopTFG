@@ -21,6 +21,7 @@ import {
 } from '@ionic/angular/standalone';
 import { RouterModule, Router } from '@angular/router';
 import { saveUserProfile, loadUserProfile } from 'src/app/firebase.service';
+import {NavController} from "@ionic/angular";
 
 
 @Component({
@@ -78,7 +79,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {}
 
   generateAgeOptions() {
@@ -157,12 +159,16 @@ export class ProfilePage implements OnInit {
       buttons: [
         {
           text: 'OK',
-          handler: () => this.router.navigate(['/home'])
+          handler: () => {
+            this.navCtrl.navigateRoot('/home');
+          }
         }
       ]
     });
 
     await alert.present();
   }
+
+
 
 }

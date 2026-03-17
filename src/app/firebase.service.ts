@@ -311,7 +311,7 @@ export const getChatList = async () => {
 
     const otherUid = data['users'].find((uid: any) => uid !== user.uid);
 
-    // загрузка профиля
+    // 👤 загрузка профиля
     const userRef = doc(firestore, "users", otherUid);
     const userSnap = await getDoc(userRef);
 
@@ -325,26 +325,29 @@ export const getChatList = async () => {
       photo = userData?.public?.photos?.[0] || photo;
     }
 
-    // последнее сообщение
+    // 💬 последнее сообщение
     const messagesRef = collection(firestore, "chats", matchId, "messages");
-
     const q = query(messagesRef, orderBy("timestamp", "desc"), limit(1));
+
     const msgSnap = await getDocs(q);
 
-    let lastMessage = "";
+    let lastMessage = "Empieza la conversación 👀";
     let time = "";
-    let timestamp = 0;
+    let timestamp = Date.now(); // важно чтобы не улетал вниз
 
-    msgSnap.forEach(m => {
-      const msg: any = m.data();
+    if (!msgSnap.empty) {
+      msgSnap.forEach(m => {
+        const msg: any = m.data();
 
-      lastMessage = msg.text || "";
+        lastMessage = msg.text || "";
+        timestamp = msg.timestamp;
 
-      timestamp = msg.timestamp;
-
-      const date = new Date(msg.timestamp);
-      time = date.getHours() + ":" + date.getMinutes().toString().padStart(2, "0");
-    });
+        const date = new Date(msg.timestamp);
+        time =
+          date.getHours() + ":" +
+          date.getMinutes().toString().padStart(2, "0");
+      });
+    }
 
     chatList.push({
       id: matchId,
@@ -356,6 +359,9 @@ export const getChatList = async () => {
     });
 
   }
+
+  // 🔥 сортировка (новые сверху)
+  chatList.sort((a, b) => b.timestamp - a.timestamp);
 
   return chatList;
 
@@ -401,36 +407,44 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
 
       const unsubscribe = onSnapshot(q, (msgSnap)=>{
 
-        msgSnap.forEach(m => {
+        let lastMessage = "Empieza la conversación";
+        let time = "";
+        let timestamp = Date.now();
 
-          const msg:any = m.data();
+        if (!msgSnap.empty) {
+          msgSnap.forEach(m => {
 
-          const timestamp = msg.timestamp;
+            const msg:any = m.data();
 
-          const date = new Date(timestamp);
+            timestamp = msg.timestamp;
 
-          const time =
-            date.getHours() + ":" +
-            date.getMinutes().toString().padStart(2,"0");
+            const date = new Date(timestamp);
 
-          const existingIndex = chatList.findIndex(c => c.id === matchId);
+            time =
+              date.getHours() + ":" +
+              date.getMinutes().toString().padStart(2,"0");
 
-          const chatData = {
-            id: matchId,
-            name,
-            photo,
-            lastMessage: msg.text,
-            time,
-            timestamp
-          };
+            lastMessage = msg.text;
 
-          if (existingIndex !== -1) {
-            chatList[existingIndex] = chatData;
-          } else {
-            chatList.push(chatData);
-          }
+          });
+        }
 
-        });
+        const existingIndex = chatList.findIndex(c => c.id === matchId);
+
+        const chatData = {
+          id: matchId,
+          name,
+          photo,
+          lastMessage,
+          time,
+          timestamp
+        };
+
+        if (existingIndex !== -1) {
+          chatList[existingIndex] = chatData;
+        } else {
+          chatList.push(chatData);
+        }
 
         chatList.sort((a,b)=>b.timestamp-a.timestamp);
 
