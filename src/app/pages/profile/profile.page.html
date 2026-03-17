@@ -5,6 +5,12 @@
     <p class="custom-title">CONFIGURACIONES</p>
   </div>
 
+  <!--
+  <ion-item lines="none" button (click)="restartTutorial()">
+    <ion-label>Ver tutorial</ion-label>
+  </ion-item>
+  -->
+
   <!-- BOTÓN LISTO -->
   <ion-item class="btnDiv">
     <ion-item class="btnListo" lines="none" slot="end">
@@ -205,4 +211,15 @@
     </div>
   </ng-container>
 
+  <div *ngIf="isTutorial" class="tutorial-overlay" (click)="nextStep()">
+
+    <!-- ФЛОППИ -->
+    <img src="assets/icon/Floppy.png" class="floppy">
+
+    <!-- ТЕКСТ -->
+    <div class="tutorial-bubble">
+      {{ getTutorialText() }}
+    </div>
+
+  </div>
 </ion-content>

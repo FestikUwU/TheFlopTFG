@@ -143,7 +143,7 @@ export class RegisterPage implements OnInit {
       await registerUser(this.name, this.email, this.password);
 
       //  После успешной регистрации редирект на home
-      this.router.navigate(['/home']);
+      this.router.navigate(['/profile']);
     } catch (error) {
       console.error('Error al registrarse:', error);
       this.showLogo = false; // Скрываем лого если ошибка

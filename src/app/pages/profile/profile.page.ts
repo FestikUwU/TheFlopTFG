@@ -51,6 +51,9 @@ import {NavController} from "@ionic/angular";
 })
 export class ProfilePage implements OnInit {
 
+  isTutorial = true;
+  tutorialStep = 0;
+
   mode: 'editar' | 'preview' = 'editar';
 
   profile = {
@@ -121,6 +124,15 @@ export class ProfilePage implements OnInit {
   }
 
   async ngOnInit() {
+
+    const seen = localStorage.getItem('tutorialSeen');
+
+    if (seen === 'true') {
+      this.isTutorial = false;
+    } else {
+      this.isTutorial = true;
+    }
+
     this.generateAgeOptions();
 
     const data = await loadUserProfile();
@@ -170,5 +182,31 @@ export class ProfilePage implements OnInit {
   }
 
 
+  getTutorialText() {
+    switch (this.tutorialStep) {
+      case 0:
+        return 'Hola  Soy Floppy.';
+      case 1:
+        return 'Aquí configuras tu perfil.';
+      case 2:
+        return 'Rellena todo y encontraremos jugadores para ti';
+      default:
+        return '';
+    }
+  }
 
+  nextStep() {
+    this.tutorialStep++;
+
+    if (this.tutorialStep > 2) {
+      this.isTutorial = false;
+    }
+  }
+
+  restartTutorial() {
+    this.tutorialStep = 0;
+    this.isTutorial = true;
+
+    localStorage.setItem('tutorialSeen', 'false');
+  }
 }
