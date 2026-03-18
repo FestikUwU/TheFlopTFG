@@ -24,8 +24,7 @@ import {NavController, ToastController} from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonHeader, IonTitle, IonToolbar,
-    CommonModule, FormsModule, IonInput, IonItem,
+    IonContent, CommonModule, FormsModule, IonInput,
     IonLabel, IonButton
   ]
 })

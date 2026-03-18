@@ -22,7 +22,7 @@ import { likeUser, dislikeUser } from 'src/app/firebase.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFooter, IonButton, IonIcon, IonImg]
+  imports: [IonContent, CommonModule, FormsModule]
 })
 export class HomePage implements OnInit {
 

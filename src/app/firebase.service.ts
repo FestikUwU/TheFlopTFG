@@ -256,6 +256,7 @@ export const sendChatMessage = async (matchId: string, text: string) => {
 };
 
 export const subscribeToChat = (matchId: string, callback: (messages: any[]) => void) => {
+
   const messagesRef = collection(firestore, "chats", matchId, "messages");
   const q = query(messagesRef, orderBy("timestamp", "asc"));
 

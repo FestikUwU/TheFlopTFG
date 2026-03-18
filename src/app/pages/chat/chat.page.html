@@ -11,25 +11,54 @@
     </div>
 
     <ion-title>{{ otherUserName }}</ion-title>
+    <div class="toolbar-right">
+
+      <button (click)="reportUser()">
+        <img src="assets/icon/reportIcon.png" class="header-icon">
+      </button>
+
+      <button (click)="toggleMusic()">
+        <img
+          [src]="isMusicOn ? 'assets/icon/musicOn.png' : 'assets/icon/musicOff.png'"
+          class="header-icon">
+      </button>
+
+    </div>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content class="ion-padding" #content>
   <ion-list class="message">
-    <div *ngFor="let msg of messages" class="message-row">
 
-      <div
-        class="bubble"
-        [class.mine]="msg.senderUid === currentUserUid"
-        [class.other]="msg.senderUid !== currentUserUid"
-      >
+    <div *ngFor="let group of messages">
 
-        {{ msg.text }}
+      <!-- DATE -->
+      <div class="date-divider">
+        {{ formatDate(group.date) }}
+      </div>
+
+      <!-- MENSAJE -->
+      <div *ngFor="let msg of group.messages" class="message-row">
+
+        <div
+          class="bubble"
+          [class.mine]="msg.senderUid === currentUserUid"
+          [class.other]="msg.senderUid !== currentUserUid"
+        >
+          {{ msg.text }}
+
+          <!-- TIEMPO -->
+          <div class="time">
+            {{ formatTime(msg.timestamp) }}
+          </div>
+
+        </div>
 
       </div>
 
     </div>
+
   </ion-list>
 </ion-content>
 

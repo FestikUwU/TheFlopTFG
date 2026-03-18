@@ -62,3 +62,23 @@ ion-app, ion-content {
   font-style: normal;
 }
 
+ion-popover {
+  --background: #FFEFD5 !important;
+  --color: black !important;
+  --box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  border-radius: 12px;
+}
+
+ion-popover ion-item {
+  --background: #FFEFD5 !important;
+  --color: black !important;
+}
+ion-action-sheet {
+  --background: #FFEFD5 !important;
+  --color: black !important;
+}
+
+ion-action-sheet .action-sheet-button {
+  color: black !important;
+  font-family: 'Limelight', sans-serif;
+}

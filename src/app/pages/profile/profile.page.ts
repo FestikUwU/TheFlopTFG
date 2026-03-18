@@ -41,8 +41,6 @@ import {NavController} from "@ionic/angular";
     IonSelect,
     IonSelectOption,
     IonButton,
-    IonButtons,
-    IonList,
     IonIcon,
     IonSegment,
     IonSegmentButton,
@@ -88,10 +86,13 @@ export class ProfilePage implements OnInit {
   ) {}
 
   generateAgeOptions() {
-    this.ageOptions = Array.from({ length: 100 }, (_, i) => ({
-      value: i,
-      display: i.toString().padStart(2, '0')
-    }));
+    this.ageOptions = Array.from({ length: 82 }, (_, i) => {
+      const age = i + 18; // 🔥 старт с 18
+      return {
+        value: age,
+        display: age.toString()
+      };
+    });
   }
 
   toggleSection(section: 'public' | 'private') {
@@ -206,5 +207,11 @@ export class ProfilePage implements OnInit {
   restartTutorial() {
     this.tutorialStep = 0;
     this.isTutorial = true;
+  }
+
+  onAgeChange() {
+    if (this.privateProfile.ageMin > this.privateProfile.ageMax) {
+      this.privateProfile.ageMax = this.privateProfile.ageMin;
+    }
   }
 }

@@ -130,13 +130,13 @@
 
 .chat-card {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   background: #FFEFD5;
   border-radius: 20px;
-  padding: 5px 5px 5px 5px;
+  padding: 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
-  width: 75%;
+  width: 80%;
 }
 
 .chat-card:active {
@@ -170,26 +170,34 @@
 }
 
 .last-message {
-  font-size: 18px;
+  max-width: 75px;
+  font-size: 15px;
   color: #8a8a8a;
   margin-top: 8px;
   font-family: Lunasima;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;      /* 🔥 2 строки */
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
 }
 
 /* Правая колонка */
 .chat-meta {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   align-items: flex-end;
-  align-self: stretch;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  margin-top: 0;
+  margin-left: auto;
+  padding: 10px;
+  padding-left: 0;
 }
 
-/* margin-top только для реальных карточек */
+/* margin-top только для реальных карточек
 .chat-card:not(:has(.skeleton-img)) .chat-meta {
   margin-top: 130px;
-}
+}*/
 
 .chat-time {
   font-size: 16px;
@@ -302,4 +310,5 @@ ion-item-option {
   --padding-start: 0;
   --inner-padding-end: 0;
   --min-height: auto;
+  max-height: 20vh;
 }

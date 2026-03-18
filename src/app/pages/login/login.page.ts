@@ -24,10 +24,6 @@ import { loginUser } from 'src/app/firebase.service'; // путь подкорр
   imports: [
     IonContent,
     IonButton,
-    IonTitle,
-    IonToolbar,
-    IonHeader,
-    IonItem,
     IonLabel,
     IonInput,
     FormsModule

@@ -12,13 +12,8 @@ import {NavController} from "@ionic/angular";
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     CommonModule,
-    FormsModule,
-    IonButton,
-    IonIcon
+    FormsModule
   ]
 })
 export class SlotPage implements OnInit {   //  ВАЖНО
@@ -105,7 +100,7 @@ export class SlotPage implements OnInit {   //  ВАЖНО
     this.posX = 0;
     this.posY = 0;
 
-    this.message = "Ey… estoy trabajando aquí 😤";
+    this.message = "Ey… estoy trabajando aquí ";
 
     setTimeout(() => {
       this.message = "";

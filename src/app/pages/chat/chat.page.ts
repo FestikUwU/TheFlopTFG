@@ -31,8 +31,6 @@ const auth = getAuth();
   styleUrls: ['./chat.page.scss'],
   standalone: true,
   imports: [
-    IonItem,
-    IonInput,
     IonButton,
     IonList,
     IonContent,
@@ -47,6 +45,7 @@ const auth = getAuth();
   ]
 })
 export class ChatPage implements OnInit {
+  isMusicOn: boolean = false;
   otherUserName: string = "";
   otherUserPhoto: string = "";
   currentUserUid: string | undefined;
@@ -68,6 +67,8 @@ export class ChatPage implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.bgMusic = new Audio('assets/audio/no-more-what-ifs.mp3'); // путь к музыке
+    this.bgMusic.loop = true;
 
     this.matchId = this.route.snapshot.paramMap.get('matchId')!;
 
@@ -102,7 +103,8 @@ export class ChatPage implements OnInit {
 
       subscribeToChat(this.matchId, (msgs) => {
         this.ngZone.run(() => {
-          this.messages = msgs;
+
+          this.messages = this.groupMessagesByDate(msgs);
 
           setTimeout(() => {
             this.content.scrollToBottom(200);
@@ -174,6 +176,94 @@ export class ChatPage implements OnInit {
     });
   }
 
+  groupMessagesByDate(messages: any[]) {
+    const groups: any[] = [];
 
+    messages.forEach(msg => {
+
+      if (!msg.timestamp) return;
+
+      let date: Date;
+
+      // 🔥 поддержка всех случаев
+      if (msg.timestamp.seconds) {
+        date = new Date(msg.timestamp.seconds * 1000);
+      } else {
+        date = new Date(msg.timestamp);
+      }
+
+      if (isNaN(date.getTime())) return; // 💥 защита от Invalid Date
+
+      const dayKey = date.toDateString();
+
+      let group = groups.find(g => g.key === dayKey);
+
+      if (!group) {
+        group = {
+          key: dayKey,
+          date: date,
+          messages: []
+        };
+        groups.push(group);
+      }
+
+      group.messages.push(msg);
+    });
+
+    return groups;
+  }
+
+  formatTime(timestamp: any): string {
+    if (!timestamp) return '';
+
+    let date: Date;
+
+    if (timestamp.seconds) {
+      date = new Date(timestamp.seconds * 1000);
+    } else {
+      date = new Date(timestamp);
+    }
+
+    if (isNaN(date.getTime())) return '';
+
+    return date.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  formatDate(date: Date): string {
+    if (!date || isNaN(date.getTime())) return '';
+
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+
+    if (date.toDateString() === today.toDateString()) {
+      return "Hoy";
+    }
+
+    if (date.toDateString() === yesterday.toDateString()) {
+      return "Ayer";
+    }
+
+    return date.toLocaleDateString();
+  }
+
+  toggleMusic() {
+    this.isMusicOn = !this.isMusicOn;
+
+    if (this.isMusicOn) {
+      this.fadeInMusicSimple();
+    } else {
+      this.fadeOutMusicSimple();
+    }
+  }
+
+  reportUser() {
+    console.log("Report user:", this.otherUserName);
+
+    // потом можно сделать alert / modal
+  }
 }
 

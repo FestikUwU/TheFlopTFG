@@ -508,3 +508,16 @@ ion-segment-button{}
   transition: all 0.1s ease;
 }
 
+.rangoEdad::part(native) {
+  background: #FFEFD5 !important;
+  color: black;
+
+  border-radius: 10px;
+  border: 1px solid black;
+
+  width: 95%;
+  margin: 12px auto;
+  box-sizing: border-box;
+
+  --inner-border-width: 0;
+}
