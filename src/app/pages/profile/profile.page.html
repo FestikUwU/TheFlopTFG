@@ -12,13 +12,11 @@
   -->
 
   <!-- BOTÓN LISTO -->
-  <ion-item class="btnDiv">
-    <ion-item class="btnListo" lines="none" slot="end">
-      <ion-buttons slot="end">
-        <ion-button (click)="onListoClick()">Listo</ion-button>
-      </ion-buttons>
-    </ion-item>
-  </ion-item>
+  <div class="btnDiv">
+    <ion-button class="btnListo" (click)="onListoClick()">
+      Listo
+    </ion-button>
+  </div>
   <!-- SEGMENT -->
   <ion-segment mode="ios" [(ngModel)]="mode" value="editar" class="profile-segment">
     <ion-segment-button value="editar">
@@ -211,7 +209,7 @@
     </div>
   </ng-container>
 
-  <div *ngIf="isTutorial" class="tutorial-overlay" (click)="nextStep()">
+  <div *ngIf="isTutorial === true" class="tutorial-overlay" (click)="nextStep()">
 
     <!-- ФЛОППИ -->
     <img src="assets/icon/Floppy.png" class="floppy">

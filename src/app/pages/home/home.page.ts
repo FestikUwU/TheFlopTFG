@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { saveUserProfile } from 'src/app/firebase.service';
 import {
   IonButton,
   IonContent,
@@ -25,6 +26,9 @@ import { likeUser, dislikeUser } from 'src/app/firebase.service';
 })
 export class HomePage implements OnInit {
 
+  isTutorial: boolean | null = null;
+  tutorialStep = 0;
+
   matches: Array<any> = [];               // все найденные матчи
   currentIndex = 0;               // индекс текущего отображаемого матча
   currentMatch: any = null;               // текущий матч
@@ -39,6 +43,11 @@ export class HomePage implements OnInit {
   isLoading = true;
 
   async ngOnInit() {
+
+    const data = await loadUserProfile();
+
+    this.isTutorial = !(data?.['tutorials']?.['homeSeen'] ?? false);
+
     this.isLoading = true;
 
     const userData = await loadUserProfile();
@@ -180,5 +189,41 @@ export class HomePage implements OnInit {
       this.triggerTestMatch();
       this.logoClicks = 0;
     }
+  }
+
+  getTutorialText() {
+    switch (this.tutorialStep) {
+      case 0:
+        return 'Muy bien, ya has completado tu perfil. Ahora te explico todo.';
+      case 1:
+        return 'Aquí puedes ver perfiles.';
+      case 2:
+        return 'Pulsa ALL IN si te interesa.';
+      case 3:
+        return 'Pulsa PASS para saltar.';
+      default:
+        return '';
+    }
+  }
+
+  async nextStep() {
+    this.tutorialStep++;
+
+    if (this.tutorialStep > 3) {
+      this.isTutorial = false;
+
+      await saveUserProfile({
+        tutorials: {
+          homeSeen: true
+        }
+      });
+    }
+  }
+
+  restartTutorial() {
+    this.tutorialStep = 0;
+    this.isTutorial = true;
+
+    localStorage.removeItem('tutorial_home_seen'); // 🔥 лучше
   }
 }

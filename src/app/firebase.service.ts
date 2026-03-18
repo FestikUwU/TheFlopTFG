@@ -204,6 +204,10 @@ export const saveUserProfile = async (data: {
     ageMax: number;
     interests: string[];
   };
+  tutorials?: {
+    profileSeen?: boolean;
+    homeSeen?: boolean;
+  };
 }) => {
   const user = auth.currentUser;
   if (!user) return;

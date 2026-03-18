@@ -51,7 +51,8 @@ import {NavController} from "@ionic/angular";
 })
 export class ProfilePage implements OnInit {
 
-  isTutorial = true;
+
+  isTutorial: boolean | null = null;
   tutorialStep = 0;
 
   mode: 'editar' | 'preview' = 'editar';
@@ -125,17 +126,11 @@ export class ProfilePage implements OnInit {
 
   async ngOnInit() {
 
-    const seen = localStorage.getItem('tutorialSeen');
+    const data = await loadUserProfile();
 
-    if (seen === 'true') {
-      this.isTutorial = false;
-    } else {
-      this.isTutorial = true;
-    }
+    this.isTutorial = !(data?.['tutorials']?.['homeSeen'] ?? false);
 
     this.generateAgeOptions();
-
-    const data = await loadUserProfile();
 
     if (data && data['public']) {
       const pub = data['public'];
@@ -156,7 +151,6 @@ export class ProfilePage implements OnInit {
       this.privateProfile.ageMax = priv.ageMax ?? 99;
       this.privateProfile.interests = priv.interests ?? [];
     }
-
   }
 
   async onListoClick() {
@@ -195,18 +189,22 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  nextStep() {
+  async nextStep() {
     this.tutorialStep++;
 
     if (this.tutorialStep > 2) {
       this.isTutorial = false;
+
+      await saveUserProfile({
+        tutorials: {
+          profileSeen: true
+        }
+      });
     }
   }
 
   restartTutorial() {
     this.tutorialStep = 0;
     this.isTutorial = true;
-
-    localStorage.setItem('tutorialSeen', 'false');
   }
 }

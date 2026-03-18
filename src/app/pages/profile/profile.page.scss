@@ -486,3 +486,23 @@ ion-segment-button{}
     transform: translateY(0px);
   }
 }
+
+.btnDiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.btnListo {
+  --background: #F3DFBA;
+  --color: #000;
+
+  font-family: 'Limelight', cursive;
+  font-weight: 800;
+
+  border-radius: 20px;
+  padding: 0px 10px;
+
+  transition: all 0.1s ease;
+}
+

@@ -473,3 +473,153 @@
   align-items: center;
 }
 */
+
+.tutorial-bubble {
+  position: absolute;
+  top: 200px;
+  left: 140px;
+  background: #D9D9D9;
+  padding: 15px;
+  border-radius: 7px;
+  max-width: 200px;
+  color: black;
+  font-size: 14px;
+  font-family: Lunasima;
+}
+
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+
+  z-index: 2000;
+}
+
+.floppy {
+  position: absolute;
+  animation: floatUpDown 2s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px); /* вверх */
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* STEP 0 — центр */
+.floppy.step-0 {
+  top: 40%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+}
+
+.tutorial-bubble.step-0 {
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+/* STEP 1 — карточка */
+.floppy.step-1 {
+  top: 3%;
+  left: 2%;
+  width: 120px;
+}
+
+.tutorial-bubble.step-1 {
+  top: 7%;
+  left: 35%;
+}
+
+/* STEP 2 — ALL IN */
+.floppy.step-2 {
+  bottom: 210px;
+  right: 20px;
+  width: 120px;
+}
+
+.tutorial-bubble.step-2 {
+  margin-top: 40vh;
+  bottom: 160px;
+  left: 140px;
+  width: 130px;
+  height: 65px;
+}
+
+/* STEP 3 — PASS */
+.floppy.step-3 {
+  bottom: 210px;
+  left: 20px;
+  width: 120px;
+}
+
+.tutorial-bubble.step-3 {
+  margin-top: 40vh;
+  bottom: 160px;
+  left: 140px;
+  width: 130px;
+  height: 65px;
+}
+
+.content.highlight {
+  /*position: relative;
+  z-index: 3000;*/
+}
+.bottom-bar-single.highlight-allin .check {
+  position: relative;
+  z-index: 3000;
+  box-shadow: 0 0 20px #5D934F;
+}
+.bottom-bar-single.highlight-pass .cross {
+  position: relative;
+  z-index: 99999;
+  box-shadow: 0 0 20px #b33a3a;
+}
+.tutorial-overlay {
+  pointer-events: auto;
+}
+
+.tutorial-bubble,
+.floppy {
+  pointer-events: auto;
+}
+
+.content.highlight,
+.bottom-bar-single.highlight-allin .check,
+.bottom-bar-single.highlight-pass .cross {
+  pointer-events: none;
+}
+
+.content.highlight {
+  position: relative;
+  z-index: 3000;
+  box-shadow: 0 0 0 4px #FFEFD5;
+  border-radius: 20px;
+}
+
+.highlight-allin .check,
+.highlight-pass .cross {
+  outline: 4px solid #FFEFD5;
+  outline-offset: 2px;
+}
+
+.bottom-bar-single.highlight-allin{
+  z-index: 3001;
+}
+
+.bottom-bar-single.highlight-pass {
+  z-index: 3001;
+}

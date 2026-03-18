@@ -9,8 +9,13 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
     </div>
   </div>
 
+  <button class="test-tutorial-btn" (click)="restartTutorial()">
+    TEST TUTORIAL
+  </button>
+
+
   <!-- Контейнер для текущего матча -->
-  <div class="content">
+  <div class="content" [class.highlight]="tutorialStep === 1">
     <div *ngIf="isLoading" class="loading">
       <p>Cargando... </p>
     </div>
@@ -43,7 +48,9 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
     </div>
   </div>
 
-  <div class="bottom-bar-single">
+  <div class="bottom-bar-single"
+       [class.highlight-allin]="tutorialStep === 2"
+       [class.highlight-pass]="tutorialStep === 3">
     <button class="single-btn check" (click)="onCheck()">ALL IN</button>
     <button class="single-btn cross" (click)="onCross()">PASS</button>
   </div>
@@ -106,5 +113,18 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
         Cerrar
       </button>
     </div>
+  </div>
+
+  <div *ngIf="isTutorial === true" class="tutorial-overlay" (click)="nextStep()">
+
+    <img
+      src="assets/icon/Floppy.png"
+      class="floppy"
+      [ngClass]="'step-' + tutorialStep">
+
+    <div class="tutorial-bubble" [ngClass]="'step-' + tutorialStep">
+      {{ getTutorialText() }}
+    </div>
+
   </div>
 </ion-content>
