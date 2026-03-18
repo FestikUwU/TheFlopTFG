@@ -70,5 +70,46 @@ export class SlotPage implements OnInit {   //  ВАЖНО
       });
     }, 100);
   }
+
+  isDragging = false;
+  offsetX = 0;
+  offsetY = 0;
+
+  posX = 0;
+  posY = 0;
+
+  message = "";
+
+  startDrag(event: TouchEvent) {
+    this.isDragging = true;
+
+    const touch = event.touches[0];
+
+    this.offsetX = touch.clientX - this.posX;
+    this.offsetY = touch.clientY - this.posY;
+  }
+
+  onDrag(event: TouchEvent) {
+    if (!this.isDragging) return;
+
+    const touch = event.touches[0];
+
+    this.posX = touch.clientX - this.offsetX;
+    this.posY = touch.clientY - this.offsetY;
+  }
+
+  endDrag() {
+    this.isDragging = false;
+
+    // возвращаем назад
+    this.posX = 0;
+    this.posY = 0;
+
+    this.message = "Ey… estoy trabajando aquí 😤";
+
+    setTimeout(() => {
+      this.message = "";
+    }, 2000);
+  }
 }
 

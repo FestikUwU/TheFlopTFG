@@ -5,6 +5,19 @@
     <img class="out" src="assets/icon/outOff.png">
   </div>
 
+  <img
+    src="assets/icon/Floppy.png"
+    class="mascot"
+    [style.transform]="'translate(' + posX + 'px,' + posY + 'px)'"
+    (touchstart)="startDrag($event)"
+    (touchmove)="onDrag($event)"
+    (touchend)="endDrag()"
+  />
+
+  <div class="bubble" *ngIf="message">
+    {{ message }}
+  </div>
+
   <div class="bottom-bar">
     <div class="bar-container">
       <button class="bar-btn" (click)="goHome()">
