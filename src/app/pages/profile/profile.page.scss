@@ -498,10 +498,12 @@ ion-segment-button{}
   --color: #000;
 
   font-family: 'Limelight', cursive;
-  font-weight: 800;
+  font-weight: 700;
 
   border-radius: 20px;
   padding: 0px 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
 
   transition: all 0.1s ease;
 }
