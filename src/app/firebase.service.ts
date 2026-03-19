@@ -5,7 +5,7 @@ import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { collection, query, where, getDocs, addDoc, orderBy, onSnapshot, limit, deleteDoc } from "firebase/firestore";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
-// Tu configuración de Firebase
+//configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBU7qvBSHZA1ekL3OfCDtfDXEF8b7pQp3k",
   authDomain: "theflop-4e5e5.firebaseapp.com",
@@ -322,7 +322,7 @@ export const getChatList = async () => {
 
     const otherUid = data['users'].find((uid: any) => uid !== user.uid);
 
-    // 👤 загрузка профиля
+    // carga de perfil
     const userRef = doc(firestore, "users", otherUid);
     const userSnap = await getDoc(userRef);
 
@@ -336,7 +336,7 @@ export const getChatList = async () => {
       photo = userData?.public?.photos?.[0] || photo;
     }
 
-    // 💬 последнее сообщение
+    // ultimo mensage
     const messagesRef = collection(firestore, "chats", matchId, "messages");
     const q = query(messagesRef, orderBy("timestamp", "desc"), limit(1));
 
@@ -371,7 +371,7 @@ export const getChatList = async () => {
 
   }
 
-  // 🔥 сортировка (новые сверху)
+  // nuevos se van primeros
   chatList.sort((a, b) => b.timestamp - a.timestamp);
 
   return chatList;
@@ -418,7 +418,7 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
 
       const unsubscribe = onSnapshot(q, (msgSnap)=>{
 
-        let lastMsgData: any = null; // 🔥 ВОТ ЭТОГО НЕ ХВАТАЕТ
+        let lastMsgData: any = null;
 
         let lastMessage = "Empieza la conversación";
         let time = "";

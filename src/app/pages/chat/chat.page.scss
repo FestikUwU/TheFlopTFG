@@ -1,9 +1,8 @@
-/* Контент и список */
 ion-content {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-bottom: 100px; /* место под плавающий input */
+  padding-bottom: 100px;
 }
 
 .message{
@@ -18,8 +17,8 @@ ion-list {
 
 
 .arrow-button {
-  all: unset;              /* убирает все дефолтные стили ion-button */
-  display: block;          /* чтобы изображение было видно */
+  all: unset;
+  display: block;
   cursor: pointer;
   background: transparent;
 }
@@ -40,7 +39,6 @@ ion-list ion-item {
   width: fit-content;
 }
 
-/* Плавающий input (сосиска) */
 .chat-input-sausage {
   position: fixed;
   bottom: 20px;
@@ -58,10 +56,9 @@ ion-list ion-item {
   z-index: 100;
 }
 
-/* Внутренние элементы */
 .chat-input-sausage ion-input {
-  --color: #000000;       /* цвет текста */
-  --caret-color: #6A041D; /* цвет курсора*/
+  --color: #000000;
+  --caret-color: #6A041D;
   --highlight-color-focused: #000000;
   --highlight-color: #6A041D;
   --highlight-height: 0;
@@ -77,7 +74,7 @@ ion-list ion-item {
   --highlight-color: #6A041D;
   --highlight-height: 0;
 
-  max-height: 120px; /* ограничение роста */
+  max-height: 120px;
   overflow-y: auto;
   --placeholder-color: #000000;
   --placeholder-opacity: 0.7;
@@ -105,9 +102,9 @@ ion-header ion-toolbar {
   box-shadow: none;
   border: none;
   display: flex;
-  align-items: center;  /* вертикальный центр */
-  justify-content: flex-start; /* элементы слева */
-  gap: 8px; /* небольшой промежуток между элементами */
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
   padding: 0 12px;
   margin-top: 15px;
 }
@@ -140,7 +137,7 @@ ion-title{
 }
 
 .back-icon {
-  width: 24px;   /* размер стрелки */
+  width: 24px;
   height: 24px;
   object-fit: contain;
 }
@@ -185,7 +182,6 @@ ion-title{
   word-break: break-word;
 }
 
-/* МОИ сообщения */
 .mine {
   margin-left: auto;
   background: #D9D9D9;
@@ -193,7 +189,6 @@ ion-title{
   border-bottom-right-radius: 4px;
 }
 
-/* ЧУЖИЕ сообщения */
 .other {
   margin-right: auto;
   background: #D9D9D9;

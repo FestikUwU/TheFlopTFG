@@ -29,9 +29,9 @@ export class HomePage implements OnInit {
   isTutorial: boolean | null = null;
   tutorialStep = 0;
 
-  matches: Array<any> = [];               // все найденные матчи
-  currentIndex = 0;               // индекс текущего отображаемого матча
-  currentMatch: any = null;               // текущий матч
+  matches: Array<any> = [];
+  currentIndex = 0;
+  currentMatch: any = null;
 
   currentUser: any = null;
 
@@ -224,6 +224,6 @@ export class HomePage implements OnInit {
     this.tutorialStep = 0;
     this.isTutorial = true;
 
-    localStorage.removeItem('tutorial_home_seen'); // 🔥 лучше
+    localStorage.removeItem('tutorial_home_seen');
   }
 }

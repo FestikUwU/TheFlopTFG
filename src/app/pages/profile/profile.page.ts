@@ -88,7 +88,7 @@ export class ProfilePage implements OnInit {
 
   generateAgeOptions() {
     this.ageOptions = Array.from({ length: 82 }, (_, i) => {
-      const age = i + 18; // 🔥 старт с 18
+      const age = i + 18; // desde 18
       return {
         value: age,
         display: age.toString()

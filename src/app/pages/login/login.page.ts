@@ -62,7 +62,7 @@ export class LoginPage {
     toast.present();
   }
 
-  //  логин через Firebase
+  //  Login por Firebase
   async login() {
     if (!this.email || !this.password) {
       this.showToast('Por favor, complete todos los campos');

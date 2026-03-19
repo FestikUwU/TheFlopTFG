@@ -1,6 +1,3 @@
-/* =========================== */
-/* Общие настройки шрифта и контента */
-/* =========================== */
 ion-content {
   font-family: 'Limelight', sans-serif !important;
   --overflow: auto;
@@ -8,7 +5,7 @@ ion-content {
   display: flex;
 }
 
-/* Заголовки */
+
 .header-container {
   display: flex;
   justify-content: center;
@@ -29,7 +26,6 @@ ion-content {
   margin-left: 20px;
 }
 
-/* Кнопки внутри ion-item */
 .custom-buttons::part(native) {
   display: flex;
   justify-content: center;
@@ -42,20 +38,19 @@ ion-button {
   --background: transparent;
 }
 
-/* Центрируем и делаем адаптивные поля */
 .campoTxt::part(native) {
   background: #FFEFD5 !important;
   border-radius: 10px;
   color: black;
   border: 1px solid black;
   min-height: 80px;
-  padding: 15px;        /* внутренние отступы */
-  margin: 12px auto;    /* авто по бокам для центрирования */
-  width: 95%;           /* ограничиваем ширину, чтобы не выходило за экран */
-  box-sizing: border-box; /* учитываем padding и border в ширине */
+  padding: 15px;
+  margin: 12px auto;
+  width: 95%;
+  box-sizing: border-box;
 }
 
-/* Для маленьких экранов */
+
 @media (max-width: 360px) {
   .campoTxt::part(native) {
     width: 95%;
@@ -70,9 +65,6 @@ ion-input {
   font-family: 'Limelight', sans-serif !important;
 }
 
-/* =========================== */
-/* Popover для ion-select (Edad / Genero) */
-/* =========================== */
 ion-select {
   font-family: 'Limelight', sans-serif !important;
   --background: none;
@@ -89,7 +81,6 @@ ion-select-option {
   font-family: 'Limelight', sans-serif !important;
 }
 
-/* Принудительно серый для темной темы */
 @media (prefers-color-scheme: dark) {
   ion-select::part(overlay),
   ion-select-option {
@@ -98,9 +89,6 @@ ion-select-option {
   }
 }
 
-/* =========================== */
-/* Модалки (если будут еще) */
-/* =========================== */
 .bottom-sheet-modal {
   --height: auto;
   --border-radius: 20px 20px 0 0;
@@ -147,9 +135,6 @@ ion-select-option {
   padding: 0;
 }
 
-/* =========================== */
-/* Адаптивность */
-/* =========================== */
 @media (max-width: 360px) {
   .custom-title {
     font-size: 1.8vh;
@@ -166,9 +151,6 @@ ion-select-option {
   }
 }
 
-/* =========================== */
-/* Анимация появления модалки */
-/* =========================== */
 @keyframes slideUp {
   from {
     transform: translateY(100%);
@@ -196,7 +178,7 @@ html.ios {
 
 .dot-fill {
   flex: 1;
-  border-bottom: 1px dotted #000; /* точки */
+  border-bottom: 1px dotted #000;
   margin: 0 5px;
 }
 
@@ -213,9 +195,9 @@ ion-list{
   border: 1px solid black;
   height: auto;
   width: 90%;
-  margin: 12px ;    /* авто по бокам для центрирования */
-  width: auto;           /* ограничиваем ширину, чтобы не выходило за экран */
-  box-sizing: border-box; /* учитываем padding и border в ширине */
+  margin: 12px ;
+  width: auto;
+  box-sizing: border-box;
   --inner-border-width: 0;
   margin-bottom: 30px;
 }
@@ -223,8 +205,8 @@ ion-list{
 .line {
   position: absolute;
   right: 10px;
-  top: 30px;    /* отступ сверху */
-  bottom: 30px; /* отступ снизу */
+  top: 30px;
+  bottom: 30px;
   width: 2px;
   background-color: #6A041D;
   z-index: 100;
@@ -244,9 +226,9 @@ ion-list{
   border-radius: 10px;
   border: 1px solid black;
   min-width: 90%;
-  margin: 12px;    /* авто по бокам для центрирования */
-  width: auto;           /* ограничиваем ширину, чтобы не выходило за экран */
-  box-sizing: border-box; /* учитываем padding и border в ширине */
+  margin: 12px;
+  width: auto;
+  box-sizing: border-box;
   --inner-border-width: 0;
 }
 
@@ -275,15 +257,12 @@ ion-list{
   font-family: 'Limelight', cursive;
 }
 
-
-/* Активная кнопка — 100% */
 ion-button.active {
   background: #FFEFD5;
   border-radius: 10px;
   padding: 0 12px;
 }
 
-/* Неактивная — 70% */
 ion-button.inactive {
   background: rgba(217, 217, 217, 0.7);
   border-radius: 10px;
@@ -299,14 +278,13 @@ ion-button.inactive {
   border: 2px solid #D9D9D9;
   overflow: hidden;
   box-sizing: border-box;
-  margin: 0 auto; /* центрирует по горизонтали */
+  margin: 0 auto;
   box-shadow: 3px 7px 15px rgba(0, 0, 0, 0.9);
   justify-content: center;
   font-family: Arial;
 }
 
 
-/* Текст поверх фото */
 .overlay-text {
   position: absolute;
   top: 7px;
@@ -316,7 +294,7 @@ ion-button.inactive {
   width: auto;
   align-items: start;
   padding: 10px;
-  background: #D9D9D9; /* полупрозрачный фон */
+  background: #D9D9D9;
   border-radius: 20px;
   color: black;
   font-size: 12px;
@@ -326,7 +304,7 @@ ion-button.inactive {
 
 /* Данные снизу (Edad, Género) */
 .overlay-data {
-  background: #D9D9D9; /* полупрозрачный фон */
+  background: #D9D9D9;
   border-radius: 20px;
   color: black;
   position: absolute;
@@ -367,7 +345,7 @@ ion-button.inactive {
 }
 
 .dot-fill {
-  flex: 1;                     /* РАСТЯГИВАЕТ ТОЧКИ */
+  flex: 1;
   border-bottom: 1px dotted #000;
   margin: 0 8px;
   position: relative;
@@ -375,7 +353,7 @@ ion-button.inactive {
 }
 
 ion-button {
-  margin-left: auto;           /*  ПРИЖИМАЕТ ВПРАВО */
+  margin-left: auto;
 }
 
 .imgAdd {
@@ -385,7 +363,7 @@ ion-button {
 }
 
 ion-segment-button {
-  font-size: 1.6vh;   // меняй тут
+  font-size: 1.6vh;
 }
 
 .buttstyle::part(native) {
@@ -461,7 +439,6 @@ ion-segment-button{}
   animation: floatUpDown 2s ease-in-out infinite;
 }
 
-/* Текст как пузырь */
 .tutorial-bubble {
   position: absolute;
   top: 200px;
@@ -480,7 +457,7 @@ ion-segment-button{}
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px); /* вверх */
+    transform: translateY(-10px);
   }
   100% {
     transform: translateY(0px);
@@ -519,7 +496,7 @@ ion-segment-button{}
 }
 
 .btnLogout {
-  --background: #FFEFD5; /* твой бордовый */
+  --background: #FFEFD5;
   --color: #000000;
 
   font-family: 'Lunasima', cursive;
@@ -538,7 +515,7 @@ ion-segment-button{}
 .btnRow {
   display: flex;
   justify-content: center;
-  gap: 12px; /* расстояние между кнопками */
+  gap: 12px;
   margin-top: 10px;
 }
 

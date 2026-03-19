@@ -15,11 +15,11 @@
   position: relative;
 }
 
-/* Контейнер для карт в углу */
+
 .cards-display {
   display: flex;
   gap: 3vw;
-  margin-bottom: 3vh; // отступ от кнопки
+  margin-bottom: 3vh;
   z-index: 10;
 }
 
@@ -118,7 +118,6 @@
   font-weight: 500;
 }
 
-/* Дополнительный отступ между группами */
 .input-card-wrapper {
   display: flex;
   flex-direction: column;
@@ -130,7 +129,6 @@
   border-radius: 15px;
 }
 
-/* Слот для карты в углу */
 .card-slot {
   width: 32px; //  32px → 4vw
   height: 45px; //  45px → 5.7vh (пропорция сохранена)
@@ -144,7 +142,6 @@
   transform: translateY(0) scale(1) rotate(0deg);
 }
 
-/* Карта */
 .poker-card {
   width: 100%;
   height: 100%;

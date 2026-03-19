@@ -13,8 +13,8 @@ import {
   IonToolbar
 } from '@ionic/angular/standalone';
 
-//  Импортируем функцию регистрации из твоего firebase.service.ts
-import { registerUser } from 'src/app/firebase.service'; // путь поправь под себя
+//  import funcion de firebase.service.ts
+import { registerUser } from 'src/app/firebase.service';
 import {NavController, ToastController} from '@ionic/angular';
 
 
@@ -30,23 +30,20 @@ import {NavController, ToastController} from '@ionic/angular';
 })
 export class RegisterPage implements OnInit {
 
-  //  Поля, связанные с формой
   name = '';
   email = '';
   password = '';
 
-  // Флаги для отображения карт
   showCard1 = false;
   showCard2 = false;
   showCard3 = false;
   showLogo = false;
 
-  // URL карт (будут выбраны рандомно)
   card1Url = '';
   card2Url = '';
   card3Url = '';
 
-  // Массив всех 52 карт - ДОБАВЛЕНО РАСШИРЕНИЕ .png
+  // Массив всех 52 карт
   private allCards = [
     // Пики (Spades)
     'assets/iconsYimgs/Spades2.jpg', 'assets/iconsYimgs/Spades3.jpg', 'assets/iconsYimgs/Spades4.jpg',
@@ -77,19 +74,18 @@ export class RegisterPage implements OnInit {
     'assets/iconsYimgs/ClubsT.jpg'
   ];
 
-  // Массив использованных карт (чтобы не повторялись)
+  // para que cartas no se repiten
   private usedCards: string[] = [];
 
   constructor(private router: Router, private toastController: ToastController, private navCtrl: NavController) {}
 
   ngOnInit() {}
 
-  // Получить случайную карту (без повторов)
+  // rndm card
   private getRandomCard(): string {
     const availableCards = this.allCards.filter(card => !this.usedCards.includes(card));
 
     if (availableCards.length === 0) {
-      // Если все карты использованы, сбрасываем
       this.usedCards = [];
       return this.allCards[Math.floor(Math.random() * this.allCards.length)];
     }
@@ -101,7 +97,7 @@ export class RegisterPage implements OnInit {
     return selectedCard;
   }
 
-  // Методы для показа карт при вводе
+  // para mostrar cartas
   onNameInput() {
     if (this.name.length > 2 && !this.showCard1) {
       this.card1Url = this.getRandomCard();
@@ -129,24 +125,18 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  //  Метод, который вызывается при клике кнопки "Entrar"
   async onRegister() {
-    // Показываем лого перед регистрацией
     this.showLogo = true;
 
-    // Небольшая задержка для показа анимации
     await new Promise(resolve => setTimeout(resolve, 800));
 
     try {
-      //  Вызываем регистрацию в Firebase
       await registerUser(this.name, this.email, this.password);
 
-      //  После успешной регистрации редирект на home
       this.router.navigate(['/profile']);
     } catch (error) {
       console.error('Error al registrarse:', error);
-      this.showLogo = false; // Скрываем лого если ошибка
-      //  Тут можно добавить alert для пользователя
+      this.showLogo = false;
     }
   }
 

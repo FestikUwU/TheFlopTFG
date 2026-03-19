@@ -123,7 +123,7 @@ export class ChatPage implements OnInit {
     this.bgMusic.volume = 0;
     this.bgMusic.play().catch(() => {});
 
-    const steps = 3;                  // три шага
+    const steps = 3;
     const stepVolume = targetVolume / steps;
     let currentStep = 0;
 
@@ -134,7 +134,7 @@ export class ChatPage implements OnInit {
       } else {
         clearInterval(fadeInterval);
       }
-    }, 200); // каждый шаг через 200 мс
+    }, 200);
   }
 
   ionViewWillLeave() {
@@ -194,7 +194,7 @@ export class ChatPage implements OnInit {
         date = new Date(msg.timestamp);
       }
 
-      if (isNaN(date.getTime())) return; // 💥 защита от Invalid Date
+      if (isNaN(date.getTime())) return;
 
       const dayKey = date.toDateString();
 
@@ -288,7 +288,6 @@ export class ChatPage implements OnInit {
   isSeen(msg: any): boolean {
     if (!msg.seenBy) return false;
 
-    // если кто-то кроме тебя видел
     return msg.seenBy.length > 1;
   }
 }
