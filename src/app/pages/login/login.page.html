@@ -1,50 +1,53 @@
-<ion-content class="login-page">
 
-  <div class="login-container">
 
-    <div class="header-container">
-      <div class="logo-container">
-        <img src="assets/iconsYimgs/logoTest.png" alt="Logo The Flop" />
-      </div>
-      <h1 class="custom-title">Login</h1>
-    </div>
+  <ion-content class="login-page">
 
-    <div class="input-card-wrapper">
+    <div class="login-container">
 
-      <div class="input-group">
-        <ion-label class="input-label"></ion-label>
-        <div class="input-wrapper">
-          <ion-input
-            class="input-field"
-            type="email"
-            [(ngModel)]="email"
-            placeholder="Email">
-          </ion-input>
-          <div class="input-line"></div>
+      <div class="header-container">
+        <div class="logo-container">
+          <img src="assets/iconsYimgs/logoTest.png" alt="Logo The Flop" />
         </div>
+        <h1 class="custom-title">Login</h1>
       </div>
 
-      <div class="input-group">
-        <ion-label class="input-label"></ion-label>
-        <div class="input-wrapper">
-          <ion-input
-            class="input-field"
-            type="password"
-            [(ngModel)]="password"
-            placeholder="Password">
-          </ion-input>
-          <div class="input-line"></div>
+      <div class="input-card-wrapper">
+
+        <div class="input-group">
+          <ion-label class="input-label"></ion-label>
+          <div class="input-wrapper">
+            <ion-input
+              class="input-field"
+              type="email"
+              [(ngModel)]="email"
+              placeholder="Email">
+            </ion-input>
+            <div class="input-line"></div>
+          </div>
         </div>
+
+        <div class="input-group">
+          <ion-label class="input-label"></ion-label>
+          <div class="input-wrapper">
+            <ion-input
+              class="input-field"
+              type="password"
+              [(ngModel)]="password"
+              placeholder="Password">
+            </ion-input>
+            <div class="input-line"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="buttons-container">
+        <ion-button class="btnTipo1" (click)="login()">ENTRAR</ion-button>
+        <ion-button class="btnTipo2" fill="clear" (click)="goRegister()">CREAR CUENTA</ion-button>
       </div>
 
     </div>
 
-    <div class="buttons-container">
-      <ion-button class="btnTipo1" (click)="login()">ENTRAR</ion-button>
-      <ion-button class="btnTipo2" fill="clear" (click)="goRegister()">CREAR CUENTA</ion-button>
-    </div>
-
-  </div>
+  </ion-content>
 
 
-</ion-content>

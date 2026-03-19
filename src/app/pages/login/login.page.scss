@@ -15,9 +15,10 @@
   margin-right: 2vh;
 }
 
-.login-page{
-  --background: url('/assets/card-suits-bg.svg') no-repeat center center;
-  --background-size: cover;
+.login-page {
+  --background: none; /* убираем ionic фон */
+  background: url('/assets/card-suits-bg.svg') no-repeat center center;
+  background-size: cover;
 }
 
 .login-container {

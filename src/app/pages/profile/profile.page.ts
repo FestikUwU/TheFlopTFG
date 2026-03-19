@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { uploadPhoto } from 'src/app/firebase.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { getAuth, signOut } from "firebase/auth";
 import {
   IonContent,
   IonItem,
@@ -213,5 +214,13 @@ export class ProfilePage implements OnInit {
     if (this.privateProfile.ageMin > this.privateProfile.ageMax) {
       this.privateProfile.ageMax = this.privateProfile.ageMin;
     }
+  }
+
+  async logout() {
+    const auth = getAuth();
+
+    await signOut(auth);
+
+    this.navCtrl.navigateRoot('/login');
   }
 }

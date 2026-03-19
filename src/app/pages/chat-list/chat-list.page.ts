@@ -6,6 +6,7 @@ import { getChatList } from 'src/app/firebase.service';
 import { subscribeChatList } from 'src/app/firebase.service';
 import { AlertController } from '@ionic/angular';
 import { deleteChatFromFirestore } from 'src/app/firebase.service';
+import { getAuth } from "firebase/auth";
 import {
   IonContent,
   IonHeader,
@@ -41,15 +42,17 @@ export class ChatListPage implements OnInit {
 
   loading = true;
 
+  currentUserUid: string | undefined;
+
   async ngOnInit() {
     //this.matches = await getUserMatches();
     //this.matches = await getChatList();
+    const user = getAuth().currentUser;
+    this.currentUserUid = user?.uid;
+
     subscribeChatList((chats)=>{
-
       this.matches = chats;
-
       this.loading = false;
-
     });
     //this.matches.sort((a, b) => b.timestamp - a.timestamp);
     setTimeout(() => {
@@ -134,6 +137,13 @@ export class ChatListPage implements OnInit {
     }, 100);
   }
 
+  isUnread(chat: any): boolean {
+    if (!chat.lastMessageData) return false;
 
+    return (
+      chat.lastMessageData.senderUid !== this.currentUserUid &&
+      !chat.lastMessageData.seenBy?.includes(this.currentUserUid)
+    );
+  }
 
 }

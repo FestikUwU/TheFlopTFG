@@ -251,7 +251,8 @@ export const sendChatMessage = async (matchId: string, text: string) => {
     text,
     sender: user.displayName ?? "Player",
     senderUid: user.uid,
-    timestamp: Date.now()
+    timestamp: Date.now(),
+    seenBy: [user.uid]
   });
 };
 
@@ -262,7 +263,12 @@ export const subscribeToChat = (matchId: string, callback: (messages: any[]) => 
 
   return onSnapshot(q, (snapshot) => {
     const msgs: any[] = [];
-    snapshot.forEach(doc => msgs.push(doc.data()));
+    snapshot.forEach(doc => {
+      msgs.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
     callback(msgs);
   });
 };
@@ -412,6 +418,8 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
 
       const unsubscribe = onSnapshot(q, (msgSnap)=>{
 
+        let lastMsgData: any = null; // 🔥 ВОТ ЭТОГО НЕ ХВАТАЕТ
+
         let lastMessage = "Empieza la conversación";
         let time = "";
         let timestamp = Date.now();
@@ -419,7 +427,12 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
         if (!msgSnap.empty) {
           msgSnap.forEach(m => {
 
-            const msg:any = m.data();
+            const msg:any = {
+              id: m.id,
+              ...m.data()
+            };
+
+            lastMsgData = msg;
 
             timestamp = msg.timestamp;
 
@@ -442,7 +455,8 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
           photo,
           lastMessage,
           time,
-          timestamp
+          timestamp,
+          lastMessageData: lastMsgData
         };
 
         if (existingIndex !== -1) {

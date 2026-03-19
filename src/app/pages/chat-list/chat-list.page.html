@@ -64,6 +64,8 @@
 
               <div class="chat-meta">
                 <span class="chat-time">{{ match.time }}</span>
+
+                <div *ngIf="isUnread(match)" class="unread-dot"></div>
               </div>
             </div>
 

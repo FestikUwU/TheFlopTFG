@@ -51,6 +51,13 @@
           <!-- TIEMPO -->
           <div class="time">
             {{ formatTime(msg.timestamp) }}
+
+            <span
+              *ngIf="msg.senderUid === currentUserUid"
+              class="ticks"
+            >
+              {{ isSeen(msg) ? '✔✔' : '✔' }}
+            </span>
           </div>
 
         </div>

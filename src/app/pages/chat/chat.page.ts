@@ -5,7 +5,7 @@ import { getMatchUsers } from 'src/app/firebase.service';
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { IonTextarea } from "@ionic/angular/standalone";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import {
   IonContent,
   IonButton,
@@ -105,6 +105,8 @@ export class ChatPage implements OnInit {
         this.ngZone.run(() => {
 
           this.messages = this.groupMessagesByDate(msgs);
+
+          this.markMessagesAsSeen(msgs);
 
           setTimeout(() => {
             this.content.scrollToBottom(200);
@@ -264,6 +266,30 @@ export class ChatPage implements OnInit {
     console.log("Report user:", this.otherUserName);
 
     // потом можно сделать alert / modal
+  }
+
+  markMessagesAsSeen(messages: any[]) {
+    const userId = this.currentUserUid;
+    if (!userId) return;
+
+    const firestore = getFirestore();
+
+    messages.forEach(async (msg) => {
+      if (!msg.seenBy?.includes(userId)) {
+        const ref = doc(firestore, "chats", this.matchId, "messages", msg.id);
+
+        await updateDoc(ref, {
+          seenBy: arrayUnion(userId)
+        });
+      }
+    });
+  }
+
+  isSeen(msg: any): boolean {
+    if (!msg.seenBy) return false;
+
+    // если кто-то кроме тебя видел
+    return msg.seenBy.length > 1;
   }
 }
 

@@ -487,11 +487,7 @@ ion-segment-button{}
   }
 }
 
-.btnDiv {
-  display: flex;
-  justify-content: center;
-  margin-top: 5px;
-}
+
 
 .btnListo {
   --background: #F3DFBA;
@@ -520,4 +516,34 @@ ion-segment-button{}
   box-sizing: border-box;
 
   --inner-border-width: 0;
+}
+
+.btnLogout {
+  --background: #FFEFD5; /* твой бордовый */
+  --color: #000000;
+
+  font-family: 'Lunasima', cursive;
+  font-weight: 700;
+
+  border-radius: 20px;
+  padding: 0px 10px;
+
+  margin-top: 5px;
+
+  transition: all 0.1s ease;
+}
+
+
+
+.btnRow {
+  display: flex;
+  justify-content: center;
+  gap: 12px; /* расстояние между кнопками */
+  margin-top: 10px;
+}
+
+.logout-bottom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }

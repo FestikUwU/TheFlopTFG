@@ -1,6 +1,8 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { CommonModule } from '@angular/common';
 import {
   IonButton,
   IonContent,
@@ -13,8 +15,8 @@ import {
 } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 
-// Импорт функции из firebase.service.ts
-import { loginUser } from 'src/app/firebase.service'; // путь подкорректируй
+
+import { loginUser } from 'src/app/firebase.service';
 
 @Component({
   standalone: true,
@@ -26,10 +28,12 @@ import { loginUser } from 'src/app/firebase.service'; // путь подкорр
     IonButton,
     IonLabel,
     IonInput,
-    FormsModule
+    FormsModule,
+    CommonModule
   ]
 })
 export class LoginPage {
+  isCheckingAuth = false;
   email: string = '';
   password: string = '';
 
@@ -38,7 +42,16 @@ export class LoginPage {
     private toastController: ToastController
   ) {}
 
-  // 🔹 toast
+  ngOnInit() {
+    const user = getAuth().currentUser;
+
+    if (user) {
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+    }
+  }
+
+
+  //  toast
   async showToast(message: string, duration: number = 2000) {
     const toast = await this.toastController.create({
       message,
@@ -49,7 +62,7 @@ export class LoginPage {
     toast.present();
   }
 
-  // 🔹 логин через Firebase
+  //  логин через Firebase
   async login() {
     if (!this.email || !this.password) {
       this.showToast('Por favor, complete todos los campos');
@@ -58,7 +71,7 @@ export class LoginPage {
 
     try {
       await loginUser(this.email, this.password); // функция из firebase.service.ts
-      this.router.navigate(['/home']);
+      this.router.navigateByUrl('/home', { replaceUrl: true });
     } catch (error: any) {
       console.error('Firebase Login Error:', error);
       this.showToast(error.message, 3000);

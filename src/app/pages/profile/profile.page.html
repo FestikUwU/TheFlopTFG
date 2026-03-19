@@ -12,10 +12,16 @@
   -->
 
   <!-- BOTÓN LISTO -->
-  <div class="btnDiv">
+  <div class="btnRow">
+    <!--
+    <ion-button class="btnLogout" (click)="logout()">
+      Logout
+    </ion-button>
+    -->
     <ion-button class="btnListo" (click)="onListoClick()">
       Listo
     </ion-button>
+
   </div>
   <!-- SEGMENT -->
   <ion-segment mode="ios" [(ngModel)]="mode" value="editar" class="profile-segment">
@@ -219,5 +225,10 @@
       {{ getTutorialText() }}
     </div>
 
+  </div>
+  <div class="logout-bottom">
+    <ion-button class="btnLogout" (click)="logout()">
+      Logout
+    </ion-button>
   </div>
 </ion-content>
