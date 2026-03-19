@@ -57,7 +57,11 @@ export class HomePage implements OnInit {
     const city = userData?.['private']?.location ?? '';
 
     if (city) {
-      this.matches = await getMatchesByCity(city);
+      this.matches = await getMatchesByCity(city, {
+        lookingGender: userData?.['private']?.lookingGender ?? 'todos',
+        ageMin: userData?.['private']?.ageMin ?? 18,
+        ageMax: userData?.['private']?.ageMax ?? 99
+      });
       this.showNextMatch();
       console.log('Matches:', this.matches);
     }
@@ -120,7 +124,14 @@ export class HomePage implements OnInit {
     const city = userData?.['private']?.location ?? '';
 
     if (city) {
-      this.matches = await getMatchesByCity(city);
+      this.matches = await getMatchesByCity(city, {
+        lookingGender: userData?.['private']?.lookingGender ?? 'todos',
+        ageMin: userData?.['private']?.ageMin ?? 18,
+        ageMax: userData?.['private']?.ageMax ?? 99
+      });
+
+      this.matches = this.matches.sort(() => Math.random() - 0.5);
+
       this.currentIndex = 0;
       this.showNextMatch();
     }

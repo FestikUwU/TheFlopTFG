@@ -1,20 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import {IonContent} from '@ionic/angular/standalone';
+import { getUserMatches, getUserLikesCount, getUserMessagesCount } from 'src/app/firebase.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.page.html',
   styleUrls: ['./stats.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, CommonModule]
 })
 export class StatsPage implements OnInit {
 
-  constructor() { }
+  matchesCount = 0;
+  likesCount = 0;
+  messagesCount = 0;
 
-  ngOnInit() {
+  isLoading = true;
+
+  constructor(private navCtrl: NavController) {}
+
+  goBack() {
+    this.navCtrl.back();
   }
 
+  async ngOnInit() {
+
+    this.isLoading = true;
+
+    const matches = await getUserMatches();
+    this.matchesCount = matches.length;
+
+    this.likesCount = await getUserLikesCount();
+    this.messagesCount = await getUserMessagesCount();
+
+    this.isLoading = false;
+  }
 }

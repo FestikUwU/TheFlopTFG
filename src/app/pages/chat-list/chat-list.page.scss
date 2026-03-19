@@ -1,6 +1,6 @@
 .content-wrapper {
   padding: 16px;
-  padding-bottom: 120px;
+  padding-bottom: 20vh;
 }
 
 .bottom-bar {
@@ -306,7 +306,7 @@ ion-item-option {
   --padding-start: 0;
   --inner-padding-end: 0;
   --min-height: auto;
-  max-height: 20vh;
+  max-height: none;
 }
 
 .unread-dot {
@@ -316,4 +316,8 @@ ion-item-option {
   border-radius: 50%;
   margin-top: 4px;
   box-shadow: 0 0 6px #FFD700;
+}
+
+.page-content {
+  --padding-bottom: 180px; // ⬅️ ключевой фикс
 }

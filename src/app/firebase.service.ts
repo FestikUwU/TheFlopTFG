@@ -477,6 +477,39 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
 
 };
 
+export const getUserLikesCount = async () => {
+  const user = getAuth().currentUser;
+  if (!user) return 0;
+
+  const likesRef = collection(firestore, "interactions", user.uid, "likes");
+  const snap = await getDocs(likesRef);
+
+  return snap.size;
+};
+
+export const getUserMessagesCount = async () => {
+  const user = getAuth().currentUser;
+  if (!user) return 0;
+
+  const matches = await getUserMatches();
+
+  let total = 0;
+
+  for (const match of matches) {
+    const messagesRef = collection(firestore, "chats", match.id, "messages");
+    const snap = await getDocs(messagesRef);
+
+    snap.forEach(doc => {
+      const data: any = doc.data();
+      if (data.senderUid === user.uid) {
+        total++;
+      }
+    });
+  }
+
+  return total;
+};
+
 export const getMatchUsers = async (matchId: string) => {
 
   const matchRef = doc(firestore, "matches", matchId);
@@ -487,7 +520,14 @@ export const getMatchUsers = async (matchId: string) => {
   return snap.data();
 };
 
-export const getMatchesByCity = async (city: string) => {
+export const getMatchesByCity = async (
+  city: string,
+  filters: {
+    lookingGender: string;
+    ageMin: number;
+    ageMax: number;
+  }
+  ) => {
 
   const user = getAuth().currentUser;
   if (!user) return [];
@@ -498,7 +538,7 @@ export const getMatchesByCity = async (city: string) => {
   const q = query(usersRef, where("private.location", "==", city));
   const querySnapshot = await getDocs(q);
 
-  // получаем лайки
+  // recibimos like
   const likesSnap = await getDocs(
     collection(firestore, "interactions", user.uid, "likes")
   );
@@ -506,6 +546,19 @@ export const getMatchesByCity = async (city: string) => {
   const dislikesSnap = await getDocs(
     collection(firestore, "interactions", user.uid, "dislikes")
   );
+
+  const matchesSnap = await getDocs(collection(firestore, "matches"));
+
+  const matchedUsers = new Set<string>();
+
+  matchesSnap.forEach(doc => {
+    const data: any = doc.data();
+
+    if (data.users.includes(user.uid)) {
+      const other = data.users.find((uid: string) => uid !== user.uid);
+      if (other) matchedUsers.add(other);
+    }
+  });
 
   const interactedUsers = new Set<string>();
 
@@ -525,6 +578,21 @@ export const getMatchesByCity = async (city: string) => {
 
     if (pubData) {
 
+      const age = pubData.age ?? 0;
+      const gender = pubData.gender ?? '';
+
+      //  FILTER 1
+      if (age < filters.ageMin || age > filters.ageMax) return;
+
+      //  FILTER 2
+      if (
+        filters.lookingGender !== 'todos' &&
+        gender !== filters.lookingGender
+      ) return;
+
+      // FILTER 3
+      if (matchedUsers.has(doc.id)) return;
+
       matches.push({
         uid: doc.id,
         name: data["name"] ?? "Player",
@@ -533,7 +601,6 @@ export const getMatchesByCity = async (city: string) => {
         gender: pubData.gender,
         photos: pubData.photos
       });
-
     }
 
   });

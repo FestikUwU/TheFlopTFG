@@ -1,13 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>stats</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="page-content">
+  <div class="top-bar">
+    <button class="back-btn" (click)="goBack()">
+      ←
+    </button>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">stats</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="header">
+    <h1>ESTADÍSTICAS</h1>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Cargando...</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="stats-container">
+
+    <div class="stat-card">
+      <p class="stat-number">{{ matchesCount }}</p>
+      <p class="stat-label">MATCHES</p>
+    </div>
+
+    <div class="stat-card">
+      <p class="stat-number">{{ likesCount }}</p>
+      <p class="stat-label">LIKES</p>
+    </div>
+
+    <div class="stat-card">
+      <p class="stat-number">{{ messagesCount }}</p>
+      <p class="stat-label">MENSAJES</p>
+    </div>
+
+  </div>
+
+  <div *ngIf="!isLoading && matchesCount === 0" class="empty">
+    <p>Aún no tienes actividad </p>
+  </div>
 </ion-content>
