@@ -226,7 +226,7 @@
     </div>
 
   </div>
-  <div class="logout-bottom">
+  <div *ngIf="mode === 'editar'" class="logout-bottom">
     <ion-button class="btnLogout" (click)="logout()">
       Logout
     </ion-button>
