@@ -43,11 +43,17 @@ export class LoginPage {
   ) {}
 
   ngOnInit() {
-    const user = getAuth().currentUser;
+    this.isCheckingAuth = true;
 
-    if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-    }
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      this.isCheckingAuth = false;
+
+      if (user) {
+        this.router.navigateByUrl('/home', { replaceUrl: true });
+      }
+    });
   }
 
 
