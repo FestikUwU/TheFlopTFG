@@ -16,7 +16,8 @@ import {NavController} from "@ionic/angular";
     FormsModule
   ]
 })
-export class SlotPage implements OnInit {   //  ВАЖНО
+export class SlotPage implements OnInit {
+  annoyLevel = 0;
 
   constructor(private router: Router, private navCtrl: NavController) {}
 
@@ -96,11 +97,34 @@ export class SlotPage implements OnInit {   //  ВАЖНО
   endDrag() {
     this.isDragging = false;
 
-    // возвращаем назад
     this.posX = 0;
     this.posY = 0;
 
-    this.message = "Ey… estoy trabajando aquí ";
+    this.annoyLevel++;
+
+    if (this.annoyLevel === 1) {
+      this.message = "Ey… estoy trabajando aquí ";
+    }
+    else if (this.annoyLevel === 2) {
+      this.message = "Oye… para ya ";
+    }
+    else if (this.annoyLevel === 3) {
+      this.message = "¿Te parece gracioso? ";
+    }
+    else if (this.annoyLevel === 4) {
+      this.message = "Deja de tocarme ";
+    }
+    else if (this.annoyLevel === 5) {
+      this.message = "Última advertencia…";
+    }
+    else if (this.annoyLevel === 6) {
+      this.message = "Voy a gritar tus datos";
+    }
+    else if (this.annoyLevel >= 7) {
+      this.message = "VALE, TÚ LO HAS PEDIDO";
+      this.shout();
+      this.annoyLevel = 0;
+    }
 
     setTimeout(() => {
       this.message = "";
