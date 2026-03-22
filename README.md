@@ -20,8 +20,7 @@ The app follows a casino-inspired concept, using elements like cards, ALL IN / P
 * 🔔 Unread message indicator
 * 🗑 Chat deletion
 * 🎵 Optional background music in chat
-* 📊 (In progress) user statistics
-* 🎮 (In progress) slot-style mini game
+* 📊 user statistics
 
 ## 🧠 Implemented Logic
 
@@ -45,14 +44,14 @@ The app follows a casino-inspired concept, using elements like cards, ALL IN / P
 ##  Main Structure
 
 pages/
-├── login
-├── register
-├── home (matches)
-├── profile
-├── chat-list
-├── chat
-├── stats
-├── slot
+  login
+  register
+  home (matches)
+  profile
+  chat-list
+  chat
+  stats
+  slot
 
 ## ⚙️ Installation
 
