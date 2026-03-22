@@ -25,6 +25,8 @@ import { likeUser, dislikeUser } from 'src/app/firebase.service';
   imports: [IonContent, CommonModule, FormsModule]
 })
 export class HomePage implements OnInit {
+  swipeDirection: string = '';
+  isAnimating: boolean = false;
 
   isTutorial: boolean | null = null;
   tutorialStep = 0;
@@ -79,30 +81,46 @@ export class HomePage implements OnInit {
   }
 
   async onCheck() {
-    if (this.currentMatch) {
+    if (this.isAnimating) return;
 
-      const isMatch = await likeUser(this.currentMatch.uid);
+    this.swipeDirection = 'revolver-right';
+    this.isAnimating = true;
 
-      if (isMatch) {
-        this.matchedUser = this.currentMatch;
-        this.isMatch = true;
+    setTimeout(async () => {
+      if (this.currentMatch) {
+        const isMatch = await likeUser(this.currentMatch.uid);
+
+        if (isMatch) {
+          this.matchedUser = this.currentMatch;
+          this.isMatch = true;
+        }
       }
 
-      console.log('LIKE', this.currentMatch.uid);
-    }
-
-    this.currentIndex++;
-    this.showNextMatch();
+      this.nextCard();
+    }, 350);
   }
 
   async onCross() {
-    if (this.currentMatch) {
-      await dislikeUser(this.currentMatch.uid);
-      console.log('DISLIKE', this.currentMatch.uid);
-    }
+    if (this.isAnimating) return;
 
+    this.swipeDirection = 'revolver-left';
+    this.isAnimating = true;
+
+    setTimeout(async () => {
+      if (this.currentMatch) {
+        await dislikeUser(this.currentMatch.uid);
+      }
+
+      this.nextCard();
+    }, 350);
+  }
+
+  nextCard() {
     this.currentIndex++;
     this.showNextMatch();
+
+    this.swipeDirection = '';
+    this.isAnimating = false;
   }
 
   shout() {

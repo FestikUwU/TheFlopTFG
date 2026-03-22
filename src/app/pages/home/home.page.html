@@ -15,7 +15,7 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
 
 
   <!-- Контейнер для текущего матча -->
-  <div class="content" [class.highlight]="tutorialStep === 1">
+  <div class="content" [class.highlight]="tutorialStep === 1" [ngClass]="swipeDirection">
     <div *ngIf="isLoading" class="loading">
       <p>Cargando... </p>
     </div>
@@ -51,8 +51,8 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
   <div class="bottom-bar-single"
        [class.highlight-allin]="tutorialStep === 2"
        [class.highlight-pass]="tutorialStep === 3">
-    <button class="single-btn check" (click)="onCheck()">ALL IN</button>
     <button class="single-btn cross" (click)="onCross()">PASS</button>
+    <button class="single-btn check" (click)="onCheck()">ALL IN</button>
   </div>
 
   <div class="bottom-bar">
@@ -70,7 +70,7 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
       </button>
 
       <!--<button class="bar-btn" (click)="shout()">
-        📢
+
       </button>-->
 
       <button class="bar-btn" (click)="goToSlotsGame()">

@@ -53,6 +53,8 @@
   box-shadow: 3px 7px 15px rgba(0, 0, 0, 0.9);
   font-family: Arial;
   justify-content: center;
+
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
 .loading {
@@ -67,6 +69,8 @@
   position: relative;
   width: 100%;
   height: 100%;
+
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
 .match-photo {
@@ -610,4 +614,28 @@
 
 .bottom-bar-single.highlight-pass {
   z-index: 3001;
+}
+
+
+.swipe-right {
+  transform: translateX(120%) rotate(15deg);
+  opacity: 0;
+  box-shadow: 0 0 20px #5D934F;
+}
+
+.swipe-left {
+  transform: translateX(-120%) rotate(-15deg);
+  opacity: 0;
+  box-shadow: 0 0 20px #b33a3a;
+}
+
+
+.revolver-right {
+  transform: rotate(25deg) translateX(120%) scale(0.9);
+  opacity: 0;
+}
+
+.revolver-left {
+  transform: rotate(-25deg) translateX(-120%) scale(0.9);
+  opacity: 0;
 }
