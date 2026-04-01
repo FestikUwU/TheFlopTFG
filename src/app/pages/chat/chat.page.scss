@@ -45,7 +45,6 @@ ion-list ion-item {
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
-  /* height: 40px; */
   min-height: 40px;
   display: flex;
   align-items: flex-end;
@@ -126,12 +125,12 @@ ion-title {
   font-size: 18px;
   font-weight: 600;
 
-  flex: 1; /* ВАЖНО */
+  flex: 1;
   text-align: center;
 
   display: flex;
   align-items: center;
-  justify-content: center; /* центр */
+  justify-content: center;
 }
 
 .back-icon {
@@ -146,24 +145,6 @@ ion-title {
   border: 1px solid black;
   border-radius: 10px;
   object-fit: cover;
-}
-.chat-message {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 6px;
-  align-items: start;
-
-  --inner-border-width: 0;
-  --border-width: 0;
-}
-
-.chat-message .user {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.chat-message .text {
-  word-break: break-word;
 }
 
 .message-row {
@@ -252,7 +233,6 @@ ion-title {
 }
 
 .ticks {
-  //margin-left: 0px;
   font-size: 12px;
   opacity: 0.7;
   color: #002349;

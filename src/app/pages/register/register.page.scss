@@ -11,7 +11,7 @@
   margin-bottom: 30px;
   width: 100%;
   min-height: 100vh;
-  padding: 2vh 0; //   20px → 2vh
+  padding: 2vh 0;
   position: relative;
 }
 
@@ -23,10 +23,9 @@
   z-index: 10;
 }
 
-/* Header */
 .header-container {
-  margin-top: 3vh; //  30px → 3vh
-  margin-bottom: 3vh; //  30px → 3vh
+  margin-top: 3vh;
+  margin-bottom: 3vh; 
   text-align: center;
 }
 
@@ -38,10 +37,9 @@
   margin: 0;
 }
 
-/* Input Group */
 .input-group {
   width: 80%;
-  margin-bottom: 2vh; //  20px → 2vh
+  margin-bottom: 2vh;
   --border-radius: 20px;
   --highlight-color-focused: transparent;
   --highlight-color: transparent;
@@ -54,10 +52,10 @@
 
 .input-label {
   display: block;
-  font-size: 1.8vh; //  14px → 1.8vh
+  font-size: 1.8vh;
   color: #6A041D;
-  margin-bottom: 1vh; //  8px → 1vh
-  margin-left: 1.2vw; //  10px → 1.2vw
+  margin-bottom: 1vh;
+  margin-left: 1.2vw;
   font-weight: 750;
   transition: color 0.3s ease;
 }
@@ -65,39 +63,37 @@
 .input-field {
   --background: #FFEFD5;
   --color: #333;
-  --padding-start: 2.5vw; //  20px → 2.5vw
-  --padding-end: 2.5vw; //  20px → 2.5vw
-  --padding-top: 1.9vh; //  15px → 1.9vh
-  --padding-bottom: 1.9vh; //  15px → 1.9vh
+  --padding-start: 2.5vw; 
+  --padding-end: 2.5vw;
+  --padding-top: 1.9vh;
+  --padding-bottom: 1.9vh;
   --highlight-height: 0;
   caret-color: black;
   width: 100%;
   border-radius: 20px;
-  font-size: 2vh; // 16px → 2vh
-  box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1); // 2px 8px → vh
+  font-size: 2vh;
+  box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1);
 }
 
-/* Buttons Container */
 .buttons-container {
   width: 100%;
   margin-top: 7vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.9vh; //  15px → 1.9vh
+  gap: 1.9vh;
 
   @media (max-width: 480px) {
     width: 90%;
-    margin-top: 3.2vh; //  25px → 3.2vh
+    margin-top: 3.2vh;
   }
 }
 
-/* Primary Button */
 .btnTipo1 {
   --background: linear-gradient(135deg, #FFBF00 0%, #FFD700 100%);
   --color: white;
   --border-radius: 100px;
-  --box-shadow: 0 0.75vh 2.5vh rgba(255, 191, 0, 0.4); //  6px 20px → vh
+  --box-shadow: 0 0.75vh 2.5vh rgba(255, 191, 0, 0.4);
 
   font-family: 'Limelight', cursive;
   font-size: clamp(20px, 5vw, 24px);
@@ -107,33 +103,32 @@
   width: 80%;
 
   &:hover {
-    --box-shadow: 0 1vh 3.2vh rgba(255, 191, 0, 0.6); //  8px 25px → vh
+    --box-shadow: 0 1vh 3.2vh rgba(255, 191, 0, 0.6);
   }
 }
 
-/* Secondary Button */
 .btnTipo2 {
   --color: #FFEFD5;
-  font-size: 1.8vh; //  14px → 1.8vh
+  font-size: 1.8vh;
   font-weight: 500;
 }
 
 .input-card-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.3vh; // 10px → 1.3vh
+  gap: 1.3vh;
   width: 100%;
   align-items: center;
   background: rgba(134, 134, 134, 0.39);
-  padding: 1.3vh; //  10px → 1.3vh
+  padding: 1.3vh;
   border-radius: 15px;
 }
 
 .card-slot {
-  width: 32px; //  32px → 4vw
-  height: 45px; //  45px → 5.7vh (пропорция сохранена)
+  width: 32px;
+  height: 45px;
   opacity: 0;
-  transform: translateY(-10vh) scale(0.5) rotate(-10deg); //  -80px → -10vh
+  transform: translateY(-10vh) scale(0.5) rotate(-10deg);
   transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -147,5 +142,5 @@
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
-  box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.4); //  4px 12px → vh
+  box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.4);
 }

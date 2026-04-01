@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonButton, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar} from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
 import {Router} from "@angular/router";
 import {NavController} from "@ionic/angular";
 

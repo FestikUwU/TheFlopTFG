@@ -275,7 +275,6 @@ export const subscribeToChat = (matchId: string, callback: (messages: any[]) => 
 
 export const deleteChatFromFirestore = async (matchId: string) => {
 
-  // удалить сообщения
   const messagesRef = collection(firestore, "chats", matchId, "messages");
 
   const snapshot = await getDocs(messagesRef);
@@ -284,7 +283,6 @@ export const deleteChatFromFirestore = async (matchId: string) => {
     await deleteDoc(docSnap.ref);
   }
 
-  // удалить match
   const matchRef = doc(firestore, "matches", matchId);
 
   await deleteDoc(matchRef);
@@ -342,9 +340,9 @@ export const getChatList = async () => {
 
     const msgSnap = await getDocs(q);
 
-    let lastMessage = "Empieza la conversación 👀";
+    let lastMessage = "Empieza la conversación";
     let time = "";
-    let timestamp = Date.now(); // важно чтобы не улетал вниз
+    let timestamp = Date.now();
 
     if (!msgSnap.empty) {
       msgSnap.forEach(m => {
@@ -399,7 +397,6 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
 
       const otherUid = data['users'].find((uid:any)=> uid !== user.uid);
 
-      // профиль пользователя
       const userRef = doc(firestore, "users", otherUid);
       const userSnap = await getDoc(userRef);
 

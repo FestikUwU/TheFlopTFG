@@ -6,12 +6,8 @@ import { CommonModule } from '@angular/common';
 import {
   IonButton,
   IonContent,
-  IonHeader,
   IonInput,
-  IonItem,
-  IonLabel,
-  IonTitle,
-  IonToolbar
+  IonLabel
 } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 
@@ -56,8 +52,6 @@ export class LoginPage {
     });
   }
 
-
-  //  toast
   async showToast(message: string, duration: number = 2000) {
     const toast = await this.toastController.create({
       message,
@@ -67,8 +61,7 @@ export class LoginPage {
     });
     toast.present();
   }
-
-  //  Login por Firebase
+  
   async login() {
     if (!this.email || !this.password) {
       this.showToast('Por favor, complete todos los campos');

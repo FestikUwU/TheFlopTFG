@@ -1,6 +1,3 @@
-<!--COIN PARA MATCH
-https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
--->
 <ion-content class="page-content">
 
   <div class="header">
@@ -8,31 +5,23 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
       <img src="assets/iconsYimgs/logoTest.png" alt="Logo The Flop" />
     </div>
   </div>
-<!--
-  <button class="test-tutorial-btn" (click)="restartTutorial()">
-    TEST TUTORIAL
-  </button>-->
 
-
-  <!-- Контейнер для текущего матча -->
   <div class="content" [class.highlight]="tutorialStep === 1" [ngClass]="swipeDirection">
     <div *ngIf="isLoading" class="loading">
       <p>Cargando... </p>
     </div>
     <div *ngIf="currentMatch" class="match-card">
-      <!-- Foto -->
+
       <img
         *ngIf="currentMatch.photos?.length"
         [src]="currentMatch.photos[0]"
         alt="Foto de perfil"
         class="match-photo"/>
 
-      <!-- Descripción -->
       <div class="match-description">
         {{ currentMatch.description || 'Sin descripción' }}
       </div>
 
-      <!-- Edad / Género -->
       <div class="match-data">
         <span>{{ currentMatch.age ?? '--' }} años</span>
         <span>{{ currentMatch.gender || 'Sin especificar' }}</span>
@@ -68,10 +57,6 @@ https://sketchfab.com/3d-models/gold-coin-ede8f6b0f13f45fb9b9a2efc9a09bae8
       <button class="bar-btn" (click)="goStats()">
         <img src="assets/icon/statsIcon.png" alt="Logo Stats">
       </button>
-
-      <!--<button class="bar-btn" (click)="shout()">
-
-      </button>-->
 
       <button class="bar-btn" (click)="goToSlotsGame()">
         <img src="assets/icon/chip.png" alt="Logo Game">

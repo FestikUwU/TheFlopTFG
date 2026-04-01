@@ -1,13 +1,3 @@
-.header {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 16px;
-  margin-left: 20px;
-}
-
 .logo-container img {
   height: 12vh;
   width: auto;
@@ -16,7 +6,7 @@
 }
 
 .login-page {
-  --background: none; /* убираем ionic фон */
+  --background: none;
   background: url('/assets/card-suits-bg.svg') no-repeat center center;
   background-size: cover;
 }
@@ -79,16 +69,16 @@ ion-input {
 .input-card-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.3vh; // 10px → 1.3vh
+  gap: 1.3vh;
   width: 100%;
   align-items: center;
-  padding: 1.3vh; //  10px → 1.3vh
+  padding: 1.3vh;
   border-radius: 15px;
 }
 
 .input-group {
   width: 80%;
-  margin-bottom: 2vh; //  20px → 2vh
+  margin-bottom: 2vh;
   --border-radius: 20px;
   --highlight-color-focused: transparent;
   --highlight-color: transparent;
@@ -101,10 +91,10 @@ ion-input {
 
 .input-label {
   display: block;
-  font-size: 1.8vh; //  14px → 1.8vh
+  font-size: 1.8vh;
   color: #6A041D;
-  margin-bottom: 1vh; //  8px → 1vh
-  margin-left: 1.2vw; //  10px → 1.2vw
+  margin-bottom: 1vh;
+  margin-left: 1.2vw;
   font-weight: 750;
   transition: color 0.3s ease;
 }
@@ -113,15 +103,15 @@ ion-input {
   --background: #F3DFBA;
   --color: #000000;
   border: 2px solid black;
-  --padding-start: 2.5vw; //  20px → 2.5vw
-  --padding-end: 2.5vw; //  20px → 2.5vw
-  --padding-top: 1.9vh; //  15px → 1.9vh
-  --padding-bottom: 1.9vh; //  15px → 1.9vh
+  --padding-start: 2.5vw;
+  --padding-end: 2.5vw;
+  --padding-top: 1.9vh;
+  --padding-bottom: 1.9vh;
 
   width: 100%;
   border-radius: 20px;
-  font-size: 2vh; // 16px → 2vh
-  box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1); // 2px 8px → vh
+  font-size: 2vh;
+  box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1);
 }
 
 

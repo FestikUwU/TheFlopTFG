@@ -30,7 +30,6 @@
   height: 40px;
 
   border-radius: 50%;
-  //border: 1px solid #000;
 
   background: transparent;
   color: #000;
@@ -48,7 +47,6 @@
   border-radius: 1px;
 }
 
-/* btn Config */
 .config {
   position: absolute;
   right: 5px;
@@ -109,10 +107,6 @@
   }
 }
 
-.out{
-
-}
-
 .mascot {
   position: fixed;
   bottom: 120px;
@@ -122,9 +116,7 @@
   height: 80px;
 
   transition: transform 0.4s ease;
-}
 
-.mascot {
   transform: translate(var(--x, 0), var(--y, 0));
 }
 

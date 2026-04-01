@@ -9,14 +9,12 @@ import { getFirestore, doc, getDoc, updateDoc, arrayUnion } from "firebase/fires
 import {
   IonContent,
   IonButton,
-  IonFooter,
   IonHeader,
-  IonInput,
-  IonItem,
   IonList,
   IonTitle,
   IonToolbar,
-  IonButtons, IonImg
+  IonButtons, 
+  IonImg
 } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -67,7 +65,7 @@ export class ChatPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.bgMusic = new Audio('assets/audio/no-more-what-ifs.mp3'); // путь к музыке
+    this.bgMusic = new Audio('assets/audio/no-more-what-ifs.mp3');
     this.bgMusic.loop = true;
 
     this.matchId = this.route.snapshot.paramMap.get('matchId')!;
@@ -139,7 +137,6 @@ export class ChatPage implements OnInit {
 
   ionViewWillLeave() {
     if (this.bgMusic) {
-      // плавное затухание при выходе
       this.fadeOutMusicSimple();
     }
   }
@@ -173,8 +170,6 @@ export class ChatPage implements OnInit {
 
   goBack() {
     this.navCtrl.navigateRoot('/chat-list', {
-      //animated: true,
-      //animationDirection: 'back'
     });
   }
 
@@ -187,7 +182,6 @@ export class ChatPage implements OnInit {
 
       let date: Date;
 
-      // 🔥 поддержка всех случаев
       if (msg.timestamp.seconds) {
         date = new Date(msg.timestamp.seconds * 1000);
       } else {
@@ -260,12 +254,6 @@ export class ChatPage implements OnInit {
     } else {
       this.fadeOutMusicSimple();
     }
-  }
-
-  reportUser() {
-    console.log("Report user:", this.otherUserName);
-
-    // потом можно сделать alert / modal
   }
 
   markMessagesAsSeen(messages: any[]) {

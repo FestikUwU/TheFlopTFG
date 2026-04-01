@@ -12,8 +12,6 @@ import {
   IonSelect,
   IonSelectOption,
   IonButton,
-  IonButtons,
-  IonList,
   IonIcon,
   IonSegment,
   IonSegmentButton,

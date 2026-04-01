@@ -1,23 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { getUserMatches } from 'src/app/firebase.service';
-import { getChatList } from 'src/app/firebase.service';
 import { subscribeChatList } from 'src/app/firebase.service';
 import { AlertController } from '@ionic/angular';
 import { deleteChatFromFirestore } from 'src/app/firebase.service';
 import { getAuth } from "firebase/auth";
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonIcon, IonItemSliding, IonItemOptions, IonItemOption, IonItem
+  IonItemSliding, 
+  IonItemOptions, 
+  IonItemOption, 
+  IonItem
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import {animate} from "@angular/animations";
 
 
 @Component({
@@ -45,8 +41,6 @@ export class ChatListPage implements OnInit {
   currentUserUid: string | undefined;
 
   async ngOnInit() {
-    //this.matches = await getUserMatches();
-    //this.matches = await getChatList();
     const user = getAuth().currentUser;
     this.currentUserUid = user?.uid;
 
@@ -54,23 +48,12 @@ export class ChatListPage implements OnInit {
       this.matches = chats;
       this.loading = false;
     });
-    //this.matches.sort((a, b) => b.timestamp - a.timestamp);
+
     setTimeout(() => {
+    if (this.loading) {
       this.loading = false;
-    }, 250);
-  }
-
-  shout() {
-    const text = 'TUS DATOS SON!!!';
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'es-ES';
-    utterance.volume = 1;
-    utterance.rate = 0.9;
-    utterance.pitch = 1.2;
-
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
+    }
+    }, 400);
   }
 
   async deleteChat(id: string) {

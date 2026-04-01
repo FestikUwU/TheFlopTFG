@@ -5,15 +5,10 @@ import { Router } from '@angular/router';
 import {
   IonButton,
   IonContent,
-  IonHeader,
   IonInput,
-  IonItem,
-  IonLabel,
-  IonTitle,
-  IonToolbar
+  IonLabel
 } from '@ionic/angular/standalone';
 
-//  import funcion de firebase.service.ts
 import { registerUser } from 'src/app/firebase.service';
 import {NavController, ToastController} from '@ionic/angular';
 

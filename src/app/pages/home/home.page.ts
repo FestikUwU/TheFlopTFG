@@ -2,16 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { saveUserProfile } from 'src/app/firebase.service';
-import {
-  IonButton,
-  IonContent,
-  IonFooter,
-  IonHeader,
-  IonIcon,
-  IonImg,
-  IonTitle,
-  IonToolbar
-} from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { NavController } from "@ionic/angular";
 import { getMatchesByCity, loadUserProfile } from 'src/app/firebase.service';
@@ -65,7 +56,6 @@ export class HomePage implements OnInit {
         ageMax: userData?.['private']?.ageMax ?? 99
       });
       this.showNextMatch();
-      console.log('Matches:', this.matches);
     }
 
     this.isLoading = false;
@@ -76,7 +66,7 @@ export class HomePage implements OnInit {
     if (this.currentIndex < this.matches.length) {
       this.currentMatch = this.matches[this.currentIndex];
     } else {
-      this.currentMatch = null; // больше матчей нет
+      this.currentMatch = null;
     }
   }
 
@@ -121,17 +111,6 @@ export class HomePage implements OnInit {
 
     this.swipeDirection = '';
     this.isAnimating = false;
-  }
-
-  shout() {
-    const text = 'TUS DATOS SON!!!';
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'es-ES';
-    utterance.volume = 1;
-    utterance.rate = 0.9;
-    utterance.pitch = 1.2;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
   }
 
   async reloadMatches() {

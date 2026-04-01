@@ -6,7 +6,6 @@
 
   <div class="content-wrapper">
 
-    <!-- SKELETON -->
     <div *ngIf="loading">
 
       <div *ngFor="let s of [1,2,3]" class="match-item">
@@ -24,10 +23,6 @@
                 <div class="skeleton-text message skeleton"></div>
               </div>
 
-              <div class="chat-meta">
-                <div class="skeleton-text time skeleton"></div>
-              </div>
-
             </div>
 
           </ion-item>
@@ -38,8 +33,6 @@
 
     </div>
 
-
-    <!-- MATCH LIST -->
     <div *ngIf="!loading">
 
       <ng-container *ngFor="let match of matches; let i = index">
@@ -58,7 +51,7 @@
                 <h2 class="chat-name">{{ match.name }}</h2>
 
                 <p class="last-message">
-                  <!--Ultimo mensaje:--> {{ match.lastMessage }}
+                  {{ match.lastMessage }}
                 </p>
               </div>
 
@@ -83,23 +76,18 @@
         </ion-item-sliding>
 
 
-        <!-- DIVIDER -->
         <div class="divider-line" *ngIf="i < matches.length - 1"></div>
 
       </ng-container>
 
     </div>
 
-
-    <!-- EMPTY -->
     <div *ngIf="!loading && matches.length === 0" class="no-chats">
       <p>No tienes conversaciones aún</p>
     </div>
 
   </div>
 
-
-  <!-- BOTTOM BAR -->
   <div class="bottom-bar">
 
     <div class="bar-container">

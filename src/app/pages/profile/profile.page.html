@@ -1,6 +1,5 @@
 <ion-content class="ion-padding">
 
-  <!-- HEADER -->
   <div class="header-container">
     <p class="custom-title">CONFIGURACIONES</p>
   </div>
@@ -11,19 +10,14 @@
   </ion-item>
   -->
 
-  <!-- BOTÓN LISTO -->
   <div class="btnRow">
-    <!--
-    <ion-button class="btnLogout" (click)="logout()">
-      Logout
-    </ion-button>
-    -->
+
     <ion-button class="btnListo" (click)="onListoClick()">
       Listo
     </ion-button>
 
   </div>
-  <!-- SEGMENT -->
+
   <ion-segment mode="ios" [(ngModel)]="mode" value="editar" class="profile-segment">
     <ion-segment-button value="editar">
       <ion-label class="segmentStyle">EDITAR</ion-label>
@@ -33,12 +27,8 @@
     </ion-segment-button>
   </ion-segment>
 
-  <!-- ========================= -->
-  <!-- EDITAR -->
-  <!-- ========================= -->
   <ng-container *ngIf="mode === 'editar'">
 
-    <!-- PERFIL PÚBLICO -->
     <ion-item button (click)="toggleSection('public')" lines="none" class="buttstyle">
       <ion-label>Perfil público</ion-label>
       <ion-icon [name]="sections.public ? 'chevron-up-outline' : 'chevron-down-outline'" slot="end"></ion-icon>
@@ -47,7 +37,6 @@
     <ng-container *ngIf="sections.public">
       <div class="section-content">
 
-        <!-- Nombre -->
         <ion-label class="field-label">Nombre a mostrar</ion-label>
         <ion-item class="campoNombre" lines="none">
           <ion-input
@@ -56,7 +45,6 @@
           </ion-input>
         </ion-item>
 
-        <!-- Descripción -->
         <ion-label class="field-label">Informacion sobre ti</ion-label>
         <ion-item class="campoTxt" lines="none">
           <ion-textarea
@@ -66,7 +54,6 @@
           </ion-textarea>
         </ion-item>
 
-        <!-- Género -->
         <ion-label class="field-label">Género</ion-label>
         <ion-item class="campoGenero" lines="none">
           <ion-select
@@ -80,7 +67,6 @@
           <div class="line"></div>
         </ion-item>
 
-        <!-- Edad -->
         <ion-label class="field-label">Edad</ion-label>
         <ion-item class="campoEdad" lines="none">
           <ion-select
