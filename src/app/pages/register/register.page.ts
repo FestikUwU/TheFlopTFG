@@ -38,30 +38,29 @@ export class RegisterPage implements OnInit {
   card2Url = '';
   card3Url = '';
 
-  // Массив всех 52 карт
   private allCards = [
-    // Пики (Spades)
+    // Spades
     'assets/iconsYimgs/Spades2.jpg', 'assets/iconsYimgs/Spades3.jpg', 'assets/iconsYimgs/Spades4.jpg',
     'assets/iconsYimgs/Spades5.jpg', 'assets/iconsYimgs/Spades6.jpg', 'assets/iconsYimgs/Spades7.jpg',
     'assets/iconsYimgs/Spades8.jpg', 'assets/iconsYimgs/Spades9.jpg', 'assets/iconsYimgs/Spades10.jpg',
     'assets/iconsYimgs/SpadesJ.jpg', 'assets/iconsYimgs/SpadesQ.jpg', 'assets/iconsYimgs/SpadesK.jpg',
     'assets/iconsYimgs/SpadesT.jpg',
 
-    // Червы (Hearts)
+    // Hearts
     'assets/iconsYimgs/Hearts2.jpg', 'assets/iconsYimgs/Hearts3.jpg', 'assets/iconsYimgs/Hearts4.jpg',
     'assets/iconsYimgs/Hearts5.jpg', 'assets/iconsYimgs/Hearts6.jpg', 'assets/iconsYimgs/Hearts7.jpg',
     'assets/iconsYimgs/Hearts8.jpg', 'assets/iconsYimgs/Hearts9.jpg', 'assets/iconsYimgs/Hearts10.jpg',
     'assets/iconsYimgs/HeartsJ.jpg', 'assets/iconsYimgs/HeartsQ.jpg', 'assets/iconsYimgs/HeartsK.jpg',
     'assets/iconsYimgs/HeartsT.jpg',
 
-    // Бубны (Diamonds)
+    // Diamonds
     'assets/iconsYimgs/Diamonds2.jpg', 'assets/iconsYimgs/Diamonds3.jpg', 'assets/iconsYimgs/Diamonds4.jpg',
     'assets/iconsYimgs/Diamonds5.jpg', 'assets/iconsYimgs/Diamonds6.jpg', 'assets/iconsYimgs/Diamonds7.jpg',
     'assets/iconsYimgs/Diamonds8.jpg', 'assets/iconsYimgs/Diamonds9.jpg', 'assets/iconsYimgs/Diamonds10.jpg',
     'assets/iconsYimgs/DiamondsJ.jpg', 'assets/iconsYimgs/DiamondsQ.jpg', 'assets/iconsYimgs/DiamondsK.jpg',
     'assets/iconsYimgs/DiamondsT.jpg',
 
-    // Трефы (Clubs)
+    // Clubs
     'assets/iconsYimgs/Clubs2.jpg', 'assets/iconsYimgs/Clubs3.jpg', 'assets/iconsYimgs/Clubs4.jpg',
     'assets/iconsYimgs/Clubs5.jpg', 'assets/iconsYimgs/Clubs6.jpg', 'assets/iconsYimgs/Clubs7.jpg',
     'assets/iconsYimgs/Clubs8.jpg', 'assets/iconsYimgs/Clubs9.jpg', 'assets/iconsYimgs/Clubs10.jpg',
@@ -69,14 +68,12 @@ export class RegisterPage implements OnInit {
     'assets/iconsYimgs/ClubsT.jpg'
   ];
 
-  // para que cartas no se repiten
   private usedCards: string[] = [];
 
   constructor(private router: Router, private toastController: ToastController, private navCtrl: NavController) {}
 
   ngOnInit() {}
 
-  // rndm card
   private getRandomCard(): string {
     const availableCards = this.allCards.filter(card => !this.usedCards.includes(card));
 
@@ -92,7 +89,6 @@ export class RegisterPage implements OnInit {
     return selectedCard;
   }
 
-  // para mostrar cartas
   onNameInput() {
     if (this.name.length > 2 && !this.showCard1) {
       this.card1Url = this.getRandomCard();
