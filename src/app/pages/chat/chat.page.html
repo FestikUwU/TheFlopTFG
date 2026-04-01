@@ -7,15 +7,17 @@
         </ion-button>
       </ion-buttons>
 
-      <ion-img class="imgPerfilMini" [src]="otherUserPhoto"></ion-img>
+      <img class="imgPerfilMini" [src]="otherUserPhoto" />
     </div>
 
     <ion-title>{{ otherUserName }}</ion-title>
     <div class="toolbar-right">
 
+      <!--
       <button (click)="reportUser()">
         <img src="assets/icon/reportIcon.png" class="header-icon">
       </button>
+      -->
 
       <button (click)="toggleMusic()">
         <img

@@ -120,20 +120,18 @@ ion-buttons {
   align-items: center;
 }
 
-ion-title{
+ion-title {
   color: black;
   font-family: Limelight;
-  margin: 0;
-  padding: 0;
   font-size: 18px;
   font-weight: 600;
-  white-space: nowrap;
-  flex: 0;
 
+  flex: 1; /* ВАЖНО */
+  text-align: center;
 
   display: flex;
   align-items: center;
-  justify-content: flex-start
+  justify-content: center; /* центр */
 }
 
 .back-icon {
@@ -261,6 +259,6 @@ ion-title{
 }
 
 .ticks.seen {
-  color: #4fc3f7;
+  color: #71fa3f;
 }
 
