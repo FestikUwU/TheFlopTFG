@@ -117,7 +117,8 @@ export const likeUser = async (targetUid: string): Promise<boolean> => {
 
     await setDoc(matchRef, {
       users: [user.uid, targetUid],
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      seenBy: []
     });
 
     return true;

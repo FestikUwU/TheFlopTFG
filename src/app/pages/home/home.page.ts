@@ -7,6 +7,11 @@ import { Router } from '@angular/router';
 import { NavController } from "@ionic/angular";
 import { getMatchesByCity, loadUserProfile } from 'src/app/firebase.service';
 import { likeUser, dislikeUser } from 'src/app/firebase.service';
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { updateDoc, doc, arrayUnion } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 @Component({
   selector: 'app-home',
@@ -59,6 +64,8 @@ export class HomePage implements OnInit {
     }
 
     this.isLoading = false;
+
+    this.listenForMatches();
   }
 
 
@@ -234,4 +241,46 @@ export class HomePage implements OnInit {
 
     localStorage.removeItem('tutorial_home_seen');
   }
+
+  listenForMatches() {
+  const auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) return;
+
+    const firestore = getFirestore();
+    const matchesRef = collection(firestore, "matches");
+
+    onSnapshot(matchesRef, (snapshot) => {
+
+      snapshot.forEach(async (docSnap) => {
+        const data: any = docSnap.data();
+
+        if (!data.users.includes(user.uid)) return;
+
+        if (data.seenBy?.includes(user.uid)) return;
+
+        if (this.isMatch) return;
+
+        const otherUid = data.users.find((uid: string) => uid !== user.uid);
+
+        this.matchedUser = {
+          uid: otherUid,
+          name: "New Match",
+          photos: []
+        };
+
+        this.isMatch = true;
+
+        await updateDoc(doc(firestore, "matches", docSnap.id), {
+          seenBy: arrayUnion(user.uid)
+        });
+
+      });
+
+    });
+
+  });
+}
+
 }
