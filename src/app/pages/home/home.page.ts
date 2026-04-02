@@ -12,6 +12,7 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import { getDoc } from "firebase/firestore";
 
 @Component({
   selector: 'app-home',
@@ -243,44 +244,52 @@ export class HomePage implements OnInit {
   }
 
   listenForMatches() {
-  const auth = getAuth();
+      const auth = getAuth();
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user) return;
+       onAuthStateChanged(auth, (user) => {
+      if (!user) return;
 
-    const firestore = getFirestore();
-    const matchesRef = collection(firestore, "matches");
+      const firestore = getFirestore();
+      const matchesRef = collection(firestore, "matches");
 
-    onSnapshot(matchesRef, (snapshot) => {
+        onSnapshot(matchesRef, async (snapshot) => {
+        for (const change of snapshot.docChanges()) {
 
-      snapshot.forEach(async (docSnap) => {
-        const data: any = docSnap.data();
+       if (change.type !== 'added') continue;
 
-        if (!data.users.includes(user.uid)) return;
+        const data: any = change.doc.data();
 
-        if (data.seenBy?.includes(user.uid)) return;
+        if (!data.users.includes(user.uid)) continue;
 
-        if (this.isMatch) return;
+    
+      if (data.notifiedUsers?.includes(user.uid)) continue;
 
-        const otherUid = data.users.find((uid: string) => uid !== user.uid);
+      if (this.isMatch) continue;
 
-        this.matchedUser = {
-          uid: otherUid,
-          name: "New Match",
-          photos: []
-        };
+       const otherUid = data.users.find((uid: string) => uid !== user.uid);
 
-        this.isMatch = true;
+      const userRef = doc(firestore, "users", otherUid);
+      const userSnap = await getDoc(userRef);
 
-        await updateDoc(doc(firestore, "matches", docSnap.id), {
-          seenBy: arrayUnion(user.uid)
-        });
+      let name = "Match";
+      let photos: string[] = [];
 
+      if (userSnap.exists()) {
+        const userData: any = userSnap.data();
+        name = userData?.public?.name || "Match";
+        photos = userData?.public?.photos || [];
+          }
+
+            this.matchedUser = { uid: otherUid, name, photos };
+            this.isMatch = true;
+
+  
+            await updateDoc(doc(firestore, "matches", change.doc.id), {
+            notifiedUsers: arrayUnion(user.uid)
+          });
+        }
       });
-
     });
-
-  });
-}
+  }
 
 }
