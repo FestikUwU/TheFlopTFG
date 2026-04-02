@@ -6,8 +6,7 @@ import { CommonModule } from '@angular/common';
 import {
   IonButton,
   IonContent,
-  IonInput,
-  IonLabel
+  IonInput
 } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 
@@ -22,7 +21,6 @@ import { loginUser } from 'src/app/firebase.service';
   imports: [
     IonContent,
     IonButton,
-    IonLabel,
     IonInput,
     FormsModule,
     CommonModule

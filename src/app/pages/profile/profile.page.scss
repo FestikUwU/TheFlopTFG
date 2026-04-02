@@ -99,7 +99,7 @@ ion-select-option {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #FFEFD5; /* принудительно серый */
+  background: #FFEFD5;
   border-radius: 20px 20px 0 0;
   overflow: hidden;
   font-family: 'Limelight', sans-serif !important;
@@ -335,9 +335,9 @@ ion-segment-button {
 .buttstyle::part(native) {
   border-radius: 15px;
   max-width: 90%;
-  background: rgba(255, 239, 213, 0.23);/* #FFEFD5 transparente*/
+  background: rgba(255, 239, 213, 0.23);
   margin: 15px;
-  border-bottom: 2px solid rgba(255, 239, 213, 0.5);/* #FFEFD5 */
+  border-bottom: 2px solid rgba(255, 239, 213, 0.5);
   --inner-border-width: 0;
 }
 

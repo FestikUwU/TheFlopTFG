@@ -13,8 +13,7 @@ import {
   IonList,
   IonTitle,
   IonToolbar,
-  IonButtons, 
-  IonImg
+  IonButtons
 } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -38,7 +37,6 @@ const auth = getAuth();
     FormsModule,
     CommonModule,
     IonButtons,
-    IonImg,
     IonTextarea
   ]
 })
@@ -279,4 +277,3 @@ export class ChatPage implements OnInit {
     return msg.seenBy.length > 1;
   }
 }
-

@@ -1,6 +1,6 @@
 {
   "name": "TheFlop",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Heorhii Tykhonov",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -63,5 +63,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.9.0"
   },
-  "description": "An Ionic project"
+  "description": "A mobile-first dating app built with Ionic and Angular, themed around poker culture. Features real-time matching, live chat, and user filtering by city and preferences, powered by Firebase."
 }

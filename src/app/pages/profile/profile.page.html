@@ -91,7 +91,6 @@
       </div>
     </ng-container>
 
-    <!-- PREFERENCIAS PRIVADAS -->
     <ion-item button (click)="toggleSection('private')" lines="none" class="buttstyle">
       <ion-label>Preferencias privadas</ion-label>
       <ion-icon
@@ -103,7 +102,6 @@
     <ng-container *ngIf="sections.private">
       <div class="section-content">
 
-        <!-- Ubicación -->
         <ion-label class="field-label">Ubicación</ion-label>
         <ion-item class="campoGenero" lines="none">
           <ion-select
@@ -123,7 +121,6 @@
           </ion-select>
         </ion-item>
 
-        <!-- Género buscado -->
         <ion-label class="field-label">Género buscado</ion-label>
         <ion-item class="campoGenero" lines="none">
           <ion-select
@@ -137,7 +134,6 @@
           <div class="line"></div>
         </ion-item>
 
-        <!-- Rango de edad -->
         <ion-label class="field-label">Rango de edad</ion-label>
 
         <ion-item class="rangoEdad" lines="none">
@@ -172,26 +168,22 @@
 
   </ng-container>
 
-  <!-- ========================= -->
   <!-- VISTA PREVIA -->
-  <!-- ========================= -->
   <ng-container *ngIf="mode === 'preview'">
     <div class="preview-content">
 
       <div class="preview-card">
-        <!-- Foto -->
+
         <img
           *ngIf="profile.photos && profile.photos.length > 0"
           [src]="profile.photos[0]"
           class="preview-image"
           alt="Foto de perfil" />
 
-        <!-- Descripción -->
         <div class="overlay-text">
           {{ profile.description || 'Sin descripción' }}
         </div>
 
-        <!-- Edad / Género -->
         <div class="overlay-data">
           <span>{{ profile.name || 'Sin especificar' }}</span>
           <span>{{ profile.age ?? '--' }} años</span>
