@@ -82,3 +82,13 @@ ion-action-sheet .action-sheet-button {
   color: black !important;
   font-family: 'Limelight', sans-serif;
 }
+
+ion-app {
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background: #1a1a1a;
+}
