@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { subscribeChatList } from 'src/app/firebase.service';
@@ -7,14 +7,13 @@ import { deleteChatFromFirestore } from 'src/app/firebase.service';
 import { getAuth } from "firebase/auth";
 import {
   IonContent,
-  IonItemSliding, 
-  IonItemOptions, 
-  IonItemOption, 
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
   IonItem
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-
 
 @Component({
   selector: 'app-chat-list',
@@ -31,33 +30,52 @@ import { NavController } from '@ionic/angular';
     IonItem
   ]
 })
-export class ChatListPage implements OnInit {
+export class ChatListPage implements OnInit, OnDestroy {
+
   matches: any[] = [];
-
-  constructor(private router: Router, private navCtrl: NavController, private alertController: AlertController) {}
-
   loading = true;
-
   currentUserUid: string | undefined;
 
-  async ngOnInit() {
-    const user = getAuth().currentUser;
-    this.currentUserUid = user?.uid;
+  private unsubscribeChats: any;
+  private unsubscribeAuth: any;
 
-    subscribeChatList((chats)=>{
-      this.matches = chats;
-      this.loading = false;
+  constructor(
+    private router: Router,
+    private navCtrl: NavController,
+    private alertController: AlertController
+  ) {}
+
+  ngOnInit() {
+    const auth = getAuth();
+
+    this.unsubscribeAuth = auth.onAuthStateChanged((user) => {
+
+      if (!user) return;
+
+      this.currentUserUid = user.uid;
+
+      this.unsubscribeChats?.();
+
+      this.unsubscribeChats = subscribeChatList((chats) => {
+        this.matches = chats;
+        this.loading = false;
+      });
+
     });
 
     setTimeout(() => {
-    if (this.loading) {
-      this.loading = false;
-    }
-    }, 400);
+      if (this.loading) {
+        this.loading = false;
+      }
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeChats?.();
+    this.unsubscribeAuth?.();
   }
 
   async deleteChat(id: string) {
-
     const alert = await this.alertController.create({
       header: 'Eliminar chat',
       message: 'Esta conversasion se eliminara permanente.',
@@ -70,11 +88,8 @@ export class ChatListPage implements OnInit {
           text: 'Eliminar',
           role: 'destructive',
           handler: async () => {
-
             await deleteChatFromFirestore(id);
-
             this.matches = this.matches.filter(chat => chat.id !== id);
-
           }
         }
       ]
@@ -84,49 +99,40 @@ export class ChatListPage implements OnInit {
   }
 
   goHome() {
-    this.navCtrl.navigateRoot('/home', {
-      animated: false
-    });
+    this.navCtrl.navigateRoot('/home', { animated: false });
   }
 
   goToSlotsGame() {
-    this.navCtrl.navigateRoot('/slot', {
-      animated: false
-    });
+    this.navCtrl.navigateRoot('/slot', { animated: false });
   }
 
   goStats() {
-    this.navCtrl.navigateRoot('/stats', {
-      animated: false
-    });
+    this.navCtrl.navigateRoot('/stats', { animated: false });
   }
 
   goToChatList() {
-    this.navCtrl.navigateRoot('/chat-list', {
-      animated: false
-    });
+    this.navCtrl.navigateRoot('/chat-list', { animated: false });
   }
 
   goToChat(matchId: string) {
     this.router.navigate(['/chat', matchId]);
   }
 
-
   goToSettings() {
     setTimeout(() => {
-      this.navCtrl.navigateRoot('/profile', {
-        animated: false
-      });
+      this.navCtrl.navigateRoot('/profile', { animated: false });
     }, 100);
   }
 
   isUnread(chat: any): boolean {
-    if (!chat.lastMessageData) return false;
+    if (!chat?.lastMessageData) return false;
+    if (!this.currentUserUid) return false;
+
+    const msg = chat.lastMessageData;
 
     return (
-      chat.lastMessageData.senderUid !== this.currentUserUid &&
-      !chat.lastMessageData.seenBy?.includes(this.currentUserUid)
+      msg.senderUid !== this.currentUserUid &&
+      !msg.seenBy?.includes(this.currentUserUid)
     );
   }
-
 }

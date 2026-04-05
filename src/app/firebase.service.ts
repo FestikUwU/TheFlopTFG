@@ -248,11 +248,13 @@ export const sendChatMessage = async (matchId: string, text: string) => {
   if (!user) return;
 
   const messagesRef = collection(firestore, "chats", matchId, "messages");
+
   await addDoc(messagesRef, {
     text,
     sender: user.displayName ?? "Player",
     senderUid: user.uid,
     timestamp: Date.now(),
+
     seenBy: [user.uid]
   });
 };
@@ -384,9 +386,12 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
 
   const matchesRef = collection(firestore, "matches");
 
-  onSnapshot(matchesRef, async (snapshot) => {
+  const messageUnsubs: Record<string, () => void> = {};
+  const chatList: any[] = [];
 
-    const chatList:any[] = [];
+  const unsubscribeMatches = onSnapshot(matchesRef, async (snapshot) => {
+
+    const activeMatchIds: string[] = [];
 
     for (const docSnap of snapshot.docs) {
 
@@ -395,6 +400,9 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
       if (!data['users'].includes(user.uid)) continue;
 
       const matchId = docSnap.id;
+      activeMatchIds.push(matchId);
+
+      if (messageUnsubs[matchId]) continue;
 
       const otherUid = data['users'].find((uid:any)=> uid !== user.uid);
 
@@ -411,16 +419,15 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
       }
 
       const messagesRef = collection(firestore, "chats", matchId, "messages");
-
       const q = query(messagesRef, orderBy("timestamp", "desc"), limit(1));
 
-      const unsubscribe = onSnapshot(q, (msgSnap)=>{
+      const unsubscribeMsg = onSnapshot(q, (msgSnap)=>{
 
         let lastMsgData: any = null;
 
         let lastMessage = "Empieza la conversación";
         let time = "";
-        let timestamp = Date.now();
+        let timestamp = 0;
 
         if (!msgSnap.empty) {
           msgSnap.forEach(m => {
@@ -431,7 +438,6 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
             };
 
             lastMsgData = msg;
-
             timestamp = msg.timestamp;
 
             const date = new Date(timestamp);
@@ -441,7 +447,6 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
               date.getMinutes().toString().padStart(2,"0");
 
             lastMessage = msg.text;
-
           });
         }
 
@@ -469,10 +474,25 @@ export const subscribeChatList = (callback: (chats:any[]) => void) => {
 
       });
 
+      messageUnsubs[matchId] = unsubscribeMsg;
     }
+
+    Object.keys(messageUnsubs).forEach(matchId => {
+      if (!activeMatchIds.includes(matchId)) {
+        messageUnsubs[matchId]();
+        delete messageUnsubs[matchId];
+
+        const index = chatList.findIndex(c => c.id === matchId);
+        if (index !== -1) chatList.splice(index, 1);
+      }
+    });
 
   });
 
+  return () => {
+    unsubscribeMatches();
+    Object.values(messageUnsubs).forEach(unsub => unsub());
+  };
 };
 
 export const getUserLikesCount = async () => {

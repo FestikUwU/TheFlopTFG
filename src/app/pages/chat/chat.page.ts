@@ -45,6 +45,7 @@ export class ChatPage implements OnInit {
   otherUserName: string = "";
   otherUserPhoto: string = "";
   currentUserUid: string | undefined;
+  isChatOpen = true;
 
   @ViewChild('content') content!: IonContent;
 
@@ -134,6 +135,8 @@ export class ChatPage implements OnInit {
   }
 
   ionViewWillLeave() {
+    this.isChatOpen = false;
+
     if (this.bgMusic) {
       this.fadeOutMusicSimple();
     }
@@ -255,20 +258,32 @@ export class ChatPage implements OnInit {
   }
 
   markMessagesAsSeen(messages: any[]) {
+    if (!this.isChatOpen) return;
+
     const userId = this.currentUserUid;
     if (!userId) return;
 
-    const firestore = getFirestore();
+    const lastMsg = messages[messages.length - 1];
+    if (!lastMsg) return;
 
-    messages.forEach(async (msg) => {
-      if (!msg.seenBy?.includes(userId)) {
-        const ref = doc(firestore, "chats", this.matchId, "messages", msg.id);
+    if (
+      lastMsg.senderUid !== userId &&
+      !lastMsg.seenBy?.includes(userId)
+    ) {
+      const firestore = getFirestore();
 
-        await updateDoc(ref, {
-          seenBy: arrayUnion(userId)
-        });
-      }
-    });
+      const ref = doc(
+        firestore,
+        "chats",
+        this.matchId,
+        "messages",
+        lastMsg.id
+      );
+
+      updateDoc(ref, {
+        seenBy: arrayUnion(userId)
+      });
+    }
   }
 
   isSeen(msg: any): boolean {
@@ -276,4 +291,5 @@ export class ChatPage implements OnInit {
 
     return msg.seenBy.length > 1;
   }
+
 }
