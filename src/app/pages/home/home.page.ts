@@ -22,6 +22,9 @@ import { getDoc } from "firebase/firestore";
   imports: [IonContent, CommonModule, FormsModule]
 })
 export class HomePage implements OnInit {
+
+  private unsubscribeMatches: any;
+
   swipeDirection: string = '';
   isAnimating: boolean = false;
 
@@ -244,52 +247,61 @@ export class HomePage implements OnInit {
   }
 
   listenForMatches() {
-      const auth = getAuth();
+    const auth = getAuth();
 
-       onAuthStateChanged(auth, (user) => {
-      if (!user) return;
+    onAuthStateChanged(auth, (user) => {
+     if (!user) return;
 
-      const firestore = getFirestore();
-      const matchesRef = collection(firestore, "matches");
+     const firestore = getFirestore();
 
-        onSnapshot(matchesRef, async (snapshot) => {
+     const matchesRef = collection(firestore, "matches");
+
+     const q = query(
+       matchesRef,
+        where("users", "array-contains", user.uid)
+      );
+
+      this.unsubscribeMatches?.();
+
+      this.unsubscribeMatches = onSnapshot(q, async (snapshot) => {
         for (const change of snapshot.docChanges()) {
 
-       if (change.type !== 'added') continue;
+          if (change.type !== 'added') continue;
 
-        const data: any = change.doc.data();
+         const data: any = change.doc.data();
 
-        if (!data.users.includes(user.uid)) continue;
+         if (data.notifiedUsers?.includes(user.uid)) continue;
 
-    
-      if (data.notifiedUsers?.includes(user.uid)) continue;
+         if (this.isMatch) continue;
 
-      if (this.isMatch) continue;
+         const otherUid = data.users.find((uid: string) => uid !== user.uid);
 
-       const otherUid = data.users.find((uid: string) => uid !== user.uid);
+          const userRef = doc(firestore, "users", otherUid);
+          const userSnap = await getDoc(userRef);
 
-      const userRef = doc(firestore, "users", otherUid);
-      const userSnap = await getDoc(userRef);
+         let name = "Match";
+         let photos: string[] = [];
 
-      let name = "Match";
-      let photos: string[] = [];
-
-      if (userSnap.exists()) {
-        const userData: any = userSnap.data();
-        name = userData?.public?.name || "Match";
-        photos = userData?.public?.photos || [];
+         if (userSnap.exists()) {
+            const userData: any = userSnap.data();
+           name = userData?.public?.name || "Match";
+           photos = userData?.public?.photos || [];
           }
 
-            this.matchedUser = { uid: otherUid, name, photos };
-            this.isMatch = true;
+          this.matchedUser = { uid: otherUid, name, photos };
+          this.isMatch = true;
 
-  
-            await updateDoc(doc(firestore, "matches", change.doc.id), {
+          await updateDoc(doc(firestore, "matches", change.doc.id), {
             notifiedUsers: arrayUnion(user.uid)
-          });
+         });
         }
       });
+
     });
+  }
+
+  ngOnDestroy() {
+  this.unsubscribeMatches?.();
   }
 
 }

@@ -278,18 +278,38 @@ export const subscribeToChat = (matchId: string, callback: (messages: any[]) => 
 
 export const deleteChatFromFirestore = async (matchId: string) => {
 
-  const messagesRef = collection(firestore, "chats", matchId, "messages");
+  const user = getAuth().currentUser;
+  if (!user) return;
 
+  const matchRef = doc(firestore, "matches", matchId);
+  const matchSnap = await getDoc(matchRef);
+
+  if (!matchSnap.exists()) return;
+
+  const data: any = matchSnap.data();
+  const otherUid = data.users.find((uid: string) => uid !== user.uid);
+
+  const messagesRef = collection(firestore, "chats", matchId, "messages");
   const snapshot = await getDocs(messagesRef);
 
   for (const docSnap of snapshot.docs) {
     await deleteDoc(docSnap.ref);
   }
 
-  const matchRef = doc(firestore, "matches", matchId);
-
   await deleteDoc(matchRef);
 
+  const likeRef1 = doc(firestore, "interactions", user.uid, "likes", otherUid);
+  const likeRef2 = doc(firestore, "interactions", otherUid, "likes", user.uid);
+
+  const dislikeRef1 = doc(firestore, "interactions", user.uid, "dislikes", otherUid);
+  const dislikeRef2 = doc(firestore, "interactions", otherUid, "dislikes", user.uid);
+
+  await Promise.all([
+    deleteDoc(likeRef1).catch(()=>{}),
+    deleteDoc(likeRef2).catch(()=>{}),
+    deleteDoc(dislikeRef1).catch(()=>{}),
+    deleteDoc(dislikeRef2).catch(()=>{})
+  ]);
 };
 
 export const loadUserProfile = async () => {
