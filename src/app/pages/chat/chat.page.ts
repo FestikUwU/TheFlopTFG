@@ -41,6 +41,10 @@ const auth = getAuth();
   ]
 })
 export class ChatPage implements OnInit {
+
+  private fadeInterval: any;
+  private unsubscribeChat: any;
+  private unsubscribeAuth: any;
   isMusicOn: boolean = false;
   otherUserName: string = "";
   otherUserPhoto: string = "";
@@ -92,13 +96,15 @@ export class ChatPage implements OnInit {
 
     }
 
-    onAuthStateChanged(auth, (user) => {
+    this.unsubscribeAuth = onAuthStateChanged(auth, (user) => {
 
       if (!user) return;
 
       this.currentUserUid = user.uid;
 
-      subscribeToChat(this.matchId, (msgs) => {
+      this.unsubscribeChat?.();
+
+      this.unsubscribeChat = subscribeToChat(this.matchId, (msgs) => {
         this.ngZone.run(() => {
 
           this.messages = this.groupMessagesByDate(msgs);
@@ -124,12 +130,14 @@ export class ChatPage implements OnInit {
     const stepVolume = targetVolume / steps;
     let currentStep = 0;
 
-    const fadeInterval = setInterval(() => {
+    clearInterval(this.fadeInterval);
+
+    this.fadeInterval = setInterval(() => {
       if (currentStep < steps) {
         this.bgMusic.volume += stepVolume;
         currentStep++;
       } else {
-        clearInterval(fadeInterval);
+        clearInterval(this.fadeInterval);
       }
     }, 200);
   }
@@ -143,22 +151,25 @@ export class ChatPage implements OnInit {
   }
 
   fadeOutMusicSimple() {
-    if (!this.bgMusic) return;
-    const steps = 3;
-    const stepVolume = this.bgMusic.volume / steps;
-    let currentStep = 0;
+  if (!this.bgMusic) return;
 
-    const fadeInterval = setInterval(() => {
-      if (currentStep < steps) {
-        this.bgMusic.volume -= stepVolume;
-        currentStep++;
-      } else {
-        this.bgMusic.pause();
-        this.bgMusic.currentTime = 0;
-        clearInterval(fadeInterval);
-      }
-    }, 150);
-  }
+  const steps = 3;
+  const stepVolume = this.bgMusic.volume / steps;
+  let currentStep = 0;
+
+  clearInterval(this.fadeInterval);
+
+  this.fadeInterval = setInterval(() => {
+    if (currentStep < steps) {
+      this.bgMusic.volume -= stepVolume;
+      currentStep++;
+    } else {
+      this.bgMusic.pause();
+      this.bgMusic.currentTime = 0;
+      clearInterval(this.fadeInterval);
+    }
+  }, 150);
+}
 
 
   send() {
@@ -290,6 +301,12 @@ export class ChatPage implements OnInit {
     if (!msg.seenBy) return false;
 
     return msg.seenBy.length > 1;
+  }
+
+  ngOnDestroy() {
+  this.unsubscribeChat?.();
+  this.unsubscribeAuth?.();
+  clearInterval(this.fadeInterval);
   }
 
 }
