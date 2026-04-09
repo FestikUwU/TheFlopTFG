@@ -1,6 +1,4 @@
-#  The Flop
-theflopapp.vercel.app/
-
+#  [The Flop](https://theflopapp.vercel.app/)
 A mobile dating-style application with a casino theme, built using Ionic, Angular, and Firebase.
 
 ---
