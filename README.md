@@ -1,84 +1,109 @@
 #  The Flop
+theflopapp.vercel.app/
 
-A mobile dating-style application with a casino theme, developed using Ionic + Angular and Firebase.
+A mobile dating-style application with a casino theme, built using Ionic, Angular, and Firebase.
+
+---
 
 ##  Description
 
-The Flop is a mobile app where users can discover matches and communicate through a real-time chat system.
-The app follows a casino-inspired concept, using elements like cards, ALL IN / PASS actions, and a stylized visual design.
+**The Flop** is a mobile application where users can discover matches and interact through a real-time chat system.
 
-##  Main Features
+The app is inspired by casino mechanics, featuring elements like cards, **ALL IN / PASS**, and a stylized UI that creates a playful and immersive experience.
 
-* 🔐 User authentication (login & register) using Firebase Auth
-* 👤 User profile creation and editing
+---
+
+##  Features
+
+* 🔐 Authentication (Login & Register) with Firebase Auth
+* 👤 User profile creation & editing
 * 🎴 Match system (LIKE / DISLIKE)
 * 💬 Real-time chat between matched users
-* ✔️ Message status:
-
-* ✔ sent
-* ✔✔ seen
+* ✔ Message status:
+  * ✔ Sent
+  * ✔✔ Seen
 * 🔔 Unread message indicator
 * 🗑 Chat deletion
 * 🎵 Optional background music in chat
-* 📊 user statistics
+* 📊 User statistics
 
-## 🧠 Implemented Logic
+---
 
-* Match system based on mutual likes
-* Message grouping by date (Today / Yesterday / custom date)
-* "Seen" system using `seenBy` array
-* Dynamic chat ordering by last message
-* Detection of unread messages
+## Core Logic
 
-## 🛠 Technologies Used
+* Match system based on **mutual likes**
+* Message grouping by date *(Today / Yesterday / custom date)*
+* Seen system using `seenBy` array
+* Dynamic chat sorting by last message
+* Unread message detection
 
-* Ionic + Angular
-* Firebase:
+---
 
+##  Stack
+
+* **Frontend:** Ionic + Angular
+* **Backend:** Firebase
   * Authentication
   * Firestore
   * Storage
-* TypeScript
-* SCSS
+* **Language:** TypeScript
+* **Styling:** SCSS
 
-##  Main Structure
+---
 
+##  Project Structure
+
+```
 pages/
-  login
-  register
-  home (matches)
-  profile
-  chat-list
-  chat
-  stats
-  slot
+ ├── login
+ ├── register
+ ├── home (matches)
+ ├── profile
+ ├── chat-list
+ ├── chat
+ ├── stats
+ └── slot
+```
 
-## ⚙️ Installation
+---
 
-1. Clone the repository
-   git clone <repo>
+##  Installation
 
-2. Install dependencies
-   npm install
+```bash
+git clone <your-repo-url>
+cd the-flop
+npm install
+ionic serve
+```
 
-3. Run the project
-   ionic serve
+---
 
-## Build APK
+##  Build APK
 
+```bash
 ionic build
 npx cap sync android
 npx cap open android
+```
 
-## Notes
+---
 
-* Developed as a Final Degree Project (TFG)
+##  Notes
+
+* Developed as a **Final Degree Project (TFG)**
 * Not optimized for production
 * Some features are still in development
 
-## Author
+---
 
-Heorhii Tykhonov
+##  Author
+
+**Heorhii Tykhonov**
 2026
 
-© 2026 Heorhii - TFG
+---
+
+##  License
+
+© 2026 Heorhii — Final Degree Project
+Unauthorized academic use is prohibited.
