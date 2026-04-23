@@ -180,10 +180,7 @@ export class HomePage implements OnInit {
 
   goToChatFromMatch() {
     this.isMatch = false;
-
-    this.navCtrl.navigateRoot('/chat-list', {
-      animated: false
-    });
+    this.router.navigate(['/chat-list']);
   }
 
   triggerTestMatch() {

@@ -181,8 +181,7 @@ export class ChatPage implements OnInit {
 
 
   goBack() {
-    this.navCtrl.navigateRoot('/chat-list', {
-    });
+    this.router.navigate(['/chat-list']);
   }
 
   groupMessagesByDate(messages: any[]) {

@@ -36,35 +36,23 @@ export class SlotPage implements OnInit {
   }
 
   goHome() {
-    this.navCtrl.navigateRoot('/home', {
-      animated: false
-    });
+    this.router.navigate(['/home']);
   }
 
   goStats() {
-    this.navCtrl.navigateRoot('/stats', {
-      animated: false
-    });
+    this.router.navigate(['/stats']);
   }
 
   goToSlotsGame() {
-    this.navCtrl.navigateRoot('/slot', {
-      animated: false
-    });
+    this.router.navigate(['/slot']);
   }
 
   goToChatList() {
-    this.navCtrl.navigateRoot('/chat-list', {
-      animated: false
-    });
+    this.router.navigate(['/chat-list']);
   }
 
   goToSettings() {
-    setTimeout(() => {
-      this.navCtrl.navigateRoot('/profile', {
-        animated: false
-      });
-    }, 100);
+    this.router.navigate(['/profile']);
   }
 
   isDragging = false;
