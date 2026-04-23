@@ -62,12 +62,6 @@ export class ChatListPage implements OnInit, OnDestroy {
       });
 
     });
-
-    setTimeout(() => {
-      if (this.loading) {
-        this.loading = false;
-      }
-    }, 1000);
   }
 
   ngOnDestroy() {
@@ -99,19 +93,19 @@ export class ChatListPage implements OnInit, OnDestroy {
   }
 
   goHome() {
-    this.navCtrl.navigateRoot('/home', { animated: false });
+    this.router.navigate(['/home']);
   }
 
   goToSlotsGame() {
-    this.navCtrl.navigateRoot('/slot', { animated: false });
+    this.router.navigate(['/slot']);
   }
 
   goStats() {
-    this.navCtrl.navigateRoot('/stats', { animated: false });
+    this.router.navigate(['/stats']);
   }
 
   goToChatList() {
-    this.navCtrl.navigateRoot('/chat-list', { animated: false });
+    this.router.navigate(['/chat-list']);
   }
 
   goToChat(matchId: string) {
@@ -119,9 +113,7 @@ export class ChatListPage implements OnInit, OnDestroy {
   }
 
   goToSettings() {
-    setTimeout(() => {
-      this.navCtrl.navigateRoot('/profile', { animated: false });
-    }, 100);
+    this.router.navigate(['/profile']);
   }
 
   isUnread(chat: any): boolean {

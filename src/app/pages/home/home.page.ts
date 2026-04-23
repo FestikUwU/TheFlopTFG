@@ -24,6 +24,7 @@ import { getDoc } from "firebase/firestore";
 export class HomePage implements OnInit {
 
   private unsubscribeMatches: any;
+  private unsubscribeAuth: any;
 
   swipeDirection: string = '';
   isAnimating: boolean = false;
@@ -52,22 +53,28 @@ export class HomePage implements OnInit {
 
     this.isLoading = true;
 
-    const userData = await loadUserProfile();
+    try {
+      const userData = await loadUserProfile();
 
-    this.currentUser = userData;
+      this.currentUser = userData;
 
-    const city = userData?.['private']?.location ?? '';
+      const city = userData?.['private']?.location ?? '';
 
-    if (city) {
-      this.matches = await getMatchesByCity(city, {
-        lookingGender: userData?.['private']?.lookingGender ?? 'todos',
-        ageMin: userData?.['private']?.ageMin ?? 18,
-        ageMax: userData?.['private']?.ageMax ?? 99
-      });
-      this.showNextMatch();
+      if (city) {
+        this.matches = await getMatchesByCity(city, {
+          lookingGender: userData?.['private']?.lookingGender ?? 'todos',
+          ageMin: userData?.['private']?.ageMin ?? 18,
+          ageMax: userData?.['private']?.ageMax ?? 99
+        });
+
+        this.showNextMatch();
+      }
+
+    } catch (e) {
+      console.error('Error loading matches:', e);
+    } finally {
+      this.isLoading = false;
     }
-
-    this.isLoading = false;
 
     this.listenForMatches();
   }
@@ -148,27 +155,23 @@ export class HomePage implements OnInit {
   }
 
   goHome() {
-    this.navCtrl.navigateRoot('/home', { animated: false });
+    this.router.navigate(['/home']);
   }
 
   goStats() {
-    this.navCtrl.navigateRoot('/stats', {
-      animated: false
-    });
+    this.router.navigate(['/stats']);
   }
 
   goToSlotsGame() {
-    this.navCtrl.navigateRoot('/slot', { animated: false });
+    this.router.navigate(['/slot']);
   }
 
   goToChatList() {
-    this.navCtrl.navigateRoot('/chat-list', { animated: false });
+    this.router.navigate(['/chat-list']);
   }
 
   goToSettings() {
-    setTimeout(() => {
-      this.navCtrl.navigateRoot('/profile', { animated: false });
-    }, 100);
+    this.router.navigate(['/profile']);
   }
 
   closeMatch() {
@@ -249,7 +252,7 @@ export class HomePage implements OnInit {
   listenForMatches() {
     const auth = getAuth();
 
-    onAuthStateChanged(auth, (user) => {
+    this.unsubscribeAuth = onAuthStateChanged(auth, (user) => {
      if (!user) return;
 
      const firestore = getFirestore();
@@ -301,7 +304,8 @@ export class HomePage implements OnInit {
   }
 
   ngOnDestroy() {
-  this.unsubscribeMatches?.();
+    this.unsubscribeMatches?.();
+    this.unsubscribeAuth?.();
   }
 
 }
