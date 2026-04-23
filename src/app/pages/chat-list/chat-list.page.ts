@@ -61,6 +61,10 @@ export class ChatListPage implements OnInit, OnDestroy {
         this.loading = false;
       });
 
+      setTimeout(() => {
+        this.loading = false;
+      }, 800);
+
     });
   }
 
