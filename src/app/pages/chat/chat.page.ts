@@ -304,9 +304,15 @@ export class ChatPage implements OnInit {
   }
 
   ngOnDestroy() {
-  this.unsubscribeChat?.();
-  this.unsubscribeAuth?.();
-  clearInterval(this.fadeInterval);
+    this.unsubscribeChat?.();
+    this.unsubscribeAuth?.();
+
+    clearInterval(this.fadeInterval);
+
+    if (this.bgMusic) {
+      this.bgMusic.pause();
+      this.bgMusic.currentTime = 0;
+    }
   }
 
 }
