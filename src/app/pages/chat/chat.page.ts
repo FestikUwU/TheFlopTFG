@@ -28,15 +28,12 @@ const auth = getAuth();
   styleUrls: ['./chat.page.scss'],
   standalone: true,
   imports: [
-    IonButton,
     IonList,
     IonContent,
-    IonTitle,
     IonToolbar,
     IonHeader,
     FormsModule,
     CommonModule,
-    IonButtons,
     IonTextarea
   ]
 })

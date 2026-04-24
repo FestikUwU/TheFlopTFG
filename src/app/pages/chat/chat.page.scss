@@ -94,49 +94,60 @@ ion-header {
   border-bottom-right-radius: 4px;
 }
 
-ion-header ion-toolbar {
-  position: relative;
+
+ion-toolbar {
   --background: transparent;
-  --border-width: 0;
   box-shadow: none;
   border: none;
+  margin-top: 10px;
+}
+
+.toolbar {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
+  justify-content: space-between;
+
+  width: 100%;
   padding: 0 12px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
-.toolbar-left {
+.left {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-ion-buttons {
-  display: flex;
-  align-items: center;
-}
+.center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 
-ion-title {
-  color: black;
   font-family: Limelight;
   font-size: 18px;
   font-weight: 600;
+  color: black;
+}
 
-  flex: 1;
-  text-align: center;
+.right {
+  display: flex;
+  align-items: center;
+}
 
+.right button {
+  all: unset;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 7px;
 }
 
-.back-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+.back-btn {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .imgPerfilMini {
@@ -145,6 +156,12 @@ ion-title {
   border: 1px solid black;
   border-radius: 10px;
   object-fit: cover;
+}
+
+.back-icon {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
 }
 
 .message-row {
@@ -206,24 +223,6 @@ ion-title {
   margin-top: 4px;
   text-align: right;
   opacity: 0.6;
-}
-
-.toolbar-right {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 2;
-}
-
-.toolbar-right button {
-  all: unset;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .header-icon {

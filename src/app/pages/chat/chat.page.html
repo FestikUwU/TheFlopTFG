@@ -1,24 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <div class="toolbar-left">
-      <ion-buttons slot="start">
-        <ion-button (click)="goBack()">
-          <img src="assets/iconsYimgs/arrowLeft.png" alt="Back" class="back-icon">
-        </ion-button>
-      </ion-buttons>
 
-      <img class="imgPerfilMini" [src]="otherUserPhoto" />
-    </div>
+    <div class="toolbar">
 
-    <ion-title>{{ otherUserName }}</ion-title>
-    <div class="toolbar-right">
+      <div class="left">
+        <button (click)="goBack()" class="back-btn">
+          <img src="assets/icon/back8.png" class="back-icon">
+        </button>
 
-      <button (click)="toggleMusic()">
-        <img
-          [src]="isMusicOn ? 'assets/icon/musicOn.png' : 'assets/icon/musicOff.png'"
-          class="header-icon">
-      </button>
+        <img class="imgPerfilMini" [src]="otherUserPhoto" />
+      </div>
 
+      <div class="center">
+        {{ otherUserName }}
+      </div>
+
+      <div class="right">
+        <button (click)="toggleMusic()">
+          <img
+            [src]="isMusicOn ? 'assets/icon/musicOn.png' : 'assets/icon/musicOff.png'"
+            class="header-icon">
+        </button>
+      </div>
     </div>
   </ion-toolbar>
 </ion-header>
