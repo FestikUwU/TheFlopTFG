@@ -1,6 +1,6 @@
 .content-wrapper {
   padding: 16px;
-  padding-bottom: 2vh;
+  padding-bottom: 1vh;
 }
 
 .bottom-bar {
@@ -122,13 +122,16 @@
   overflow: hidden;
 }
 
-/* затемнение */
 .chat-card::after {
   content: '';
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0);
   transition: background 0.15s ease;
+}
+
+.chat-card:active::after {
+  background: rgba(0, 0, 0, 0.30);
 }
 
 .chat-card:hover {

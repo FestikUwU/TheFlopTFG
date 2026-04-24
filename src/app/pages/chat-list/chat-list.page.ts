@@ -58,13 +58,11 @@ export class ChatListPage implements OnInit, OnDestroy {
 
       this.unsubscribeChats = subscribeChatList((chats) => {
         this.matches = chats;
-        this.loading = false;
       });
 
       setTimeout(() => {
         this.loading = false;
-      }, 800);
-
+      }, 500);
     });
   }
 
