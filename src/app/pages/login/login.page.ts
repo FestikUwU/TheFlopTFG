@@ -59,7 +59,7 @@ export class LoginPage {
     });
     toast.present();
   }
-  
+
   async login() {
     if (!this.email || !this.password) {
       this.showToast('Por favor, complete todos los campos');
@@ -70,7 +70,7 @@ export class LoginPage {
       await loginUser(this.email, this.password); // функция из firebase.service.ts
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } catch (error: any) {
-      console.error('Firebase Login Error:', error);
+      console.error('Tu correo o contraseña no son correctos.');
       this.showToast(error.message, 3000);
     }
   }
