@@ -90,7 +90,7 @@ export class RegisterPage implements OnInit {
   }
 
   onNameInput() {
-    if (this.name.length > 2 && !this.showCard1) {
+    if (this.name.length > 1 && !this.showCard1) {
       this.card1Url = this.getRandomCard();
       this.showCard1 = true;
     } else if (this.name.length < 2) {
@@ -117,16 +117,34 @@ export class RegisterPage implements OnInit {
   }
 
   async onRegister() {
-    this.showLogo = true;
 
-    await new Promise(resolve => setTimeout(resolve, 800));
+    if (!this.name || !this.email || !this.password) {
+      this.showToast('Completa todos los campos');
+      return;
+    }
+
+    if (this.password.length < 6) {
+      this.showToast('La contraseña debe tener al menos 6 caracteres');
+      return;
+    }
+
+    this.showLogo = true;
 
     try {
       await registerUser(this.name, this.email, this.password);
-
       this.router.navigate(['/profile']);
-    } catch (error) {
-      console.error('Error al registrarse:', error);
+    } catch (error: any) {
+      let message = 'Error al registrarse';
+
+      if (error.code === 'auth/email-already-in-use') {
+        message = 'Este correo ya está en uso';
+      } else if (error.code === 'auth/invalid-email') {
+        message = 'Correo no válido';
+      } else if (error.code === 'auth/weak-password') {
+        message = 'La contraseña es demasiado débil';
+      }
+
+      this.showToast(message, 3000);
       this.showLogo = false;
     }
   }
