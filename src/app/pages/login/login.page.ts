@@ -70,8 +70,7 @@ export class LoginPage {
       await loginUser(this.email, this.password); // функция из firebase.service.ts
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } catch (error: any) {
-      console.error('Tu correo o contraseña no son correctos.');
-      this.showToast(error.message, 3000);
+      this.showToast('Correo o contraseña incorrectos', 3000);
     }
   }
 
