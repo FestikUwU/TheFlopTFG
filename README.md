@@ -68,7 +68,7 @@ pages/
 ##  Installation
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/FestikUwU/TheFlopTFG.git
 cd the-flop
 npm install
 ionic serve
