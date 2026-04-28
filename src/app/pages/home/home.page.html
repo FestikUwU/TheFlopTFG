@@ -29,11 +29,17 @@
     </div>
 
     <div *ngIf="!currentMatch && !isLoading" class="no-matches">
-      <p>No hay más coincidencias en tu ciudad</p>
+
+      <img src="assets/icon/emptyStateHome.png" class="empty-img" />
+
+      <p class="empty-text">
+        Aún no hay nadie, pero estamos buscando
+      </p>
 
       <button class="reload-btn" (click)="reloadMatches()">
-        Buscar de nuevo
+        REINTENTAR
       </button>
+
     </div>
   </div>
 
