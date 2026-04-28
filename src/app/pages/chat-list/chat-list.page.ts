@@ -14,6 +14,7 @@ import {
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import {NavbarComponent} from "../../components/navbar/navbar.component";
 
 @Component({
   selector: 'app-chat-list',
@@ -27,7 +28,8 @@ import { NavController } from '@ionic/angular';
     IonItemSliding,
     IonItemOptions,
     IonItemOption,
-    IonItem
+    IonItem,
+    NavbarComponent
   ]
 })
 export class ChatListPage implements OnInit, OnDestroy {

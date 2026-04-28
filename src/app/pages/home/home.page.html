@@ -44,30 +44,7 @@
     <button class="single-btn check" (click)="onCheck()">ALL IN</button>
   </div>
 
-  <div class="bottom-bar">
-    <div class="bar-container">
-      <button class="bar-btn" (click)="goHome()">
-        <img src="assets/icon/LogoMini.png" alt="Logo The Flop" />
-      </button>
-
-      <button class="bar-btn active" (click)="goToChatList()">
-        <img src="assets/iconsYimgs/messege2.png" alt="Logo Mensaje">
-      </button>
-
-      <button class="bar-btn" (click)="goStats()">
-        <img src="assets/icon/statsIcon.png" alt="Logo Stats">
-      </button>
-
-      <button class="bar-btn" (click)="goToSlotsGame()">
-        <img src="assets/icon/chip.png" alt="Logo Game">
-      </button>
-    </div>
-    <div class="config">
-      <button (click)="goToSettings()">
-        <img src="assets/iconsYimgs/newSettings.png" alt="settings" />
-      </button>
-    </div>
-  </div>
+  <app-navbar active="home"></app-navbar>
 
   <div *ngIf="isMatch" class="match-popup">
 

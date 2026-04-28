@@ -13,13 +13,14 @@ import { getAuth } from "firebase/auth";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { getDoc } from "firebase/firestore";
+import {NavbarComponent} from "../../components/navbar/navbar.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonContent, CommonModule, FormsModule]
+  imports: [IonContent, CommonModule, FormsModule, NavbarComponent]
 })
 export class HomePage implements OnInit {
 

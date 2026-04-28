@@ -1,0 +1,34 @@
+<div class="bottom-bar">
+  <div class="bar-container" #barContainer>
+
+    <img
+      src="assets/icon/fingerpoint.png"
+      [class.finger]="true"
+      [class.finger-ready]="fingerReady"
+      [style.left.px]="fingerX"
+    />
+
+    <button class="bar-btn" #btnHome (click)="navigate('/home')">
+      <img src="assets/icon/LogoMini.png" />
+    </button>
+
+    <button class="bar-btn" #btnChats (click)="navigate('/chat-list')">
+      <img src="assets/iconsYimgs/messege2.png">
+    </button>
+
+    <button class="bar-btn" #btnStats (click)="navigate('/stats')">
+      <img src="assets/icon/statsIcon.png">
+    </button>
+
+    <button class="bar-btn" #btnGame (click)="navigate('/slot')">
+      <img src="assets/icon/chip.png">
+    </button>
+
+  </div>
+
+  <div class="config">
+    <button (click)="navigate('/profile')">
+      <img src="assets/iconsYimgs/newSettings.png" />
+    </button>
+  </div>
+</div>

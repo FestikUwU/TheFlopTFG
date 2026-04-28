@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent } from '@ionic/angular/standalone';
 import {Router} from "@angular/router";
 import {NavController} from "@ionic/angular";
+import {NavbarComponent} from "../../components/navbar/navbar.component";
 
 @Component({
   selector: 'app-slot',
@@ -13,7 +14,8 @@ import {NavController} from "@ionic/angular";
   imports: [
     IonContent,
     CommonModule,
-    FormsModule
+    FormsModule,
+    NavbarComponent
   ]
 })
 export class SlotPage implements OnInit {
