@@ -16,14 +16,18 @@ export class AppComponent {
     const enterAnim = this.animationCtrl
       .create()
       .addElement(opts.enteringEl)
-      .duration(200)
-      .fromTo('opacity', 0, 1);
+      .duration(300)
+      .easing('ease-out')
+      .fromTo('opacity', 0, 1)
+      .fromTo('transform', 'translateY(10px)', 'translateY(0)');
 
     const leaveAnim = this.animationCtrl
       .create()
       .addElement(opts.leavingEl)
       .duration(200)
-      .fromTo('opacity', 1, 0);
+      .easing('ease-in')
+      .fromTo('opacity', 1, 0)
+      .fromTo('transform', 'translateY(0)', 'translateY(-10px)');
 
     return this.animationCtrl
       .create()

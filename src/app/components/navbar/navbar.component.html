@@ -1,11 +1,11 @@
-<div class="bottom-bar">
+<div class="bottom-bar" >
   <div class="bar-container" #barContainer>
 
     <img
       src="assets/icon/fingerpoint.png"
-      [class.finger]="true"
-      [class.finger-ready]="fingerReady"
+      class="finger"
       [style.left.px]="fingerX"
+      [style.opacity]="fingerReady ? 1 : 0"
     />
 
     <button class="bar-btn" #btnHome (click)="navigate('/home')">

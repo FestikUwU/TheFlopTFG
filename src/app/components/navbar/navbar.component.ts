@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 
@@ -51,7 +51,9 @@ export class NavbarComponent implements AfterViewInit {
   }
 
   navigate(path: string) {
-    this.router.navigate([path]);
+    setTimeout(() => {
+      this.router.navigate([path]);
+    }, 250);
   }
 
   updateFinger() {
