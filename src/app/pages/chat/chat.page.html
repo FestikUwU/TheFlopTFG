@@ -28,6 +28,7 @@
 
 
 <ion-content class="ion-padding" #content>
+
   <ion-list class="message">
 
     <div *ngFor="let group of messages">
@@ -63,6 +64,12 @@
     </div>
 
   </ion-list>
+
+  <div *ngIf="messages.length === 0" class="empty-chat">
+    <img src="assets/icon/emptyChat.png" class="empty-chat-img" />
+    <p class="empty-chat-text">¿Quién dará el primer paso?</p>
+  </div>
+
 </ion-content>
 
 <div class="chat-input-sausage">
