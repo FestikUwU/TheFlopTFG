@@ -14,8 +14,10 @@ import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { getDoc } from "firebase/firestore";
 import {NavbarComponent} from "../../components/navbar/navbar.component";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
@@ -127,9 +129,9 @@ export class HomePage implements OnInit {
   nextCard() {
     this.currentIndex++;
     this.showNextMatch();
-
     this.swipeDirection = '';
     this.isAnimating = false;
+    this.currentMatchPhotoIndex = 0;
   }
 
   async reloadMatches() {
@@ -304,6 +306,12 @@ export class HomePage implements OnInit {
   ngOnDestroy() {
     this.unsubscribeMatches?.();
     this.unsubscribeAuth?.();
+  }
+
+  currentMatchPhotoIndex = 0;
+
+  onMatchSlideChange(event: any) {
+    this.currentMatchPhotoIndex = event.detail[0].activeIndex;
   }
 
 }

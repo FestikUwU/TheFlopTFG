@@ -18,7 +18,7 @@ import {
   AlertController,
   IonTextarea
 } from '@ionic/angular/standalone';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { saveUserProfile, loadUserProfile } from 'src/app/firebase.service';
 import {NavController} from "@ionic/angular";
 
@@ -51,6 +51,7 @@ export class ProfilePage implements OnInit {
 
   isTutorial: boolean | null = null;
   tutorialStep = 0;
+  currentPhotoIndex = 0;
 
   mode: 'editar' | 'preview' = 'editar';
 
@@ -80,7 +81,6 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private router: Router,
     private navCtrl: NavController
   ) {}
 
@@ -208,17 +208,44 @@ export class ProfilePage implements OnInit {
     this.isTutorial = true;
   }
 
-  onAgeChange() {
-    if (this.privateProfile.ageMin > this.privateProfile.ageMax) {
-      this.privateProfile.ageMax = this.privateProfile.ageMin;
-    }
-  }
-
   async logout() {
     const auth = getAuth();
 
     await signOut(auth);
 
     this.navCtrl.navigateRoot('/login');
+  }
+
+  setMainPhoto(index: number) {
+    const selected = this.profile.photos[index];
+    this.profile.photos.splice(index, 1);
+    this.profile.photos.unshift(selected);
+  }
+
+  removePhoto(index: number) {
+    this.profile.photos.splice(index, 1);
+  }
+
+  async replacePhoto(index: number) {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+
+    input.onchange = async (event: any) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const url = await uploadPhoto(file);
+
+      if (url) {
+        this.profile.photos[index] = url;
+      }
+    };
+
+    input.click();
+  }
+
+  onSlideChange(event: any) {
+    this.currentPhotoIndex = event.detail[0].activeIndex;
   }
 }

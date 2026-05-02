@@ -88,6 +88,18 @@
           </ion-button>
         </ion-item>
 
+        <div class="photos-grid">
+          <div class="photo-item" *ngFor="let photo of profile.photos; let i = index">
+
+            <img [src]="photo"  alt=""/>
+
+            <button (click)="setMainPhoto(i)">⭐</button>
+            <button (click)="removePhoto(i)">❌</button>
+            <button (click)="replacePhoto(i)">✏️</button>
+
+          </div>
+        </div>
+
       </div>
     </ng-container>
 
@@ -174,11 +186,24 @@
 
       <div class="preview-card">
 
-        <img
-          *ngIf="profile.photos && profile.photos.length > 0"
-          [src]="profile.photos[0]"
-          class="preview-image"
-          alt="Foto de perfil" />
+        <swiper-container
+          slides-per-view="1"
+          class="preview-swiper"
+          (swiperslidechange)="onSlideChange($event)"
+        >
+
+          <swiper-slide *ngFor="let photo of profile.photos">
+            <img [src]="photo" class="preview-image"  alt="Imagenes preview"/>
+          </swiper-slide>
+
+        </swiper-container>
+
+        <div class="dots">
+          <span
+            *ngFor="let p of profile.photos; let i = index"
+            [class.active]="i === currentPhotoIndex">
+          </span>
+        </div>
 
         <div class="overlay-text">
           {{ profile.description || 'Sin descripción' }}
@@ -195,7 +220,7 @@
 
   <div *ngIf="isTutorial === true" class="tutorial-overlay" (click)="nextStep()">
 
-    <img src="assets/icon/Floppy.png" class="floppy">
+    <img src="assets/icon/Floppy.png" class="floppy" alt="FLOPPY">
 
     <div class="tutorial-bubble">
       {{ getTutorialText() }}

@@ -12,11 +12,23 @@
     </div>
     <div *ngIf="currentMatch" class="match-card">
 
-      <img
-        *ngIf="currentMatch.photos?.length"
-        [src]="currentMatch.photos[0]"
-        alt="Foto de perfil"
-        class="match-photo"/>
+      <swiper-container
+        slides-per-view="1"
+        class="match-swiper"
+        (swiperslidechange)="onMatchSlideChange($event)">
+
+        <swiper-slide *ngFor="let photo of currentMatch.photos">
+          <img [src]="photo" class="match-photo" alt="Foto de perfil" />
+        </swiper-slide>
+
+      </swiper-container>
+
+      <div class="match-dots">
+    <span
+      *ngFor="let p of currentMatch.photos; let i = index"
+      [class.active]="i === currentMatchPhotoIndex">
+    </span>
+      </div>
 
       <div class="match-description">
         {{ currentMatch.description || 'Sin descripción' }}
@@ -26,6 +38,7 @@
         <span>{{ currentMatch.age ?? '--' }} años</span>
         <span>{{ currentMatch.gender || 'Sin especificar' }}</span>
       </div>
+
     </div>
 
     <div *ngIf="!currentMatch && !isLoading" class="no-matches">
@@ -86,7 +99,7 @@
     <img
       src="assets/icon/Floppy.png"
       class="floppy"
-      [ngClass]="'step-' + tutorialStep">
+      [ngClass]="'step-' + tutorialStep" alt="">
 
     <div class="tutorial-bubble" [ngClass]="'step-' + tutorialStep">
       {{ getTutorialText() }}

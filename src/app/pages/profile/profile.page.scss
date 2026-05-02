@@ -20,10 +20,6 @@ ion-content {
   text-align: center;
 }
 
-ion-button {
-  --background: transparent;
-}
-
 .campoTxt::part(native) {
   background: #FFEFD5 !important;
   border-radius: 10px;
@@ -75,14 +71,6 @@ ion-select-option {
   }
 }
 
-.bottom-sheet-modal {
-  --height: auto;
-  --border-radius: 20px 20px 0 0;
-  --box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
-  align-items: flex-end;
-  animation: slideUp 0.3s ease-out;
-}
-
 .bottom-sheet-modal::part(content) {
   width: 95vw;
   max-width: 480px;
@@ -93,32 +81,6 @@ ion-select-option {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-.modal-content-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: #FFEFD5;
-  border-radius: 20px 20px 0 0;
-  overflow: hidden;
-  font-family: 'Limelight', sans-serif !important;
-}
-
-.modal-header {
-  --background: transparent;
-  --border-color: #ccc;
-  --border-width: 0 0 1px 0;
-  --min-height: 56px;
-  padding: 0 8px;
-}
-
-.modal-title {
-  text-align: center;
-  font-size: 17px;
-  font-weight: 600;
-  color: #000;
-  padding: 0;
 }
 
 @media (max-width: 360px) {
@@ -166,7 +128,6 @@ ion-list{
   height: auto;
   width: 90%;
   margin: 12px ;
-  width: auto;
   box-sizing: border-box;
   --inner-border-width: 0;
   margin-bottom: 30px;
@@ -223,18 +184,6 @@ ion-list{
   font-family: 'Limelight', cursive;
 }
 
-ion-button.active {
-  background: #FFEFD5;
-  border-radius: 10px;
-  padding: 0 12px;
-}
-
-ion-button.inactive {
-  background: rgba(217, 217, 217, 0.7);
-  border-radius: 10px;
-  padding: 0 12px;
-}
-
 .preview-card {
   position: fixed;
   width: 80%;
@@ -266,6 +215,7 @@ ion-button.inactive {
   font-size: 12px;
   text-align: left;
   box-sizing: border-box;
+  z-index: 2;
 }
 
 .overlay-data {
@@ -284,6 +234,7 @@ ion-button.inactive {
   margin-right: 30px;
   margin-bottom: 10px;
   font-size: 15px;
+  z-index: 2;
 }
 
 .preview-content {
@@ -298,11 +249,6 @@ ion-button.inactive {
   display: flex;
   align-items: center;
   width: 100%;
-}
-
-.imgAdd{
-  width: 10%;
-  height: auto;
 }
 
 .dot-text {
@@ -320,6 +266,7 @@ ion-button.inactive {
 
 ion-button {
   margin-left: auto;
+  --background: transparent;
 }
 
 .imgAdd {
@@ -432,9 +379,9 @@ ion-segment-button {
   font-weight: 700;
 
   border-radius: 20px;
-  padding: 0px 10px;
-  margin-bottom: 0px;
-  margin-top: 0px;
+  padding: 0 10px;
+  margin-bottom: 0;
+  margin-top: 0;
 
   transition: all 0.1s ease;
 }
@@ -461,7 +408,7 @@ ion-segment-button {
   font-weight: 700;
 
   border-radius: 20px;
-  padding: 0px 10px;
+  padding: 0 10px;
 
   margin-top: 5px;
 
@@ -480,3 +427,86 @@ ion-segment-button {
   display: flex;
   justify-content: center;
 }
+
+.photos-grid {
+  display: flex;
+  margin: 4%;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.photo-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.photo-item button {
+  position: absolute;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-item button:nth-child(2) {
+  top: 5px;
+  left: 5px;
+}
+
+.photo-item button:nth-child(3) {
+  top: 5px;
+  right: 5px;
+}
+
+.photo-item button:nth-child(4) {
+  bottom: 5px;
+  right: 5px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 10;
+}
+
+.dots span {
+  width: 30px;
+  height: 4px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 20%;
+}
+
+.dots .active {
+  background: white;
+}
+
+.preview-swiper {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.preview-swiper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
