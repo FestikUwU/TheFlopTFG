@@ -4,8 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { getMatchUsers } from 'src/app/firebase.service';
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
-import { IonTextarea } from "@ionic/angular/standalone";
+import {IonIcon, IonTextarea} from "@ionic/angular/standalone";
 import { getFirestore, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { addIcons } from 'ionicons';
+import { checkmark, checkmarkDone } from 'ionicons/icons';
 import {
   IonContent,
   IonButton,
@@ -34,7 +36,8 @@ const auth = getAuth();
     IonHeader,
     FormsModule,
     CommonModule,
-    IonTextarea
+    IonTextarea,
+    IonIcon
   ]
 })
 export class ChatPage implements OnInit {
@@ -62,7 +65,12 @@ export class ChatPage implements OnInit {
     private router: Router,
     private navCtrl: NavController,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    addIcons({
+      checkmark,
+      'checkmark-done': checkmarkDone
+    });
+  }
 
   async ngOnInit() {
     this.bgMusic = new Audio('assets/audio/no-more-what-ifs.mp3');

@@ -49,12 +49,14 @@
           <div class="time">
             {{ formatTime(msg.timestamp) }}
 
-            <span
-              *ngIf="msg.senderUid === currentUserUid"
-              class="ticks"
-            >
-              {{ isSeen(msg) ? '✔✔' : '✔' }}
+            <span *ngIf="msg.senderUid === currentUserUid" class="ticks">
+
+              <ion-icon *ngIf="!isSeen(msg)" name="checkmark"></ion-icon>
+
+              <ion-icon *ngIf="isSeen(msg)" name="checkmark-done"></ion-icon>
+
             </span>
+
           </div>
 
         </div>
