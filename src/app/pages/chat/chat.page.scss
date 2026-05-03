@@ -44,10 +44,10 @@ ion-list ion-item {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: 85%;
   min-height: 40px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   padding: 8px 16px;
   border: 2px solid black;
   border-radius: 25px;
@@ -73,7 +73,8 @@ ion-list ion-item {
   --highlight-color: #6A041D;
   --highlight-height: 0;
 
-  max-height: 120px;
+  max-height: 90px;
+  min-height: 0;
   overflow-y: auto;
   --placeholder-color: #000000;
   --placeholder-opacity: 0.7;
@@ -94,12 +95,12 @@ ion-header {
   border-bottom-right-radius: 4px;
 }
 
-
 ion-toolbar {
   --background: transparent;
   box-shadow: none;
   border: none;
   margin-top: 10px;
+  --border-width: 0 !important;
 }
 
 .toolbar {

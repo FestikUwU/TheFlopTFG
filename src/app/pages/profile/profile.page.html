@@ -93,9 +93,17 @@
 
             <img [src]="photo"  alt=""/>
 
-            <button (click)="setMainPhoto(i)">⭐</button>
-            <button (click)="removePhoto(i)">❌</button>
-            <button (click)="replacePhoto(i)">✏️</button>
+            <button (click)="setMainPhoto(i)">
+              <ion-icon color="warning" name="star"></ion-icon>
+            </button>
+
+            <button (click)="removePhoto(i)">
+              <ion-icon color="danger" name="close"></ion-icon>
+            </button>
+
+            <button (click)="replacePhoto(i)">
+              <ion-icon color="dark" name="create"></ion-icon>
+            </button>
 
           </div>
         </div>

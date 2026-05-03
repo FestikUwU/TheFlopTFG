@@ -14,6 +14,7 @@
 
     <button class="bar-btn" #btnChats (click)="navigate('/chat-list')">
       <img src="assets/iconsYimgs/messege2.png">
+      <span *ngIf="hasUnread" class="notif-dot"></span>
     </button>
 
     <button class="bar-btn" #btnStats (click)="navigate('/stats')">

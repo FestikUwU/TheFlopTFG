@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef } fr
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { subscribeChatList } from 'src/app/firebase.service';
+import { getAuth } from "firebase/auth";
 
 @Component({
   selector: 'app-navbar',
@@ -19,6 +21,33 @@ export class NavbarComponent implements AfterViewInit {
 
   fingerX = 0;
   fingerReady = false;
+  hasUnread = false;
+  private unsubscribeChats: any;
+
+  ngOnInit() {
+    const auth = getAuth();
+
+    auth.onAuthStateChanged((user) => {
+      if (!user) return;
+
+      this.unsubscribeChats?.();
+
+      this.unsubscribeChats = subscribeChatList((chats) => {
+
+        this.hasUnread = chats.some(chat => {
+          const msg = chat.lastMessageData;
+
+          return (
+            msg &&
+            msg.senderUid !== user.uid &&
+            !msg.seenBy?.includes(user.uid)
+          );
+        });
+
+      });
+
+    });
+  }
 
   constructor(public router: Router, private cdr: ChangeDetectorRef) {}
 
@@ -74,5 +103,9 @@ export class NavbarComponent implements AfterViewInit {
     this.fingerX = (btnRect.left - parentRect.left) + (btnRect.width / 2) - 17;
 
     console.log('active:', this.active, 'fingerX:', this.fingerX);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeChats?.();
   }
 }

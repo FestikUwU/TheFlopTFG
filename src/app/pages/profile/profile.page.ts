@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { uploadPhoto } from 'src/app/firebase.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { getAuth, signOut } from "firebase/auth";
+import { addIcons } from 'ionicons';
+import { star, close, create } from 'ionicons/icons';
 import {
   IonContent,
   IonItem,
@@ -82,7 +84,9 @@ export class ProfilePage implements OnInit {
   constructor(
     private alertController: AlertController,
     private navCtrl: NavController
-  ) {}
+  ) {
+    addIcons({ star, close, create });
+  }
 
   generateAgeOptions() {
     this.ageOptions = Array.from({ length: 82 }, (_, i) => {
