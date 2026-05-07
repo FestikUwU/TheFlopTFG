@@ -64,11 +64,7 @@ export const subscribeMessages = (callback: (data: any) => void) => {
   });
 };
 
-export const registerUser = async (
-  name: string,
-  email: string,
-  password: string
-) => {
+export const registerUser = async (name: string, email: string, password: string) => {
   const cred = await createUserWithEmailAndPassword(auth, email, password);
 
   await updateProfile(cred.user, {
@@ -179,10 +175,7 @@ export const createMatch = async (targetUid: string) => {
   });
 };
 
-export const loginUser = async (
-  email: string,
-  password: string
-) => {
+export const loginUser = async (email: string, password: string) => {
   const cred = await signInWithEmailAndPassword(auth, email, password);
   return cred.user;
 };
@@ -242,7 +235,6 @@ export const getUserMatches = async () => {
   return matches;
 };
 
-
 export const sendChatMessage = async (matchId: string, text: string) => {
   const user = auth.currentUser;
   if (!user) return;
@@ -257,6 +249,19 @@ export const sendChatMessage = async (matchId: string, text: string) => {
 
     seenBy: [user.uid]
   });
+};
+
+export const deleteMessage = async (matchId: string, messageId: string) => {
+
+  const messageRef = doc(
+    firestore,
+    "chats",
+    matchId,
+    "messages",
+    messageId
+  );
+
+  await deleteDoc(messageRef);
 };
 
 export const subscribeToChat = (matchId: string, callback: (messages: any[]) => void) => {
@@ -558,14 +563,7 @@ export const getMatchUsers = async (matchId: string) => {
   return snap.data();
 };
 
-export const getMatchesByCity = async (
-  city: string,
-  filters: {
-    lookingGender: string;
-    ageMin: number;
-    ageMax: number;
-  }
-  ) => {
+export const getMatchesByCity = async (city: string, filters: { lookingGender: string; ageMin: number; ageMax: number; }) => {
 
   const user = getAuth().currentUser;
   if (!user) return [];

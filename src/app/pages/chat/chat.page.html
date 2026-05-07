@@ -5,10 +5,10 @@
 
       <div class="left">
         <button (click)="goBack()" class="back-btn">
-          <img src="assets/icon/back8.png" class="back-icon">
+          <img src="assets/icon/back8.png" class="back-icon" alt="Back button">
         </button>
 
-        <img class="imgPerfilMini" [src]="otherUserPhoto" />
+        <img class="imgPerfilMini" [src]="otherUserPhoto"  alt="Imagen de Perfil"/>
       </div>
 
       <div class="center">
@@ -19,7 +19,7 @@
         <button (click)="toggleMusic()">
           <img
             [src]="isMusicOn ? 'assets/icon/musicOn.png' : 'assets/icon/musicOff.png'"
-            class="header-icon">
+            class="header-icon" alt="Music">
         </button>
       </div>
     </div>
@@ -43,6 +43,7 @@
           class="bubble"
           [class.mine]="msg.senderUid === currentUserUid"
           [class.other]="msg.senderUid !== currentUserUid"
+          (contextmenu)="openMessageMenu($event, msg)"
         >
           {{ msg.text }}
 
@@ -68,7 +69,7 @@
   </ion-list>
 
   <div *ngIf="messages.length === 0" class="empty-chat">
-    <img src="assets/icon/emptyChat.png" class="empty-chat-img" />
+    <img src="assets/icon/emptyChat.png" class="empty-chat-img"  alt="empty state Chat"/>
     <p class="empty-chat-text">¿Quién dará el primer paso?</p>
   </div>
 

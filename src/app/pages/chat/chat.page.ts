@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
-import { sendChatMessage, subscribeToChat } from 'src/app/firebase.service';
+import { sendChatMessage, subscribeToChat, deleteMessage } from 'src/app/firebase.service';
 import { ActivatedRoute } from '@angular/router';
 import { getMatchUsers } from 'src/app/firebase.service';
 import { getAuth } from "firebase/auth";
@@ -20,7 +20,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
-import { NavController } from "@ionic/angular";
+import { NavController, AlertController } from "@ionic/angular";
 
 const auth = getAuth();
 
@@ -64,7 +64,8 @@ export class ChatPage implements OnInit {
     private ngZone: NgZone,
     private router: Router,
     private navCtrl: NavController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertController: AlertController
   ) {
     addIcons({
       checkmark,
@@ -330,6 +331,44 @@ export class ChatPage implements OnInit {
     if (!msg.seenBy) return false;
 
     return msg.seenBy.length > 1;
+  }
+
+  async removeMessage(msg: any) {
+
+    if (msg.senderUid !== this.currentUserUid) return;
+
+    await deleteMessage(
+      this.matchId,
+      msg.id
+    );
+  }
+
+  async openMessageMenu(event: Event, msg: any) {
+
+    event.preventDefault();
+
+    if (msg.senderUid !== this.currentUserUid) return;
+
+    const alert = await this.alertController.create({
+      header: 'Eliminar mensaje',
+      message: 'Este mensaje se eliminará.',
+      cssClass: 'delete-alert',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          handler: async () => {
+            await this.removeMessage(msg);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ngOnDestroy() {
