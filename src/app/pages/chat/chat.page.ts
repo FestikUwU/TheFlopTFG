@@ -78,6 +78,8 @@ export class ChatPage implements OnInit {
 
     this.matchId = this.route.snapshot.paramMap.get('matchId')!;
 
+    this.loadDraft();
+
     const match: any = await getMatchUsers(this.matchId);
 
     if (match) {
@@ -156,34 +158,57 @@ export class ChatPage implements OnInit {
   }
 
   fadeOutMusicSimple() {
-  if (!this.bgMusic) return;
+    if (!this.bgMusic) return;
 
-  const steps = 3;
-  const stepVolume = this.bgMusic.volume / steps;
-  let currentStep = 0;
+    const steps = 3;
+    const stepVolume = this.bgMusic.volume / steps;
+    let currentStep = 0;
 
-  clearInterval(this.fadeInterval);
+    clearInterval(this.fadeInterval);
 
-  this.fadeInterval = setInterval(() => {
-    if (currentStep < steps) {
-      this.bgMusic.volume -= stepVolume;
-      currentStep++;
-    } else {
-      this.bgMusic.pause();
-      this.bgMusic.currentTime = 0;
-      clearInterval(this.fadeInterval);
-    }
-  }, 150);
-}
+    this.fadeInterval = setInterval(() => {
+      if (currentStep < steps) {
+        this.bgMusic.volume -= stepVolume;
+       currentStep++;
+      } else {
+       this.bgMusic.pause();
+        this.bgMusic.currentTime = 0;
+       clearInterval(this.fadeInterval);
+      }
+    }, 150);
+  }
 
 
   send() {
     if (this.newMessage.trim() !== '') {
       sendChatMessage(this.matchId, this.newMessage);
       this.newMessage = '';
+      this.clearDraft();
     }
   }
 
+  saveDraft() {
+    localStorage.setItem(
+      `draft_${this.matchId}`,
+      this.newMessage
+    );
+  }
+
+  loadDraft() {
+    const draft = localStorage.getItem(
+      `draft_${this.matchId}`
+    );
+
+    if (draft) {
+      this.newMessage = draft;
+    }
+  }
+
+  clearDraft() {
+    localStorage.removeItem(
+      `draft_${this.matchId}`
+    );
+  }
 
   goBack() {
     this.router.navigate(['/chat-list']);

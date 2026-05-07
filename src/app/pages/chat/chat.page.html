@@ -79,7 +79,8 @@
   <ion-textarea
     autoGrow="true"
     placeholder="Mensaje"
-    [(ngModel)]="newMessage">
+    [(ngModel)]="newMessage"
+    (ionInput)="saveDraft()">
   </ion-textarea>
 
   <button class="arrow-button" (click)="send()">
