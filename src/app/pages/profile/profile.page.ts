@@ -166,6 +166,7 @@ export class ProfilePage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Guardado',
       message: 'Perfil guardado correctamente',
+      cssClass: 'delete-alert',
       buttons: [
         {
           text: 'OK',

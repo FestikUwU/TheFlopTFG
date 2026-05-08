@@ -102,15 +102,14 @@
 
 .match-item {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   margin-top: 20px;
-  margin-right: 80px;
+  //margin-right: 80px;
   margin-bottom: 12px;
 }
 
 .chat-card {
   position: relative;
-
   display: flex;
   align-items: stretch;
   background: #FFEFD5;
@@ -118,7 +117,9 @@
   padding: 5px;
   cursor: pointer;
   transition: transform 0.1s ease, filter 0.1s ease;
-  width: 80%;
+  width: calc(100% - 70px);
+  max-width: 500px;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -143,13 +144,15 @@
 }
 
 .profile-image img {
-  width: 130px;
+  width: 110px;
+  min-width: 110px;
   height: 160px;
   border-radius: 16px;
   object-fit: cover;
 }
 
 .chat-info {
+  min-width: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -164,10 +167,11 @@
   font-weight: 700;
   margin-top: 10px;
   color: black;
+  flex-shrink: 0;
 }
 
 .last-message {
-  max-width: 75px;
+  max-width: 100%;
   font-size: 15px;
   color: #8a8a8a;
   margin-top: 8px;
@@ -184,6 +188,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  min-width: 55px;
   align-items: flex-end;
   margin-left: auto;
   padding: 10px;
@@ -211,7 +216,7 @@
   padding: 5px 5px 5px 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
-  width: 100%;
+  width: 80%;
 }
 
 .skeleton-img {
@@ -281,7 +286,7 @@ ion-item-option {
   background: rgba(217, 217, 217, 0.36);
   width: 90px;
   height: 90px;
-  margin-top: 4vh;
+  margin-top: 5vh;
   margin-right: 5px;
   border-radius: 7px;
 }

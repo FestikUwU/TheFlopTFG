@@ -42,7 +42,21 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+
+:root {
+  color-scheme: dark;
+
+  --ion-background-color: #6A041D;
+  --ion-text-color: #D9D9D9;
+
+  --ion-item-background: #FFEFD5;
+
+  --ion-toolbar-background: #FFEFD5;
+  --ion-card-background: #FFEFD5;
+}
+
+//@import '@ionic/angular/css/palettes/dark.system.css';
+
 ion-app, ion-content {
   --background: #6A041D;
   background: #6A041D;
@@ -85,7 +99,6 @@ ion-action-sheet .action-sheet-button {
 
 ion-app {
   max-width: 500px;
-  max-height: 1000px;
   margin: 0 auto;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
 }
@@ -97,7 +110,7 @@ body {
 .delete-alert .alert-wrapper {
   background: #FFEFD5 !important;
   //border: 1px solid black;
-  border-radius: 50px;
+  border-radius: 25px;
   box-shadow: none;
 }
 
