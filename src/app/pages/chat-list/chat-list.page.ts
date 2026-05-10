@@ -77,6 +77,7 @@ export class ChatListPage implements OnInit, OnDestroy {
     const alert = await this.alertController.create({
       header: 'Eliminar chat',
       message: 'Esta conversasion se eliminara permanente.',
+      cssClass: 'delete-alert',
       buttons: [
         {
           text: 'Cancelar',
