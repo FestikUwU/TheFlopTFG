@@ -631,7 +631,7 @@ export const getMatchesByCity = async (city: string, filters: { lookingGender: s
 
       matches.push({
         uid: doc.id,
-        name: data["name"] ?? "Player",
+        name: pubData.name ?? "Player",
         description: pubData.description,
         age: pubData.age,
         gender: pubData.gender,
