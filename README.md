@@ -18,12 +18,16 @@ The app is inspired by casino mechanics, featuring elements like cards, **ALL IN
 * 🎴 Match system (LIKE / DISLIKE)
 * 💬 Real-time chat between matched users
 * ✔ Message status:
-  * ✔ Sent
-  * ✔✔ Seen
+  * ✔ Message sent status
+  * ✔✔ Message seen status
 * 🔔 Unread message indicator
 * 🗑 Chat deletion
 * 🎵 Optional background music in chat
 * 📊 User statistics
+* 📘 Integrated tutorial system
+* 💾 Draft message persistence
+* 🎭 Custom empty states
+* 🎮 Interactive mascot screen
 
 ---
 
@@ -89,7 +93,7 @@ npx cap open android
 ##  Notes
 
 * Developed as a **Final Degree Project (TFG)**
-* Not optimized for production
+* This project was developed for educational purposes as a Final Degree Project (TFG).
 * Some features are still in development
 
 ---
