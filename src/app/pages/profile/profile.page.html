@@ -31,7 +31,7 @@
 
     <ion-item button (click)="toggleSection('public')" lines="none" class="buttstyle">
       <ion-label>Perfil público</ion-label>
-      <ion-icon [name]="sections.public ? 'chevron-up-outline' : 'chevron-down-outline'" slot="end"></ion-icon>
+      <ion-icon color="light" [name]="sections.public ? 'chevron-up-outline' : 'chevron-down-outline'" slot="end"></ion-icon>
     </ion-item>
 
     <ng-container *ngIf="sections.public">
@@ -114,6 +114,7 @@
     <ion-item button (click)="toggleSection('private')" lines="none" class="buttstyle">
       <ion-label>Preferencias privadas</ion-label>
       <ion-icon
+        color="light"
         [name]="sections.private ? 'chevron-up-outline' : 'chevron-down-outline'"
         slot="end">
       </ion-icon>

@@ -23,6 +23,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { saveUserProfile, loadUserProfile } from 'src/app/firebase.service';
 import {NavController} from "@ionic/angular";
+import { chevronUpOutline, chevronDownOutline } from 'ionicons/icons';
 
 
 @Component({
@@ -85,7 +86,7 @@ export class ProfilePage implements OnInit {
     private alertController: AlertController,
     private navCtrl: NavController
   ) {
-    addIcons({ star, close, create });
+    addIcons({ star, close, create, chevronUpOutline, chevronDownOutline });
   }
 
   generateAgeOptions() {

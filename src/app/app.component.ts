@@ -13,24 +13,31 @@ export class AppComponent {
   constructor(private animationCtrl: AnimationController) {}
 
   fadeAnimation = (baseEl: any, opts: any) => {
-    const enterAnim = this.animationCtrl
-      .create()
-      .addElement(opts.enteringEl)
-      .duration(300)
-      .easing('ease-out')
-      .fromTo('opacity', 0, 1)
-      .fromTo('transform', 'translateY(10px)', 'translateY(0)');
 
-    const leaveAnim = this.animationCtrl
-      .create()
-      .addElement(opts.leavingEl)
-      .duration(200)
-      .easing('ease-in')
-      .fromTo('opacity', 1, 0)
-      .fromTo('transform', 'translateY(0)', 'translateY(-10px)');
+    const root = this.animationCtrl.create();
 
-    return this.animationCtrl
-      .create()
-      .addAnimation([enterAnim, leaveAnim]);
+    if (opts.enteringEl) {
+      const enterAnim = this.animationCtrl
+        .create()
+        .addElement(opts.enteringEl)
+        .duration(250)
+        .easing('ease-out')
+        .fromTo('opacity', 0, 1);
+
+      root.addAnimation(enterAnim);
+    }
+
+    if (opts.leavingEl) {
+      const leaveAnim = this.animationCtrl
+        .create()
+        .addElement(opts.leavingEl)
+        .duration(200)
+        .easing('ease-in')
+        .fromTo('opacity', 1, 0);
+
+      root.addAnimation(leaveAnim);
+    }
+
+    return root;
   };
 }

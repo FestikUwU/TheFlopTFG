@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { saveUserProfile } from 'src/app/firebase.service';
@@ -44,44 +44,45 @@ export class HomePage implements OnInit {
   isMatch = false;
   matchedUser: any = null;
 
-  constructor(private router: Router, private navCtrl: NavController ) {}
+  constructor(private router: Router, private navCtrl: NavController, private cdr: ChangeDetectorRef ) {}
 
   isLoading = true;
 
   async ngOnInit() {
-
     const data = await loadUserProfile();
-
     this.isTutorial = !(data?.['tutorials']?.['homeSeen'] ?? false);
 
-    this.isLoading = true;
-
-    try {
-      const userData = await loadUserProfile();
-
-      this.currentUser = userData;
-
-      const city = userData?.['private']?.location ?? '';
-
-      if (city) {
-        this.matches = await getMatchesByCity(city, {
-          lookingGender: userData?.['private']?.lookingGender ?? 'todos',
-          ageMin: userData?.['private']?.ageMin ?? 18,
-          ageMax: userData?.['private']?.ageMax ?? 99
-        });
-
-        this.showNextMatch();
-      }
-
-    } catch (e) {
-      console.error('Error loading matches:', e);
-    } finally {
-      this.isLoading = false;
-    }
+    await this.loadMatches();
 
     this.listenForMatches();
   }
 
+  async ionViewWillEnter() {
+    await this.loadMatches();
+  }
+
+  async loadMatches() {
+    this.isLoading = true;
+
+    const userData = await loadUserProfile();
+    this.currentUser = userData;
+
+    const city = userData?.['private']?.location ?? '';
+
+    if (city) {
+      this.matches = await getMatchesByCity(city, {
+        lookingGender: userData?.['private']?.lookingGender ?? 'todos',
+        ageMin: userData?.['private']?.ageMin ?? 18,
+        ageMax: userData?.['private']?.ageMax ?? 99
+      });
+
+      this.currentIndex = 0;
+      this.showNextMatch();
+      this.cdr.detectChanges();
+    }
+
+    this.isLoading = false;
+  }
 
   showNextMatch() {
     if (this.currentIndex < this.matches.length) {
@@ -152,6 +153,7 @@ export class HomePage implements OnInit {
 
       this.currentIndex = 0;
       this.showNextMatch();
+      this.cdr.detectChanges();
     }
 
     this.isLoading = false;
