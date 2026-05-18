@@ -101,6 +101,7 @@ npx cap open android
 ##  Author
 
 **Heorhii Tykhonov**
+![Demo](docs/nambaOne.JPG)
 2026
 
 ---
