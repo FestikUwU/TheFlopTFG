@@ -1,0 +1,281 @@
+ion-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 100px;
+}
+
+.message{
+  margin-bottom: 90px;
+}
+
+ion-list {
+  flex: 1;
+  overflow-y: auto;
+  background: transparent;
+}
+
+
+.arrow-button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  background: transparent;
+
+  margin-left: 15px;
+}
+
+.arrow-button img {
+  width: 10px;
+  height: 15px;
+}
+
+ion-list ion-item {
+  --background: #D9D9D9;
+  --color: #000000;
+  box-shadow: none;
+  margin-bottom: 4px;
+  border: 3px solid #bcbcbc;
+  border-radius: 10px;
+  max-width: 75%;
+  width: fit-content;
+}
+
+.chat-input-sausage {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  //min-height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 13px;
+  border: 2px solid black;
+  border-radius: 25px;
+  background-color: #FFEFD5;
+  z-index: 100;
+}
+
+.chat-input-sausage ion-input {
+  --color: #000000;
+  --caret-color: #6A041D;
+  --highlight-color-focused: #000000;
+  --highlight-color: #6A041D;
+  --highlight-height: 0;
+}
+
+.chat-input-sausage ion-textarea {
+  --color: #000000;
+  flex: 1;
+
+  --background: transparent;
+  --padding-start: 0;
+  --highlight-color-focused: #000000;
+  --highlight-color: #6A041D;
+  --highlight-height: 0;
+
+  max-width: 90%;
+  max-height: 11vh;
+  min-height: 24px;
+  overflow-y: auto;
+  --placeholder-color: #000000;
+  --placeholder-opacity: 0.7;
+}
+
+.chat-input-sausage ion-input::part(native) {
+  caret-color: #6A041D !important;
+}
+
+.chat-input-sausage ion-button {
+  --border-radius: 25px;
+}
+
+ion-header {
+  background-color: #FFEFD5;
+  padding-top: env(safe-area-inset-top);
+  min-height: 85px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+ion-toolbar {
+  --background: transparent;
+  box-shadow: none;
+  border: none;
+  margin-top: 10px;
+  --border-width: 0 !important;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 0 12px;
+  margin-top: 10px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-family: Limelight;
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.right button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 7px;
+}
+
+.back-btn {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.imgPerfilMini {
+  width: 40px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.back-icon {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+}
+
+.message-row {
+  display: flex;
+  width: 100%;
+  margin: 6px 0;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.bubble:active {
+  transform: scale(0.97);
+  opacity: 0.8;
+}
+
+.mine {
+  margin-left: auto;
+  background: #D9D9D9;
+  color: black;
+  border-bottom-right-radius: 4px;
+}
+
+.other {
+  margin-right: auto;
+  background: #D9D9D9;
+  color: black;
+  border-bottom-left-radius: 4px;
+}
+
+.date-divider {
+  text-align: center;
+  font-size: 14px;
+  color: #FFEFD5;
+  margin: 10px 0;
+  position: relative;
+}
+
+.date-divider::before,
+.date-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: rgb(0 0 0 / 0);
+}
+
+.date-divider::before {
+  left: 0;
+}
+
+.date-divider::after {
+  right: 0;
+}
+
+.time {
+  font-size: 10px;
+  margin-top: 4px;
+  text-align: right;
+  opacity: 0.6;
+}
+
+.header-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.ticks ion-icon {
+  font-size: 14px;
+  margin-left: 4px;
+  color: #002349;
+  opacity: 0.7;
+}
+
+.ticks ion-icon.seen {
+  color: #71fa3f;
+}
+
+.empty-chat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.empty-chat-img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.empty-chat-text {
+  font-size: 15px;
+  color: #D9D9D9;
+  font-family: 'Lunasima', sans-serif;
+  opacity: 0.8;
+}

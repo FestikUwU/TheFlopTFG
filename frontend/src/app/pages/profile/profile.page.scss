@@ -1,0 +1,512 @@
+ion-content {
+  font-family: 'Limelight', sans-serif !important;
+  --overflow: auto;
+  overflow-y: auto;
+  display: flex;
+}
+
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  min-width: 200px;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+.custom-title {
+  font-size: 2vh;
+  margin: 20px;
+  text-align: center;
+}
+
+.campoTxt::part(native) {
+  background: #FFEFD5 !important;
+  border-radius: 10px;
+  color: black;
+  border: 1px solid black;
+  min-height: 80px;
+  padding: 15px;
+  margin: 12px auto;
+  width: 95%;
+  box-sizing: border-box;
+}
+
+
+@media (max-width: 360px) {
+  .campoTxt::part(native) {
+    width: 95%;
+    padding: 10px;
+    min-height: 65px;
+  }
+}
+
+
+ion-input {
+  --background: transparent;
+  font-family: 'Limelight', sans-serif !important;
+}
+
+ion-select {
+  font-family: 'Limelight', sans-serif !important;
+  --background: none;
+  --color: #000;
+}
+
+ion-select::part(overlay) {
+  --background: #FFEFD5;
+}
+
+ion-select-option {
+  --background: #FFEFD5;
+  color: #000;
+  font-family: 'Limelight', sans-serif !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-select::part(overlay),
+  ion-select-option {
+    --background: #FFEFD5 !important;
+    color: #000 !important;
+  }
+}
+
+.bottom-sheet-modal::part(content) {
+  width: 95vw;
+  max-width: 480px;
+  margin: 0 auto;
+  max-height: 70vh;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 360px) {
+  .custom-title {
+    font-size: 1.8vh;
+  }
+
+  .campoTxt::part(native) {
+    margin: 10px 3vw;
+    min-height: 65px;
+  }
+
+  ion-item.campoTxt {
+    --padding-start: 10px;
+    --inner-padding-end: 10px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+html.ios {
+  --ion-default-font: 'Limelight', sans-serif !important;
+}
+
+ion-list{
+  display: contents;
+}
+
+.campoEdad::part(native) {
+  --background: #FFEFD5 !important;
+  --ion-default-font: 'Limelight', sans-serif !important;
+  color: black;
+  align-items: start;
+  border-radius: 10px;
+  border: 1px solid black;
+  height: auto;
+  width: 90%;
+  margin: 12px ;
+  box-sizing: border-box;
+  --inner-border-width: 0;
+  margin-bottom: 30px;
+}
+
+.line {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  bottom: 30px;
+  width: 2px;
+  background-color: #6A041D;
+  z-index: 100;
+}
+
+.none {
+  --background: transparent !important;
+  --inner-border-width: 0 !important;
+  --ion-default-font: 'Limelight', sans-serif !important;
+}
+
+.campoGenero::part(native) {
+  background: #FFEFD5 !important;
+  --ion-default-font: 'Limelight', sans-serif !important;
+  color: #000000;
+  align-items: start;
+  border-radius: 10px;
+  border: 1px solid black;
+  min-width: 90%;
+  margin: 12px;
+  width: auto;
+  box-sizing: border-box;
+  --inner-border-width: 0;
+}
+
+.btnListo::part(native) {
+  display: flex;
+  justify-content: center;
+  background: #F3DFBA;
+  border-radius: 20px;
+  max-width: 8vh;
+  max-height: 2vh;
+  color: black;
+  box-shadow: none;
+  margin-bottom: 15px;
+  --inner-border-width: 0;
+  --box-shadow: 0 10px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btnListo ion-button {
+  font-weight: 800;
+  --color: #000;
+
+  font-family: 'Limelight', cursive;
+}
+
+.preview-card {
+  position: fixed;
+  width: 80%;
+  max-width: 80%;
+  height: 55%;
+  border-radius: 30px;
+  border: 2px solid #D9D9D9;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin: 0 auto;
+  box-shadow: 3px 7px 15px rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  font-family: Arial;
+}
+
+
+.overlay-text {
+  position: absolute;
+  top: 7px;
+  right: 0;
+  margin-right: 7px;
+  max-width: 70%;
+  width: auto;
+  align-items: start;
+  padding: 10px;
+  background: #D9D9D9;
+  border-radius: 20px;
+  color: black;
+  font-size: 12px;
+  text-align: left;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.overlay-data {
+  background: #D9D9D9;
+  border-radius: 20px;
+  color: black;
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  box-sizing: border-box;
+  margin-left: 17px;
+  margin-right: 30px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  z-index: 2;
+}
+
+.preview-content {
+  justify-content: center;
+  padding: 20px;
+}
+
+.fotos {
+  background: transparent !important;
+  --background: transparent !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.dot-text {
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.dot-fill {
+  flex: 1;
+  border-bottom: 1px dotted #000;
+  margin: 0 8px;
+  position: relative;
+  top: 8px;
+}
+
+ion-button {
+  margin-left: auto;
+  --background: transparent;
+}
+
+.imgAdd {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+ion-segment-button {
+  font-size: 1.6vh;
+}
+
+.buttstyle::part(native) {
+  border-radius: 15px;
+  max-width: 90%;
+  background: rgba(255, 239, 213, 0.23);
+  margin: 15px;
+  border-bottom: 2px solid rgba(255, 239, 213, 0.5);
+  --inner-border-width: 0;
+}
+
+.field-label {
+  display: block;
+  font-family: 'Limelight', sans-serif !important;
+  font-size: 14px;
+  color: #D9D9D9;
+  margin-left: 5%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.campoNombre::part(native) {
+  background: #FFEFD5 !important;
+  border-radius: 10px;
+  color: black;
+  border: 1px solid black;
+  height: 25px;
+  margin: 12px auto;
+  width: 95%;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.campoNombre ion-input {
+  --background: transparent;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+
+  z-index: 2000;
+}
+
+.floppy {
+  position: absolute;
+  top: 140px;
+  left: 10px;
+  width: 120px;
+
+  animation: floatUpDown 2s ease-in-out infinite;
+}
+
+.tutorial-bubble {
+  position: absolute;
+  top: 200px;
+  left: 140px;
+  background: #D9D9D9;
+  padding: 15px;
+  border-radius: 7px;
+  max-width: 200px;
+  color: black;
+  font-size: 14px;
+  font-family: Lunasima;
+}
+
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+
+.btnListo {
+  --background: #F3DFBA;
+  --color: #000;
+
+  font-family: 'Limelight', cursive;
+  font-weight: 700;
+
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-bottom: 0;
+  margin-top: 0;
+
+  transition: all 0.1s ease;
+}
+
+.rangoEdad::part(native) {
+  background: #FFEFD5 !important;
+  color: black;
+
+  border-radius: 10px;
+  border: 1px solid black;
+
+  width: 95%;
+  margin: 12px auto;
+  box-sizing: border-box;
+
+  --inner-border-width: 0;
+}
+
+.btnLogout {
+  --background: #FFEFD5;
+  --color: #000000;
+
+  font-family: 'Lunasima', cursive;
+  font-weight: 700;
+
+  border-radius: 20px;
+  padding: 0 10px;
+
+  margin-top: 5px;
+
+  transition: all 0.1s ease;
+}
+
+.btnRow {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.logout-bottom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.photos-grid {
+  display: flex;
+  margin: 4%;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.photo-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.photo-item button {
+  position: absolute;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-item button:nth-child(2) {
+  top: 5px;
+  left: 5px;
+}
+
+.photo-item button:nth-child(3) {
+  top: 5px;
+  right: 5px;
+}
+
+.photo-item button:nth-child(4) {
+  bottom: 5px;
+  right: 5px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 10;
+}
+
+.dots span {
+  width: 30px;
+  height: 4px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 20%;
+}
+
+.dots .active {
+  background: white;
+}
+
+.preview-swiper {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.preview-swiper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+

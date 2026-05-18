@@ -1,0 +1,119 @@
+.logo-container img {
+  height: 12vh;
+  width: auto;
+  max-width: 100%;
+  margin-right: 2vh;
+}
+
+.login-page {
+  --background: none;
+  background: url('/src/assets/card-suits-bg.svg') no-repeat center center;
+  background-size: cover;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2vh 0;
+}
+.header-container {
+  margin-bottom: 4vh;
+  margin-left: 9vh;
+}
+
+.custom-title {
+  font-size: 4vh;
+  font-family: 'Limelight', cursive;
+  color: #FFEFD5;
+}
+
+ion-label {
+  font-weight: 700;
+  color: #6A041D;
+}
+ion-input {
+  font-size: 1vh;
+  color: #333;
+  --highlight-height: 0;
+  --highlight-color-focused: #000000;
+  --highlight-color: #6A041D;
+}
+.buttons-container {
+  margin-top: 6vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+}
+.btnTipo1 {
+  --background: linear-gradient(135deg, #FFBF00, #FFD700);
+  --color: white;
+  --border-radius: 100px;
+  --box-shadow: 0 0.75vh 2.5vh rgba(255, 191, 0, 0.4);
+
+  width: 80%;
+  height: 7.6vh;
+  font-family: 'Limelight', cursive;
+  font-size: clamp(20px, 5vw, 24px);
+}
+.btnTipo2 {
+  --color: #FFFFFF;
+  font-size: 1.8vh;
+}
+
+.input-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3vh;
+  width: 100%;
+  align-items: center;
+  padding: 1.3vh;
+  border-radius: 15px;
+}
+
+.input-group {
+  width: 80%;
+  margin-bottom: 2vh;
+  --border-radius: 20px;
+  --highlight-color-focused: transparent;
+  --highlight-color: transparent;
+  border: none;
+
+  @media (max-width: 480px) {
+    width: 90%;
+  }
+}
+
+.input-label {
+  display: block;
+  font-size: 1.8vh;
+  color: #6A041D;
+  margin-bottom: 1vh;
+  margin-left: 1.2vw;
+  font-weight: 750;
+  transition: color 0.3s ease;
+}
+
+.input-field {
+  --background: #F3DFBA;
+  --color: #000000;
+  border: 2px solid black;
+  --padding-start: 2.5vw;
+  --padding-end: 2.5vw;
+  --padding-top: 1.9vh;
+  --padding-bottom: 1.9vh;
+
+  width: 100%;
+  border-radius: 20px;
+  font-size: 2vh;
+  box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1);
+}
+
+
+
+
